@@ -42,7 +42,7 @@ public class ContractSignerAccountDubboService implements IContractSignerAccount
      */
     @Override
     public String webFindOperInfo(final Long anId) {
-        return AjaxObject.newOk("查询签署人成功！", contractSignerAccountService.findSignerAccount(anId)).toJson();
+        return AjaxObject.newOk("查询签署人成功！", contractSignerAccountService.findOperInfo(anId)).toJson();
     }
 
     /* (non-Javadoc)
@@ -58,8 +58,7 @@ public class ContractSignerAccountDubboService implements IContractSignerAccount
      */
     @Override
     public String webQuerySignerAccountInfo(final Long anCustNo) {
-        // TODO Auto-generated method stub
-        return null;
+        return AjaxObject.newOkWithPage("检查签署人成功！", contractSignerAccountService.querySignerAccountInfo(anCustNo)).toJson();
     }
 
 }

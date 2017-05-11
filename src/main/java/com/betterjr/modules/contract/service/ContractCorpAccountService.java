@@ -19,6 +19,7 @@ import com.betterjr.common.service.BaseService;
 import com.betterjr.common.utils.BTAssert;
 import com.betterjr.common.utils.BetterStringUtils;
 import com.betterjr.common.utils.UserUtils;
+import com.betterjr.mapper.pagehelper.Page;
 import com.betterjr.modules.account.entity.CustOperatorInfo;
 import com.betterjr.modules.contract.dao.ContractCorpAccountMapper;
 import com.betterjr.modules.contract.entity.ContractCorpAccount;
@@ -115,5 +116,13 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
         final int result = this.updateByPrimaryKeySelective(corpAccount);
         BTAssert.isTrue(result == 1, "设置企业签署人失败！");
         return corpAccount;
+    }
+
+    /**
+     * @param anCustNo
+     * @return
+     */
+    public Page queryCorpAccountInfo(final Long anCustNo) {
+        return null;
     }
 }

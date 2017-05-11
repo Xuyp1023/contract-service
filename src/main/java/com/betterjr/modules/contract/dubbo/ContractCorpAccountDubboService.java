@@ -67,8 +67,7 @@ public class ContractCorpAccountDubboService implements IContractCorpAccountServ
      */
     @Override
     public String webQueryCorpAccountInfo(final Long anCustNo) {
-        // TODO Auto-generated method stub
-        return null;
+        return AjaxObject.newOkWithPage("查询企业帐号信息成功！", contractCorpAccountService.queryCorpAccountInfo(anCustNo)).toJson();
     }
 
 }
