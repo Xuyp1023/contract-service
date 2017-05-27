@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<context id="context1" targetRuntime="MyBatis3Simple"
+		defaultModelType="flat">
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+
+		<plugin type="com.betterjr.mapper.generator.MapperPlugin">
+			<property name="mappers" value="com.betterjr.mapper.common.Mapper" />
+			<property name="caseSensitive" value="true" />
+		</plugin>
+
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="false" />
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.2.49:3306/liuwl_dev" userId="finance"
+			password="1" />
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<javaModelGenerator targetPackage="com.betterjr.modules.contract.entity"
+			targetProject="E:\new\platform-service\src\main\java\">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="contract"
+			targetProject="E:\new\platform-service\src\main\resources\sqlmap\modules\" />
+		<javaClientGenerator targetPackage="com.betterjr.modules.contract.dao"
+			implementationPackage="com.betterjr.modules.contract.dao.impl"
+			targetProject="E:\new\platform-service\src\main\java\" type="XMLMAPPER" />
+			
+			
+		<table schema="" tableName="t_sys_business_type" domainObjectName="BusinessType">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="C_CODE" jdbcType="VARCHAR" javaType="String" property="code" />
+            <columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+            <columnOverride column="N_VERSION" jdbcType="INTEGER" javaType="Long" property="version" />
+            
+            <columnOverride column="C_CREDIT_FLAG" jdbcType="CHAR" javaType="String" property="creditFlag" />
+            <columnOverride column="L_MOCK_DATA_ID" jdbcType="INTEGER" javaType="Long" property="mockDataId" />
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+
+
+        <table schema="" tableName="t_sys_contract_type" domainObjectName="ContractType">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="C_CODE" jdbcType="VARCHAR" javaType="String" property="code" />
+            <columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+            <columnOverride column="N_VERSION" jdbcType="INTEGER" javaType="Long" property="version" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        
+        <table schema="" tableName="t_sys_contract_standard_type" domainObjectName="ContractStandardType">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_TYPE_ID" jdbcType="INTEGER" javaType="Long" property="typeId" />
+            
+            <columnOverride column="C_CODE" jdbcType="VARCHAR" javaType="String" property="code" />
+            <columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+            <columnOverride column="N_VERSION" jdbcType="INTEGER" javaType="Long" property="version" />
+            
+            <columnOverride column="D_ENABLE_DATE" jdbcType="CHAR" javaType="String" property="enableDate" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        
+        <table schema="" tableName="t_sys_contract_standard_type" domainObjectName="ContractStandardType">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_TYPE_ID" jdbcType="INTEGER" javaType="Long" property="typeId" />
+            
+            <columnOverride column="C_CODE" jdbcType="VARCHAR" javaType="String" property="code" />
+            <columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+            <columnOverride column="N_VERSION" jdbcType="INTEGER" javaType="Long" property="version" />
+            
+            <columnOverride column="D_ENABLE_DATE" jdbcType="CHAR" javaType="String" property="enableDate" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        <table schema="" tableName="t_sys_contract_busin_standard" domainObjectName="ContractBusinStandardType">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_BUSIN_TYPE_ID" jdbcType="INTEGER" javaType="Long" property="businTypeId" />
+            <columnOverride column="L_STANDARD_TYPE_ID" jdbcType="INTEGER" javaType="Long" property="standardTypeId" />
+            <columnOverride column="C_STANDARD_TYPE_NAME" jdbcType="VARCHAR" javaType="String" property="standardTypeName" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        <table schema="" tableName="t_sys_contract_stamper" domainObjectName="ContractStamper">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+            
+            <columnOverride column="L_ORIGIN_STAMPER" jdbcType="INTEGER" javaType="Long" property="originStamper" />
+            <columnOverride column="D_ORIGIN_DATE" jdbcType="CHAR" javaType="String" property="originDate" />
+            <columnOverride column="T_ORIGIN_TIME" jdbcType="CHAR" javaType="String" property="originTime" />
+            
+            <columnOverride column="L_STAMPER" jdbcType="INTEGER" javaType="Long" property="stamper" />
+            <columnOverride column="D_MAKE_DATE" jdbcType="CHAR" javaType="String" property="makeDate" />
+            <columnOverride column="T_MAKE_TIME" jdbcType="CHAR" javaType="String" property="makeTime" />
+            
+            <columnOverride column="L_CUSTNO" jdbcType="INTEGER" javaType="String" property="custNo" />
+            <columnOverride column="C_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="custName" />
+            <columnOverride column="C_OPERORG" jdbcType="VARCHAR" javaType="String" property="operOrg" />
+            
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+            <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+            <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+            <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+            <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+            <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+            <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+            <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        <table schema="" tableName="t_sys_contract_template" domainObjectName="ContractTemplate">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_TYPE_ID" jdbcType="INTEGER" javaType="Long" property="typeId" />
+            <columnOverride column="L_STANDARD_TYPE_ID" jdbcType="INTEGER" javaType="Long" property="standardTypeId" />
+            
+            <columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+            
+            <columnOverride column="L_ORIGIN_TEMPLATE" jdbcType="INTEGER" javaType="Long" property="originTemplate" />
+            <columnOverride column="L_ORIGIN_SIMPLE" jdbcType="INTEGER" javaType="Long" property="originSimple" />
+            <columnOverride column="D_ORIGIN_DATE" jdbcType="CHAR" javaType="String" property="originDate" />
+            <columnOverride column="T_ORIGIN_TIME" jdbcType="CHAR" javaType="String" property="originTime" />
+            <columnOverride column="C_ORIGIN_COMMENT" jdbcType="VARCHAR" javaType="String" property="originComment" />
+            
+            <columnOverride column="L_TEMPLATE" jdbcType="INTEGER" javaType="Long" property="template" />
+            <columnOverride column="D_MAKE_DATE" jdbcType="CHAR" javaType="String" property="makeDate" />
+            <columnOverride column="T_MAKE_TIME" jdbcType="CHAR" javaType="String" property="makeTime" />
+            
+            <columnOverride column="L_MAKE_OPERID" jdbcType="INTEGER" javaType="Long" property="makeOperId" />
+            <columnOverride column="C_MAKE_OPERNAME" jdbcType="VARCHAR" javaType="String" property="makeOperName" />
+            
+            <columnOverride column="C_COMMENT" jdbcType="VARCHAR" javaType="String" property="comment" />
+            <columnOverride column="C_AUDIT_REMARK" jdbcType="VARCHAR" javaType="String" property="auditRemark" />
+            
+            <columnOverride column="L_CUSTNO" jdbcType="INTEGER" javaType="String" property="custNo" />
+            <columnOverride column="C_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="custName" />
+            <columnOverride column="C_OPERORG" jdbcType="VARCHAR" javaType="String" property="operOrg" />
+            
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+			<columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+			<columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+			<columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+			<columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+			<columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+			<columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+			<columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+            
+            <columnOverride column="C_AUDIT_STATUS" jdbcType="CHAR" javaType="String" property="auditStatus" />
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        <table schema="" tableName="t_sys_contract_template_log" domainObjectName="ContractTemplateLog">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_TEMPLATE_ID" jdbcType="INTEGER" javaType="Long" property="templateId" />
+            <columnOverride column="C_TEMPLATE_NAME" jdbcType="VARCHAR" javaType="String" property="templateName" />
+            
+            <columnOverride column="L_ORIGIN_STAMPER" jdbcType="INTEGER" javaType="Long" property="originStamper" />
+            <columnOverride column="D_ORIGIN_DATE" jdbcType="CHAR" javaType="String" property="originDate" />
+            <columnOverride column="T_ORIGIN_TIME" jdbcType="CHAR" javaType="String" property="originTime" />
+            
+            <columnOverride column="D_OPER_DATE" jdbcType="CHAR" javaType="String" property="operDate" />
+            <columnOverride column="T_OPER_TIME" jdbcType="CHAR" javaType="String" property="operTime" />
+            
+            <columnOverride column="C_OPER_TYPE" jdbcType="CHAR" javaType="String" property="operType" />
+            <columnOverride column="C_OPER_CONTENT" jdbcType="VARCHAR" javaType="String" property="operContent" />
+            
+            <columnOverride column="L_CUSTNO" jdbcType="INTEGER" javaType="String" property="custNo" />
+            <columnOverride column="C_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="custName" />
+            <columnOverride column="C_OPERORG" jdbcType="VARCHAR" javaType="String" property="operOrg" />
+            
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+            <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+            <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+            <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+            <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+            <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+            <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+            <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        <table schema="" tableName="t_sys_contract_template_stamp_place" domainObjectName="ContractTemplateStampPlace">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_TEMPLATE_ID" jdbcType="INTEGER" javaType="Long" property="templateId" />
+            <columnOverride column="C_TEMPLATE_NAME" jdbcType="VARCHAR" javaType="String" property="templateName" />
+            
+            <columnOverride column="C_SIGNATORY" jdbcType="CHAR" javaType="String" property="signatory" />
+            <columnOverride column="N_SEQUENCE" jdbcType="INTEGER" javaType="Long" property="sequence" />
+            
+            <columnOverride column="C_TYPE" jdbcType="CHAR" javaType="String" property="type" />
+            <columnOverride column="N_PAGINATION" jdbcType="INTEGER" javaType="Long" property="pagination" />
+            <columnOverride column="N_AXIS_X" jdbcType="INTEGER" javaType="Long" property="axisX" />
+            <columnOverride column="N_AXIS_Y" jdbcType="INTEGER" javaType="Long" property="axisY" />
+            <columnOverride column="C_KEY_WORD" jdbcType="VARCHAR" javaType="String" property="keyWord" />
+            
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+            <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+            <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+            <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+            <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+            <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+            <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+            <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        
+        <table schema="" tableName="t_sys_contract_data_source" domainObjectName="ContractDataSource">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+            <columnOverride column="C_TYPE" jdbcType="VARCHAR" javaType="String" property="type" />
+            
+            <columnOverride column="C_DATA" jdbcType="LONGTEXT" javaType="String" property="data" />
+            <columnOverride column="C_EXTERNAL_DATA" jdbcType="LONGTEXT" javaType="String" property="externalData" />
+            
+            <columnOverride column="L_CUSTNO" jdbcType="INTEGER" javaType="String" property="custNo" />
+            <columnOverride column="C_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="custName" />
+            <columnOverride column="C_OPERORG" jdbcType="VARCHAR" javaType="String" property="operOrg" />
+            
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+            <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+            <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+            <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+            <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+            <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+            <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+            <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        
+        <table schema="" tableName="t_sys_contract" domainObjectName="Contract">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_TYPE_ID" jdbcType="INTEGER" javaType="Long" property="typeId" />
+            <columnOverride column="L_STANDARD_TYPE_ID" jdbcType="INTEGER" javaType="Long" property="standardTypeId" />
+            <columnOverride column="L_DATA_SOURCE_ID" jdbcType="INTEGER" javaType="Long" property="dataSourceId" />
+            
+            <columnOverride column="C_NO" jdbcType="VARCHAR" javaType="String" property="no" />
+            <columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+            <columnOverride column="C_TYPE" jdbcType="VARCHAR" javaType="String" property="type" />
+            
+            <columnOverride column="L_ORIGIN_HTML" jdbcType="INTEGER" javaType="Long" property="originHtml" />
+            <columnOverride column="L_ORIGIN_PDF" jdbcType="INTEGER" javaType="Long" property="originPdf" />
+            
+            <columnOverride column="L_SIGN_PDF" jdbcType="INTEGER" javaType="Long" property="signPdf" />
+            
+            <columnOverride column="D_SIGN_START_DATE" jdbcType="VARCHAR" property="signStartDate" />
+            <columnOverride column="T_SIGN_START_TIME" jdbcType="VARCHAR" property="signStartTime" />
+            <columnOverride column="D_SIGN_END_DATE" jdbcType="VARCHAR" property="signEndDate" />
+            <columnOverride column="T_SIGN_END_TIME" jdbcType="VARCHAR" property="signEndTime" />
+            
+            <columnOverride column="L_CUSTNO" jdbcType="INTEGER" javaType="String" property="custNo" />
+            <columnOverride column="C_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="custName" />
+            <columnOverride column="C_OPERORG" jdbcType="VARCHAR" javaType="String" property="operOrg" />
+            
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+            <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+            <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+            <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+            <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+            <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+            <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+            <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        
+        <table schema="" tableName="t_sys_contract_stub" domainObjectName="ContractStub">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_CONTRACT_ID" jdbcType="INTEGER" javaType="Long" property="contractId" />
+            
+            <columnOverride column="C_SIGNATORY" jdbcType="CHAR" javaType="String" property="signatory" />
+            <columnOverride column="N_SEQUENCE" jdbcType="INTEGER" javaType="Long" property="sequence" />
+            
+            <columnOverride column="L_OPERID" jdbcType="INTEGER" javaType="Long" property="operId" />
+            <columnOverride column="C_OPERNAME" jdbcType="VARCHAR" property="operName" />
+            
+            <columnOverride column="L_CORP_ACCOUNT_ID" jdbcType="INTEGER" javaType="Long" property="corpAccountId" />
+            <columnOverride column="L_SIGNER_ACCOUNT_ID" jdbcType="INTEGER" javaType="Long" property="signerAccountId" />
+            <columnOverride column="L_CORP_SIGNER_ID" jdbcType="INTEGER" javaType="Long" property="corpSignerId" />
+            
+            <columnOverride column="C_POSITION_TYPE" jdbcType="CHAR" javaType="String" property="positionType" />
+            <columnOverride column="N_PAGINATION" jdbcType="INTEGER" javaType="Long" property="pagination" />
+            <columnOverride column="N_AXIS_X" jdbcType="INTEGER" javaType="Long" property="axisX" />
+            <columnOverride column="N_AXIS_Y" jdbcType="INTEGER" javaType="Long" property="axisY" />
+            <columnOverride column="C_KEY_WORD" jdbcType="VARCHAR" javaType="String" property="keyWord" />
+            
+            <columnOverride column="D_SIGN_DATE" jdbcType="VARCHAR" property="signDate" />
+            <columnOverride column="T_SIGN_TIME" jdbcType="VARCHAR" property="signTime" />
+            
+            <columnOverride column="L_SIGN_PDF" jdbcType="INTEGER" javaType="Long" property="signPdf" />
+            
+            <columnOverride column="L_CUSTNO" jdbcType="INTEGER" javaType="String" property="custNo" />
+            <columnOverride column="C_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="custName" />
+            <columnOverride column="C_OPERORG" jdbcType="VARCHAR" javaType="String" property="operOrg" />
+             
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+            <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+            <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+            <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+            <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+            <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+            <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+            <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        
+        <table schema="" tableName="t_sys_contract_corp_account" domainObjectName="ContractCorpAccount">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+            <columnOverride column="C_TYPE" jdbcType="VARCHAR" javaType="String" property="type" />
+            
+            <columnOverride column="C_ORG_CODE" jdbcType="VARCHAR" javaType="String" property="orgCode" />
+            <columnOverride column="C_IDENT_NO" jdbcType="VARCHAR" javaType="String" property="identNo" />
+            
+            <columnOverride column="C_ACCOUNT" jdbcType="VARCHAR" javaType="String" property="account" />
+            
+            <columnOverride column="L_SERVICE_CUSTNO" jdbcType="INTEGER" javaType="String" property="serviceCustNo" />
+            <columnOverride column="C_SERVICE_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="serviceCustName" />
+            
+            <columnOverride column="L_CUSTNO" jdbcType="INTEGER" javaType="String" property="custNo" />
+            <columnOverride column="C_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="custName" />
+            <columnOverride column="C_OPERORG" jdbcType="VARCHAR" javaType="String" property="operOrg" />
+            
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+            <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+            <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+            <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+            <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+            <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+            <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+            <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        
+        <table schema="" tableName="t_sys_contract_signer_account" domainObjectName="ContractSignerAccount">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            
+            <columnOverride column="C_MOBILE_NO" jdbcType="VARCHAR" javaType="String" property="mobileNo" />
+            <columnOverride column="C_IDENT_NO" jdbcType="VARCHAR" javaType="String" property="identNo" />
+            
+            <columnOverride column="C_ACCOUNT" jdbcType="VARCHAR" javaType="String" property="account" />
+            
+            <columnOverride column="L_SERVICE_CUSTNO" jdbcType="INTEGER" javaType="String" property="serviceCustNo" />
+            <columnOverride column="C_SERVICE_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="serviceCustName" />
+            
+            <columnOverride column="L_OPERID" jdbcType="INTEGER" javaType="String" property="operId" />
+            <columnOverride column="C_OPERNAME" jdbcType="VARCHAR" javaType="String" property="operName" />
+            <columnOverride column="C_OPERORG" jdbcType="VARCHAR" javaType="String" property="operOrg" />
+            
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+            <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+            <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+            <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+            <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+            <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+            <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+            <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+        
+        <table schema="" tableName="t_sys_contract_corp_signer" domainObjectName="ContractCorpSigner">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            
+            <columnOverride column="L_CORP_ID" jdbcType="INTEGER" javaType="Long" property="corpId" />
+            <columnOverride column="L_CUSTNO" jdbcType="INTEGER" javaType="String" property="custNo" />
+            <columnOverride column="C_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="custName" />
+            <columnOverride column="C_CORP_ACCOUNT" jdbcType="VARCHAR" javaType="String" property="corpAccount" />
+            
+            <columnOverride column="L_SIGNER_ID" jdbcType="INTEGER" javaType="Long" property="signerId" />
+            <columnOverride column="L_OPERID" jdbcType="INTEGER" javaType="String" property="operId" />
+            <columnOverride column="C_OPERNAME" jdbcType="VARCHAR" javaType="String" property="operName" />
+            <columnOverride column="C_SIGNER_ACCOUNT" jdbcType="VARCHAR" javaType="String" property="signerAccount" />
+            <columnOverride column="C_SIGNER_MOBILE_NO" jdbcType="VARCHAR" javaType="String" property="signerMobileNo" />
+            
+            <columnOverride column="L_SERVICE_CUSTNO" jdbcType="INTEGER" javaType="String" property="serviceCustNo" />
+            <columnOverride column="C_SERVICE_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="serviceCustName" />
+            
+            <columnOverride column="C_OPERORG" jdbcType="VARCHAR" javaType="String" property="operOrg" />
+            
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+            <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+            <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+            <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+            <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+            <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+            <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+            <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+            
+            <columnOverride column="C_BUSIN_STATUS" jdbcType="CHAR" javaType="String" property="businStatus" />
+            <columnOverride column="C_DOC_STATUS" jdbcType="CHAR" javaType="String" property="docStatus" />
+        </table>
+	<!-- 	
+		<table schema="" tableName="t_sys_wf_category" domainObjectName="WorkFlowCategory">
+			<columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+			<columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+			<columnOverride column="C_DESCRIPTION" jdbcType="VARCHAR" javaType="String" property="description" />
+		</table>
+
+		流程基础表
+		<table schema="" tableName="t_sys_wf_base" domainObjectName="WorkFlowBase">
+			<columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+			<columnOverride column="L_CATEGORY_ID" jdbcType="INTEGER" javaType="Long" property="categoryId" />
+			<columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+			<columnOverride column="C_NICKNAME" jdbcType="VARCHAR" javaType="String" property="nickname" />
+			<columnOverride column="C_OPERROLE" jdbcType="VARCHAR" javaType="String" property="operRole" />
+			<columnOverride column="C_OPERORG" jdbcType="VARCHAR" javaType="String" property="operOrg" />
+			<columnOverride column="L_CUSTNO" jdbcType="INTEGER" javaType="Long" property="custNo" />
+			<columnOverride column="C_CUSTNAME" jdbcType="VARCHAR" javaType="String" property="custName" />
+			<columnOverride column="N_VERSION" jdbcType="INTEGER" javaType="Long" property="version" />
+			<columnOverride column="C_IS_LAST" jdbcType="CHAR" javaType="String" property="isLast" />
+			<columnOverride column="C_IS_PUBLISHED" jdbcType="CHAR" javaType="String" property="isPublished" />
+			<columnOverride column="C_IS_DEFAULT" jdbcType="CHAR" javaType="String" property="isDefault" />
+			<columnOverride column="C_IS_DISABLED" jdbcType="CHAR" javaType="String" property="isDisabled" />
+			<columnOverride column="C_PROCESS_ID" jdbcType="VARCHAR" javaType="String" property="processId" />
+			<columnOverride column="C_MONEY_VARIABLE" jdbcType="VARCHAR" javaType="String" property="moneyVariable" />
+			<columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+		   <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+		   <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+		   <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+		   <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+		   <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+		   <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+		   <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+		   <columnOverride column="C_BUSIN_STATUS" jdbcType="VARCHAR" property="businStatus" />
+		   <columnOverride column="C_LAST_STATUS" jdbcType="VARCHAR" property="lastStatus" />
+		</table>
+		
+		流程节点表
+        <table schema="" tableName="t_sys_wf_node" domainObjectName="WorkFlowNode">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_BASE_ID" jdbcType="INTEGER" javaType="Long" property="baseId" />
+            <columnOverride column="N_SEQ" jdbcType="INTEGER" javaType="Integer" property="seq" />
+            <columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+            <columnOverride column="C_NICKNAME" jdbcType="VARCHAR" javaType="String" property="nickname" />
+            <columnOverride column="C_IS_DISABLED" jdbcType="VARCHAR" javaType="String" property="isDisabled" />
+            <columnOverride column="C_HANDLER" jdbcType="VARCHAR" javaType="String" property="handler" />
+            <columnOverride column="C_FORM" jdbcType="VARCHAR" javaType="String" property="form" />
+            <columnOverride column="C_TYPE" jdbcType="CHAR" javaType="String" property="type" />
+            <columnOverride column="C_OPERROLE" jdbcType="VARCHAR" javaType="String" property="operRole" />
+            <columnOverride column="C_MONEY_VARIABLE" jdbcType="VARCHAR" javaType="String" property="moneyVariable" />
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+           <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+           <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+           <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+           <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+           <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+           <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+           <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+           <columnOverride column="C_BUSIN_STATUS" jdbcType="VARCHAR" property="businStatus" />
+           <columnOverride column="C_LAST_STATUS" jdbcType="VARCHAR" property="lastStatus" />
+        </table>
+        
+            流程步骤表
+        <table schema="" tableName="t_sys_wf_step" domainObjectName="WorkFlowStep">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_NODE_ID" jdbcType="INTEGER" javaType="Long" property="nodeId" />
+            <columnOverride column="N_SEQ" jdbcType="INTEGER" javaType="Integer" property="seq" />
+            <columnOverride column="C_NAME" jdbcType="VARCHAR" javaType="String" property="name" />
+            <columnOverride column="C_NICKNAME" jdbcType="VARCHAR" javaType="String" property="nickname" />
+            <columnOverride column="C_AUDIT_TYPE" jdbcType="CHAR" javaType="String" property="auditType" />
+            <columnOverride column="C_IS_MONEY" jdbcType="VARCHAR" javaType="String" property="isMoney" />
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+           <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+           <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+           <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+           <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+           <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+           <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+           <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+           <columnOverride column="C_BUSIN_STATUS" jdbcType="VARCHAR" property="businStatus" />
+           <columnOverride column="C_LAST_STATUS" jdbcType="VARCHAR" property="lastStatus" />
+        </table>
+        
+        流程审批人
+        <table schema="" tableName="t_sys_wf_approver" domainObjectName="WorkFlowApprover">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="C_PARENT_TYPE" jdbcType="CHAR" javaType="String" property="parentType" />
+            <columnOverride column="L_PARENT_ID" jdbcType="INTEGER" javaType="Long" property="parentId" />
+            <columnOverride column="L_OPERID" jdbcType="INTEGER" javaType="Long" property="operId" />
+            <columnOverride column="L_MONEY_ID" jdbcType="INTEGER" javaType="Long" property="moneyId" />
+            <columnOverride column="N_WEIGHT" jdbcType="INTEGER" javaType="Integer" property="weight" />
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+           <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+           <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+           <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+           <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+           <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+           <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+           <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+           <columnOverride column="C_BUSIN_STATUS" jdbcType="VARCHAR" property="businStatus" />
+           <columnOverride column="C_LAST_STATUS" jdbcType="VARCHAR" property="lastStatus" />
+        </table>
+         -->
+        <!-- 流程金额段
+        <table schema="" tableName="t_sys_wf_money" domainObjectName="WorkFlowMoney">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="N_SEQ" jdbcType="INTEGER" javaType="Integer" property="seq" />
+            <columnOverride column="L_BASE_ID" jdbcType="INTEGER" javaType="Long" property="baseId" />
+            <columnOverride column="N_BEGIN_MONEY" jdbcType="DECIMAL" javaType="BigDecimal" property="beginMoney" />
+            <columnOverride column="N_END_MONEY" jdbcType="DECIMAL" javaType="BigDecimal" property="endMoney" />
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+           <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+           <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+           <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+           <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+           <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+           <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+           <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+           <columnOverride column="C_BUSIN_STATUS" jdbcType="VARCHAR" property="businStatus" />
+           <columnOverride column="C_LAST_STATUS" jdbcType="VARCHAR" property="lastStatus" />
+        </table>-->
+        
+ <!--                流程业务表
+        <table schema="" tableName="t_sys_wf_business" domainObjectName="WorkFlowBusiness">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_BUSINESS_ID" jdbcType="INTEGER" javaType="Long" property="businessId" />
+            <columnOverride column="L_BASE_ID" jdbcType="INTEGER" javaType="Long" property="baseId" />
+            <columnOverride column="C_ORDER_ID" jdbcType="VARCHAR" javaType="String" property="orderId" />
+            <columnOverride column="C_BUSINESS_TYPE" jdbcType="CHAR" javaType="String" property="businessType" />
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+           <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+           <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+           <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+           <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+           <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+           <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+           <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+           <columnOverride column="C_BUSIN_STATUS" jdbcType="VARCHAR" property="businStatus" />
+           <columnOverride column="C_LAST_STATUS" jdbcType="VARCHAR" property="lastStatus" />
+        </table>
+        
+        流程审批表
+        <table schema="" tableName="t_sys_wf_audit" domainObjectName="WorkFlowAudit">
+            <columnOverride column="ID" jdbcType="INTEGER" javaType="Long" property="id" />
+            <columnOverride column="L_BASE_ID" jdbcType="INTEGER" javaType="Long" property="baseId" />
+            <columnOverride column="L_NODE_ID" jdbcType="INTEGER" javaType="Long" property="nodeId" />
+            <columnOverride column="L_STEP_ID" jdbcType="INTEGER" javaType="Long" property="stepId" />
+            <columnOverride column="C_ORDER_ID" jdbcType="VARCHAR" javaType="String" property="orderId" />
+            <columnOverride column="C_TASK_ID" jdbcType="VARCHAR" javaType="String" property="taskId" />
+            <columnOverride column="L_OPERID" jdbcType="INTEGER" javaType="Long" property="operId" />
+            <columnOverride column="L_CUSTNO" jdbcType="INTEGER" javaType="Long" property="custNo" />
+            <columnOverride column="L_CUSTNAME" jdbcType="VARCHAR" property="custName" />
+            <columnOverride column="C_OPERORG" jdbcType="VARCHAR" property="operOrg" />
+           <columnOverride column="D_AUDIT_DATE" jdbcType="VARCHAR" property="auditDate" />
+           <columnOverride column="T_AUDIT_TIME" jdbcType="VARCHAR" property="auditTime" />
+           <columnOverride column="C_AUDIT_CONTENT" jdbcType="VARCHAR" property="auditContent" />
+           <columnOverride column="C_AUDIT_RESULT" jdbcType="CHAR" property="auditResult" />
+            
+            <columnOverride column="L_REG_OPERID" jdbcType="INTEGER" javaType="Long" property="regOperId" />
+           <columnOverride column="C_REG_OPERNAME" jdbcType="VARCHAR" property="regOperName" />
+           <columnOverride column="D_REG_DATE" jdbcType="VARCHAR" property="regDate" />
+           <columnOverride column="T_REG_TIME" jdbcType="VARCHAR" property="regTime" />
+           <columnOverride column="L_MODI_OPERID" jdbcType="INTEGER" javaType="Long" property="modiOperId" />
+           <columnOverride column="C_MODI_OPERNAME" jdbcType="VARCHAR" property="modiOperName" />
+           <columnOverride column="D_MODI_DATE" jdbcType="VARCHAR" property="modiDate" />
+           <columnOverride column="T_MODI_TIME" jdbcType="VARCHAR" property="modiTime" />
+           <columnOverride column="C_BUSIN_STATUS" jdbcType="VARCHAR" property="businStatus" />
+           <columnOverride column="C_LAST_STATUS" jdbcType="VARCHAR" property="lastStatus" />
+        </table> -->
+	</context>
+</generatorConfiguration>
