@@ -17,7 +17,8 @@
 	<!-- 扫描spring注解 -->
 	<context:component-scan base-package="com.betterjr.modules.contract;
 	   com.betterjr.modules.generator;
-	   com.betterjr.modules.rule.service" />
+	   com.betterjr.modules.rule.service;
+	   com.betterjr.modules.document.service" />
 
 	<bean class="com.betterjr.common.config.BetterPropertyPlaceholderConfigurer">
 		<property name="fileEncoding" value="UTF-8" />

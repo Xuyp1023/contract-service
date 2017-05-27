@@ -25,6 +25,8 @@ public class ContractService extends BaseService<ContractMapper, Contract> {
      * @return
      */
     public Contract addContract(final Contract anContract) {
+        //
+
         return null;
     }
 
@@ -34,6 +36,7 @@ public class ContractService extends BaseService<ContractMapper, Contract> {
      * @return
      */
     public Contract saveContract(final Contract anContract) {
+
         return null;
     }
 
@@ -42,6 +45,7 @@ public class ContractService extends BaseService<ContractMapper, Contract> {
      * @return
      */
     public boolean saveContractSigner() {
+
         return false;
     }
 
@@ -50,6 +54,7 @@ public class ContractService extends BaseService<ContractMapper, Contract> {
      * @return
      */
     public boolean saveContractStampPlace() {
+
         return false;
     }
 
@@ -58,6 +63,7 @@ public class ContractService extends BaseService<ContractMapper, Contract> {
      * @return
      */
     public boolean saveStartContractSign() {
+
         return false;
     }
 
@@ -65,6 +71,7 @@ public class ContractService extends BaseService<ContractMapper, Contract> {
      * 审核合同签署
      */
     public boolean saveAuditContractSign() {
+
         return false;
     }
 
@@ -73,6 +80,7 @@ public class ContractService extends BaseService<ContractMapper, Contract> {
      * @return
      */
     public boolean saveContractSign() {
+
         return false;
     }
 }

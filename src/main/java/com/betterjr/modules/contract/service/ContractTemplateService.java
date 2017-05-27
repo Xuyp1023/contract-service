@@ -457,12 +457,10 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         if (BetterStringUtils.equals(anAuditStatus, "01")) { // 审核通过
             contractTemplate.setTextAuditStatus("01"); // 电子合同文本审核通过
-            // TODO 记录 log
             contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "01", "标准合同文本审核通过");
         }
         else { // 审核不通过
             contractTemplate.setTextAuditStatus("02");// 电子合同文本审核驳回
-            // TODO 记录 log
             contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "03", "标准合同文本审核不通过");
         }
 
@@ -650,12 +648,12 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         if (BetterStringUtils.equals(anAuditStatus, "01")) { // 审核通过
             contractTemplate.setTemplateAuditStatus("01"); // 电子合同文本审核通过
-            // TODO 记录 log
+            // 记录 log
             contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "05", "审核标准合同模板通过");
         }
         else { // 审核不通过
             contractTemplate.setTemplateAuditStatus("02");// 电子合同文本审核驳回
-            // TODO 记录 log
+            // 记录 log
             contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "06", "审核标准合同模板不通过");
         }
 

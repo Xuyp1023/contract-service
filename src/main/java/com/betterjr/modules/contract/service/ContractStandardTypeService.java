@@ -87,7 +87,8 @@ public class ContractStandardTypeService extends BaseService<ContractStandardTyp
         }
 
         return this.selectByProperty(conditionMap).stream()
-                .map(standardType -> new SimpleDataEntity(standardType.getId().toString(), standardType.getName())).collect(Collectors.toList());
+                .map(standardType -> new SimpleDataEntity(standardType.getId().toString(), standardType.getName()))
+                .collect(Collectors.toList());
     }
 
     /**

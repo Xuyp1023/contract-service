@@ -26,6 +26,7 @@ public class ContractStubService extends BaseService<ContractStubMapper, Contrac
      * @return
      */
     public ContractStub addContractStub(final Long anContractId, final ContractStub anContractStub) {
+
         return null;
     }
 
@@ -34,6 +35,7 @@ public class ContractStubService extends BaseService<ContractStubMapper, Contrac
      * @return
      */
     public ContractStub saveContractStub() {
+
         return null;
     }
 }

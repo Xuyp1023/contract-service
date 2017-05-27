@@ -38,7 +38,8 @@ public class ContractTypeService extends BaseService<ContractTypeMapper, Contrac
      * @return
      */
     public List<SimpleDataEntity> querySimpleType() {
-        return this.selectAll().stream().map(contractType -> new SimpleDataEntity(contractType.getName(), contractType.getId().toString()))
+        return this.selectAll().stream()
+                .map(contractType -> new SimpleDataEntity(contractType.getName(), contractType.getId().toString()))
                 .collect(Collectors.toList());
     }
 }

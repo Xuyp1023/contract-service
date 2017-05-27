@@ -7,8 +7,12 @@
 // ============================================================================
 package com.betterjr.modules.contract.service;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
@@ -16,6 +20,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.betterjr.common.exception.BytterException;
 import com.betterjr.common.service.BaseService;
 import com.betterjr.common.utils.BTAssert;
+import com.betterjr.common.utils.Base64Coder;
 import com.betterjr.common.utils.BetterStringUtils;
 import com.betterjr.common.utils.UserUtils;
 import com.betterjr.mapper.pagehelper.Page;
@@ -26,6 +31,7 @@ import com.betterjr.modules.customer.ICustMechBaseService;
 import com.betterjr.modules.customer.entity.CustMechBase;
 import com.betterjr.modules.document.ICustFileService;
 import com.betterjr.modules.document.entity.CustFileItem;
+import com.betterjr.modules.document.service.DataStoreService;
 
 /**
  * @author liuwl
@@ -39,6 +45,9 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
 
     @Reference(interfaceClass = ICustMechBaseService.class)
     private ICustMechBaseService custMechBaseService;
+
+    @Resource
+    private DataStoreService dataStoreService;
 
     /**
      * 获取当前机构印章(所有状态)
@@ -163,7 +172,26 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
 
         anContractStamper.setOriginStamper(custFileService.updateCustFileItemInfo(anOrginFileId, null));
 
-        anContractStamper.setOriginStamper(custFileService.updateCustFileItemInfo(anFileId, null));
+        // dataStoreService
+        final BufferedInputStream inputStream = new BufferedInputStream(dataStoreService.loadFromStore(Long.valueOf(anFileId)));
+
+        final int mb2 = 2 * 1024 * 1024;
+        final byte[] picBytes = new byte[mb2];
+
+        int count = 0;
+        try {
+            count = inputStream.read(picBytes, 0, mb2);
+            if (count == mb2) {
+                throw new BytterException("印章文件需要小于2MB!");
+            }
+        }
+        catch (final IOException e) {
+            throw new BytterException("印章文件读取失败!");
+        }
+        final String data = new String(Base64Coder.encode(picBytes, 0, count));
+
+        anContractStamper.setStamperData(data);
+        anContractStamper.setStamper(custFileService.updateCustFileItemInfo(anFileId, null));
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
 
@@ -187,8 +215,27 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
 
         BTAssert.notNull(contractStamper, "未找到该印章");
 
+        final BufferedInputStream inputStream = new BufferedInputStream(dataStoreService.loadFromStore(Long.valueOf(anFileId)));
+        final int mb2 = 2 * 1024 * 1024;
+        final byte[] picBytes = new byte[mb2];
+
+        int count = 0;
+        try {
+            count = inputStream.read(picBytes, 0, mb2);
+            if (count == mb2) {
+                throw new BytterException("印章文件需要小于2MB!");
+            }
+        }
+        catch (final IOException e) {
+            throw new BytterException("印章文件读取失败!");
+        }
+
+        final String data = new String(Base64Coder.encode(picBytes, 0, count));
+
         // 保存 印章文件
         final Long batchNo = custFileService.updateCustFileItemInfo(anFileId, null);
+
+        contractStamper.setStamperData(data);
         contractStamper.setStamper(batchNo);
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();

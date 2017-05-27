@@ -66,8 +66,8 @@ public class ContractCorpAccountDubboService implements IContractCorpAccountServ
      * @see com.betterjr.modules.contract.IContractCorpAccountService#webQueryCorpAccountInfo(java.lang.Long)
      */
     @Override
-    public String webQueryCorpAccountInfo(final Long anCustNo) {
-        return AjaxObject.newOkWithPage("查询企业帐号信息成功！", contractCorpAccountService.queryCorpAccountInfo(anCustNo)).toJson();
+    public String webQueryCorpAccountInfo(final Long anCustNo, final int anFlag, final int anPageNum, final int anPageSize) {
+        return AjaxObject.newOkWithPage("查询企业帐号信息成功！", contractCorpAccountService.queryCorpAccountInfo(anCustNo, anFlag, anPageNum, anPageSize)).toJson();
     }
 
 }

@@ -18,6 +18,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.betterjr.common.service.BaseService;
 import com.betterjr.common.utils.BTAssert;
 import com.betterjr.common.utils.BetterStringUtils;
+import com.betterjr.common.utils.QueryTermBuilder;
 import com.betterjr.common.utils.UserUtils;
 import com.betterjr.mapper.pagehelper.Page;
 import com.betterjr.modules.account.entity.CustOperatorInfo;
@@ -66,6 +67,8 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
         anCorpAccount.init(operator);
+
+        // TODO 调用 注册接口
 
         final int result = this.insert(anCorpAccount);
 
@@ -122,7 +125,11 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
      * @param anCustNo
      * @return
      */
-    public Page queryCorpAccountInfo(final Long anCustNo) {
-        return null;
+    public Page<ContractCorpAccount> queryCorpAccountInfo(final Long anCustNo, final int anFlag, final int anPageNum, final int anPageSize) {
+        BTAssert.notNull(anCustNo, "公司编号不允许为空！");
+
+        final Map<String, Object> conditionMap = QueryTermBuilder.newInstance().put("custNo", anCustNo).build();
+
+        return this.selectPropertyByPage(conditionMap, anPageNum, anPageSize, anFlag == 1);
     }
 }

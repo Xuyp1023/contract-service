@@ -66,6 +66,13 @@ public class ContractStamper implements BetterjrEntity {
     @MetaData( value="印章文件", comments = "印章文件")
     private Long stamper;
 
+    /**
+     * 印章文件
+     */
+    @Column(name = "C_STAMPER_DATA",  columnDefinition="TEXT" )
+    @MetaData( value="印章文件内容", comments = "印章文件内容")
+    private String stamperData;
+
     @Transient
     private Long stamperId;
     @Transient
@@ -234,6 +241,14 @@ public class ContractStamper implements BetterjrEntity {
         this.stamper = stamper;
     }
 
+    public String getStamperData() {
+        return stamperData;
+    }
+
+    public void setStamperData(final String stamperData) {
+        this.stamperData = stamperData;
+    }
+
     public String getMakeDate() {
         return makeDate;
     }
@@ -366,6 +381,7 @@ public class ContractStamper implements BetterjrEntity {
         sb.append(", originDate=").append(originDate);
         sb.append(", originTime=").append(originTime);
         sb.append(", stamper=").append(stamper);
+        sb.append(", stamperData=").append(stamperData);
         sb.append(", makeDate=").append(makeDate);
         sb.append(", makeTime=").append(makeTime);
         sb.append(", custNo=").append(custNo);
@@ -404,6 +420,7 @@ public class ContractStamper implements BetterjrEntity {
                 && (this.getOriginDate() == null ? other.getOriginDate() == null : this.getOriginDate().equals(other.getOriginDate()))
                 && (this.getOriginTime() == null ? other.getOriginTime() == null : this.getOriginTime().equals(other.getOriginTime()))
                 && (this.getStamper() == null ? other.getStamper() == null : this.getStamper().equals(other.getStamper()))
+                && (this.getStamperData() == null ? other.getStamperData() == null : this.getStamperData().equals(other.getStamperData()))
                 && (this.getMakeDate() == null ? other.getMakeDate() == null : this.getMakeDate().equals(other.getMakeDate()))
                 && (this.getMakeTime() == null ? other.getMakeTime() == null : this.getMakeTime().equals(other.getMakeTime()))
                 && (this.getCustNo() == null ? other.getCustNo() == null : this.getCustNo().equals(other.getCustNo()))
@@ -431,6 +448,7 @@ public class ContractStamper implements BetterjrEntity {
         result = prime * result + ((getOriginDate() == null) ? 0 : getOriginDate().hashCode());
         result = prime * result + ((getOriginTime() == null) ? 0 : getOriginTime().hashCode());
         result = prime * result + ((getStamper() == null) ? 0 : getStamper().hashCode());
+        result = prime * result + ((getStamperData() == null) ? 0 : getStamperData().hashCode());
         result = prime * result + ((getMakeDate() == null) ? 0 : getMakeDate().hashCode());
         result = prime * result + ((getMakeTime() == null) ? 0 : getMakeTime().hashCode());
         result = prime * result + ((getCustNo() == null) ? 0 : getCustNo().hashCode());
