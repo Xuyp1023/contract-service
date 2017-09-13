@@ -21,117 +21,117 @@ public class ContractTemplateStampPlace implements BetterjrEntity {
      * 编号
      */
     @Id
-    @Column(name = "ID",  columnDefinition="INTEGER" )
-    @MetaData( value="编号", comments = "编号")
+    @Column(name = "ID", columnDefinition = "INTEGER")
+    @MetaData(value = "编号", comments = "编号")
     private Long id;
 
     /**
      * 合同模板编号
      */
-    @Column(name = "L_TEMPLATE_ID",  columnDefinition="INTEGER" )
-    @MetaData( value="合同模板编号", comments = "合同模板编号")
+    @Column(name = "L_TEMPLATE_ID", columnDefinition = "INTEGER")
+    @MetaData(value = "合同模板编号", comments = "合同模板编号")
     private Long templateId;
 
     /**
      * 合同模板名称
      */
-    @Column(name = "C_TEMPLATE_NAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="合同模板名称", comments = "合同模板名称")
+    @Column(name = "C_TEMPLATE_NAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "合同模板名称", comments = "合同模板名称")
     private String templateName;
 
     /**
      * 签约方
      */
-    @Column(name = "C_SIGNATORY",  columnDefinition="CHAR" )
-    @MetaData( value="签约方", comments = "签约方")
+    @Column(name = "C_SIGNATORY", columnDefinition = "CHAR")
+    @MetaData(value = "签约方", comments = "签约方")
     private String signatory;
 
     /**
      * 签约顺序
      */
-    @Column(name = "N_SEQUENCE",  columnDefinition="INTEGER" )
-    @MetaData( value="签约顺序", comments = "签约顺序")
+    @Column(name = "N_SEQUENCE", columnDefinition = "INTEGER")
+    @MetaData(value = "签约顺序", comments = "签约顺序")
     private Long sequence;
 
     /**
      * 位置类型
      */
-    @Column(name = "C_TYPE",  columnDefinition="CHAR" )
-    @MetaData( value="位置类型", comments = "位置类型")
+    @Column(name = "C_TYPE", columnDefinition = "CHAR")
+    @MetaData(value = "位置类型", comments = "位置类型")
     private String type;
 
     /**
      * 页码
      */
-    @Column(name = "N_PAGINATION",  columnDefinition="INTEGER" )
-    @MetaData( value="页码", comments = "页码")
-    private Long pagination;
+    @Column(name = "C_PAGINATION", columnDefinition = "VARCHAR")
+    @MetaData(value = "页码", comments = "签署页码，若为多页签章，支持页码格式；类似打印指定打印页")
+    private String pagination;
 
     /**
      * X轴
      */
-    @Column(name = "N_AXIS_X",  columnDefinition="INTEGER" )
-    @MetaData( value="X轴", comments = "X轴")
+    @Column(name = "N_AXIS_X", columnDefinition = "INTEGER")
+    @MetaData(value = "X轴", comments = "X轴")
     private Long axisX;
 
     /**
      * Y轴
      */
-    @Column(name = "N_AXIS_Y",  columnDefinition="INTEGER" )
-    @MetaData( value="Y轴", comments = "Y轴")
+    @Column(name = "N_AXIS_Y", columnDefinition = "INTEGER")
+    @MetaData(value = "Y轴", comments = "Y轴")
     private Long axisY;
 
     /**
      * 关键字
      */
-    @Column(name = "C_KEY_WORD",  columnDefinition="VARCHAR" )
-    @MetaData( value="关键字", comments = "关键字")
+    @Column(name = "C_KEY_WORD", columnDefinition = "VARCHAR")
+    @MetaData(value = "关键字", comments = "关键字")
     private String keyWord;
 
     /**
      * 业务状态
      */
-    @Column(name = "C_BUSIN_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="业务状态", comments = "业务状态")
+    @Column(name = "C_BUSIN_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "业务状态", comments = "业务状态")
     private String businStatus;
 
     /**
      * 文档状态
      */
-    @Column(name = "C_DOC_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="文档状态", comments = "文档状态")
+    @Column(name = "C_DOC_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "文档状态", comments = "文档状态")
     private String docStatus;
 
-    @Column(name = "L_REG_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_REG_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long regOperId;
 
-    @Column(name = "C_REG_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_REG_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regOperName;
 
-    @Column(name = "D_REG_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_REG_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regDate;
 
-    @Column(name = "T_REG_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_REG_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regTime;
 
-    @Column(name = "L_MODI_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_MODI_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long modiOperId;
 
-    @Column(name = "C_MODI_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_MODI_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiOperName;
 
-    @Column(name = "D_MODI_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_MODI_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiDate;
 
-    @Column(name = "T_MODI_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_MODI_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiTime;
 
     private static final long serialVersionUID = 1492408575306L;
@@ -184,12 +184,12 @@ public class ContractTemplateStampPlace implements BetterjrEntity {
         this.type = type;
     }
 
-    public Long getPagination() {
-        return pagination;
+    public String getPagination() {
+        return this.pagination;
     }
 
-    public void setPagination(final Long pagination) {
-        this.pagination = pagination;
+    public void setPagination(final String anPagination) {
+        this.pagination = anPagination;
     }
 
     public Long getAxisX() {

@@ -18,187 +18,194 @@ public class ContractStub implements BetterjrEntity {
      * 编号
      */
     @Id
-    @Column(name = "ID",  columnDefinition="INTEGER" )
-    @MetaData( value="编号", comments = "编号")
+    @Column(name = "ID", columnDefinition = "INTEGER")
+    @MetaData(value = "编号", comments = "编号")
     private Long id;
 
     /**
      * 电子合同编号
      */
-    @Column(name = "L_CONTRACT_ID",  columnDefinition="INTEGER" )
-    @MetaData( value="电子合同编号", comments = "电子合同编号")
+    @Column(name = "L_CONTRACT_ID", columnDefinition = "INTEGER")
+    @MetaData(value = "电子合同编号", comments = "电子合同编号")
     private Long contractId;
 
     /**
      * 签署方
      */
-    @Column(name = "C_SIGNATORY",  columnDefinition="CHAR" )
-    @MetaData( value="签署方", comments = "签署方")
+    @Column(name = "C_SIGNATORY", columnDefinition = "CHAR")
+    @MetaData(value = "签署方", comments = "签署方")
     private String signatory;
 
     /**
      * 签署顺序
      */
-    @Column(name = "N_SEQUENCE",  columnDefinition="INTEGER" )
-    @MetaData( value="签署顺序", comments = "签署顺序")
+    @Column(name = "N_SEQUENCE", columnDefinition = "INTEGER")
+    @MetaData(value = "签署顺序", comments = "签署顺序")
     private Long sequence;
 
     /**
      * 操作员编号
      */
-    @Column(name = "L_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="操作员编号", comments = "操作员编号")
+    @Column(name = "L_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "操作员编号", comments = "操作员编号")
     private Long operId;
 
     /**
      * 操作员名称
      */
-    @Column(name = "L_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="操作员名称", comments = "操作员名称")
-    private String lOpername;
+    @Column(name = "C_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "操作员名称", comments = "操作员名称")
+    private String operName;
 
     /**
      * 企业帐号
      */
-    @Column(name = "L_CORP_ACCOUNT_ID",  columnDefinition="INTEGER" )
-    @MetaData( value="企业帐号", comments = "企业帐号")
+    @Column(name = "L_CORP_ACCOUNT_ID", columnDefinition = "INTEGER")
+    @MetaData(value = "企业帐号", comments = "企业帐号")
     private Long corpAccountId;
 
     /**
      * 签署人帐号
      */
-    @Column(name = "L_SIGNER_ACCOUNT_ID",  columnDefinition="INTEGER" )
-    @MetaData( value="签署人帐号", comments = "签署人帐号")
+    @Column(name = "L_SIGNER_ACCOUNT_ID", columnDefinition = "INTEGER")
+    @MetaData(value = "签署人帐号", comments = "签署人帐号")
     private Long signerAccountId;
 
     /**
      * 公司签署人编号
      */
-    @Column(name = "L_CORP_SIGNER_ID",  columnDefinition="INTEGER" )
-    @MetaData( value="公司签署人编号", comments = "公司签署人编号")
+    @Column(name = "L_CORP_SIGNER_ID", columnDefinition = "INTEGER")
+    @MetaData(value = "公司签署人编号", comments = "公司签署人编号")
     private Long corpSignerId;
 
     /**
      * 位置类型
      */
-    @Column(name = "C_POSITION_TYPE",  columnDefinition="CHAR" )
-    @MetaData( value="位置类型", comments = "位置类型")
+    @Column(name = "C_POSITION_TYPE", columnDefinition = "CHAR")
+    @MetaData(value = "位置类型", comments = "位置类型")
     private String positionType;
 
     /**
      * 页码
      */
-    @Column(name = "N_PAGINATION",  columnDefinition="INTEGER" )
-    @MetaData( value="页码", comments = "页码")
-    private Long pagination;
+    @Column(name = "C_PAGINATION", columnDefinition = "VARCHAR")
+    @MetaData(value = "页码", comments = "签署页码，若为多页签章，支持页码格式；类似打印指定打印页")
+    private String pagination;
 
     /**
      * X轴
      */
-    @Column(name = "N_AXIS_X",  columnDefinition="INTEGER" )
-    @MetaData( value="X轴", comments = "X轴")
+    @Column(name = "N_AXIS_X", columnDefinition = "INTEGER")
+    @MetaData(value = "X轴", comments = "X轴")
     private Long axisX;
 
     /**
      * Y轴
      */
-    @Column(name = "N_AXIS_Y",  columnDefinition="INTEGER" )
-    @MetaData( value="Y轴", comments = "Y轴")
+    @Column(name = "N_AXIS_Y", columnDefinition = "INTEGER")
+    @MetaData(value = "Y轴", comments = "Y轴")
     private Long axisY;
 
     /**
      * 关键字
      */
-    @Column(name = "C_KEY_WORD",  columnDefinition="VARCHAR" )
-    @MetaData( value="关键字", comments = "关键字")
+    @Column(name = "C_KEY_WORD", columnDefinition = "VARCHAR")
+    @MetaData(value = "关键字", comments = "关键字")
     private String keyWord;
 
     /**
      * 签署日期
      */
-    @Column(name = "D_SIGN_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="签署日期", comments = "签署日期")
+    @Column(name = "D_SIGN_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "签署日期", comments = "签署日期")
     private String signDate;
 
     /**
      * 签署时间
      */
-    @Column(name = "T_SIGN_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="签署时间", comments = "签署时间")
+    @Column(name = "T_SIGN_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "签署时间", comments = "签署时间")
     private String signTime;
 
     /**
      * 签署后pdf
      */
-    @Column(name = "L_SIGN_PDF",  columnDefinition="INTEGER" )
-    @MetaData( value="签署后pdf", comments = "签署后pdf")
+    @Column(name = "L_SIGN_PDF", columnDefinition = "INTEGER")
+    @MetaData(value = "签署后pdf", comments = "签署后pdf")
     private Long signPdf;
 
     /**
      * 业务状态
      */
-    @Column(name = "C_BUSIN_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="业务状态", comments = "业务状态")
+    @Column(name = "C_BUSIN_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "业务状态", comments = "业务状态")
     private String businStatus;
 
     /**
      * 文档状态
      */
-    @Column(name = "C_DOC_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="文档状态", comments = "文档状态")
+    @Column(name = "C_DOC_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "文档状态", comments = "文档状态")
     private String docStatus;
 
     /**
      * 公司
      */
-    @Column(name = "L_CUSTNO",  columnDefinition="INTEGER" )
-    @MetaData( value="公司", comments = "公司")
+    @Column(name = "L_CUSTNO", columnDefinition = "INTEGER")
+    @MetaData(value = "公司", comments = "公司")
     private Long custNo;
 
     /**
      * 公司名称
      */
-    @Column(name = "C_CUSTNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="公司名称", comments = "公司名称")
+    @Column(name = "C_CUSTNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "公司名称", comments = "公司名称")
     private String custName;
+
+    /**
+     * 签署记录id
+     */
+    @Column(name = "C_SIGN_SERVICEID", columnDefinition = "VARCHAR")
+    @MetaData(value = "签署记录id", comments = "签署记录id")
+    private String signServiceId;
 
     /**
      * 机构
      */
-    @Column(name = "C_OPERORG",  columnDefinition="VARCHAR" )
-    @MetaData( value="机构", comments = "机构")
+    @Column(name = "C_OPERORG", columnDefinition = "VARCHAR")
+    @MetaData(value = "机构", comments = "机构")
     private String operOrg;
 
-    @Column(name = "D_MODI_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_MODI_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiDate;
 
-    @Column(name = "T_MODI_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_MODI_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiTime;
 
-    @Column(name = "C_MODI_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_MODI_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiOperName;
 
-    @Column(name = "L_MODI_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_MODI_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long modiOperId;
 
-    @Column(name = "T_REG_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_REG_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regTime;
 
-    @Column(name = "D_REG_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_REG_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regDate;
 
-    @Column(name = "C_REG_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_REG_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regOperName;
 
-    @Column(name = "L_REG_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_REG_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long regOperId;
 
     private static final long serialVersionUID = 1492408575311L;
@@ -243,12 +250,12 @@ public class ContractStub implements BetterjrEntity {
         this.operId = operId;
     }
 
-    public String getlOpername() {
-        return lOpername;
+    public String getOperName() {
+        return this.operName;
     }
 
-    public void setlOpername(final String lOpername) {
-        this.lOpername = lOpername == null ? null : lOpername.trim();
+    public void setOperName(final String anOperName) {
+        this.operName = anOperName;
     }
 
     public Long getCorpAccountId() {
@@ -283,12 +290,12 @@ public class ContractStub implements BetterjrEntity {
         this.positionType = positionType;
     }
 
-    public Long getPagination() {
-        return pagination;
+    public String getPagination() {
+        return this.pagination;
     }
 
-    public void setPagination(final Long pagination) {
-        this.pagination = pagination;
+    public void setPagination(final String anPagination) {
+        this.pagination = anPagination;
     }
 
     public Long getAxisX() {
@@ -443,6 +450,14 @@ public class ContractStub implements BetterjrEntity {
         this.regOperId = regOperId;
     }
 
+    public String getSignServiceId() {
+        return this.signServiceId;
+    }
+
+    public void setSignServiceId(final String anSignServiceId) {
+        this.signServiceId = anSignServiceId;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -454,7 +469,7 @@ public class ContractStub implements BetterjrEntity {
         sb.append(", signatory=").append(signatory);
         sb.append(", sequence=").append(sequence);
         sb.append(", operId=").append(operId);
-        sb.append(", lOpername=").append(lOpername);
+        sb.append(", operName=").append(operName);
         sb.append(", corpAccountId=").append(corpAccountId);
         sb.append(", signerAccountId=").append(signerAccountId);
         sb.append(", corpSignerId=").append(corpSignerId);
@@ -479,7 +494,7 @@ public class ContractStub implements BetterjrEntity {
         sb.append(", regDate=").append(regDate);
         sb.append(", regOperName=").append(regOperName);
         sb.append(", regOperId=").append(regOperId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append(", signServiceId=").append(signServiceId);
         sb.append("]");
         return sb.toString();
     }
@@ -501,9 +516,10 @@ public class ContractStub implements BetterjrEntity {
                 && (this.getSignatory() == null ? other.getSignatory() == null : this.getSignatory().equals(other.getSignatory()))
                 && (this.getSequence() == null ? other.getSequence() == null : this.getSequence().equals(other.getSequence()))
                 && (this.getOperId() == null ? other.getOperId() == null : this.getOperId().equals(other.getOperId()))
-                && (this.getlOpername() == null ? other.getlOpername() == null : this.getlOpername().equals(other.getlOpername()))
+                && (this.getOperName() == null ? other.getOperName() == null : this.getOperName().equals(other.getOperName()))
                 && (this.getCorpAccountId() == null ? other.getCorpAccountId() == null : this.getCorpAccountId().equals(other.getCorpAccountId()))
-                && (this.getSignerAccountId() == null ? other.getSignerAccountId() == null : this.getSignerAccountId().equals(other.getSignerAccountId()))
+                && (this.getSignerAccountId() == null ? other.getSignerAccountId() == null
+                        : this.getSignerAccountId().equals(other.getSignerAccountId()))
                 && (this.getCorpSignerId() == null ? other.getCorpSignerId() == null : this.getCorpSignerId().equals(other.getCorpSignerId()))
                 && (this.getPositionType() == null ? other.getPositionType() == null : this.getPositionType().equals(other.getPositionType()))
                 && (this.getPagination() == null ? other.getPagination() == null : this.getPagination().equals(other.getPagination()))
@@ -525,7 +541,8 @@ public class ContractStub implements BetterjrEntity {
                 && (this.getRegTime() == null ? other.getRegTime() == null : this.getRegTime().equals(other.getRegTime()))
                 && (this.getRegDate() == null ? other.getRegDate() == null : this.getRegDate().equals(other.getRegDate()))
                 && (this.getRegOperName() == null ? other.getRegOperName() == null : this.getRegOperName().equals(other.getRegOperName()))
-                && (this.getRegOperId() == null ? other.getRegOperId() == null : this.getRegOperId().equals(other.getRegOperId()));
+                && (this.getRegOperId() == null ? other.getRegOperId() == null : this.getRegOperId().equals(other.getRegOperId()))
+                && (this.getSignServiceId() == null ? other.getSignServiceId() == null : this.getSignServiceId().equals(other.getSignServiceId()));
     }
 
     @Override
@@ -537,7 +554,7 @@ public class ContractStub implements BetterjrEntity {
         result = prime * result + ((getSignatory() == null) ? 0 : getSignatory().hashCode());
         result = prime * result + ((getSequence() == null) ? 0 : getSequence().hashCode());
         result = prime * result + ((getOperId() == null) ? 0 : getOperId().hashCode());
-        result = prime * result + ((getlOpername() == null) ? 0 : getlOpername().hashCode());
+        result = prime * result + ((getOperName() == null) ? 0 : getOperName().hashCode());
         result = prime * result + ((getCorpAccountId() == null) ? 0 : getCorpAccountId().hashCode());
         result = prime * result + ((getSignerAccountId() == null) ? 0 : getSignerAccountId().hashCode());
         result = prime * result + ((getCorpSignerId() == null) ? 0 : getCorpSignerId().hashCode());
@@ -562,6 +579,7 @@ public class ContractStub implements BetterjrEntity {
         result = prime * result + ((getRegDate() == null) ? 0 : getRegDate().hashCode());
         result = prime * result + ((getRegOperName() == null) ? 0 : getRegOperName().hashCode());
         result = prime * result + ((getRegOperId() == null) ? 0 : getRegOperId().hashCode());
+        result = prime * result + ((getSignServiceId() == null) ? 0 : getSignServiceId().hashCode());
         return result;
     }
 }

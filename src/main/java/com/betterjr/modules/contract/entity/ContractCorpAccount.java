@@ -17,164 +17,171 @@ import com.betterjr.modules.account.entity.CustOperatorInfo;
 @Entity
 @Table(name = "t_sys_contract_corp_account")
 public class ContractCorpAccount implements BetterjrEntity {
+
     /**
      * 编号
      */
     @Id
-    @Column(name = "ID",  columnDefinition="INTEGER" )
-    @MetaData( value="编号", comments = "编号")
+    @Column(name = "ID", columnDefinition = "INTEGER")
+    @MetaData(value = "编号", comments = "编号")
     private Long id;
 
     /**
-     * 名称
+     * 人员姓名
      */
-    @Column(name = "C_NAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="名称", comments = "名称")
+    @Column(name = "C_NAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "人员姓名", comments = "人员姓名")
     private String name;
 
     /**
-     * 类型
+     * 人员身份证号
      */
-    @Column(name = "C_TYPE",  columnDefinition="VARCHAR" )
-    @MetaData( value="类型", comments = "类型")
+    @Column(name = "C_IDENT_NO", columnDefinition = "VARCHAR")
+    @MetaData(value = "人员身份证号", comments = "人员身份证号")
+    private String identNo;
+
+    /**
+     * 手机号码
+     */
+    @Column(name = "C_MOBILENO", columnDefinition = "VARCHAR")
+    @MetaData(value = "手机号码", comments = "手机号码")
+    private String mobileNo;
+
+    /**
+     * 注册类型
+     */
+    @Column(name = "C_TYPE", columnDefinition = "VARCHAR")
+    @MetaData(value = "注册类型", comments = "注册类型")
     private String type;
 
     /**
      * 组织机构代码
      */
-    @Column(name = "C_ORG_CODE",  columnDefinition="VARCHAR" )
-    @MetaData( value="组织机构代码", comments = "组织机构代码")
+    @Column(name = "C_ORG_CODE", columnDefinition = "VARCHAR")
+    @MetaData(value = "组织机构代码", comments = "组织机构代码")
     private String orgCode;
-
-    /**
-     * 身份证号
-     */
-    @Column(name = "C_IDENT_NO",  columnDefinition="VARCHAR" )
-    @MetaData( value="身份证号", comments = "身份证号")
-    private String identNo;
 
     /**
      * 帐号
      */
-    @Column(name = "C_ACCOUNT",  columnDefinition="VARCHAR" )
-    @MetaData( value="帐号", comments = "帐号")
+    @Column(name = "C_ACCOUNT", columnDefinition = "VARCHAR")
+    @MetaData(value = "帐号", comments = "帐号")
     private String account;
 
     /**
      * 业务状态
      */
-    @Column(name = "C_BUSIN_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="业务状态", comments = "业务状态")
+    @Column(name = "C_BUSIN_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "业务状态", comments = "业务状态")
     private String businStatus;
 
     /**
      * 文档状态
      */
-    @Column(name = "C_DOC_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="文档状态", comments = "文档状态")
+    @Column(name = "C_DOC_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "文档状态", comments = "文档状态")
     private String docStatus;
 
     /**
-     * 公司
+     * 公司编号
      */
-    @Column(name = "L_CUSTNO",  columnDefinition="INTEGER" )
-    @MetaData( value="公司", comments = "公司")
+    @Column(name = "L_CUSTNO", columnDefinition = "INTEGER")
+    @MetaData(value = "公司编号", comments = "公司编号")
     private Long custNo;
 
     /**
      * 公司名称
      */
-    @Column(name = "C_CUSTNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="公司名称", comments = "公司名称")
+    @Column(name = "C_CUSTNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "公司名称", comments = "公司名称")
     private String custName;
 
     /**
      * 机构
      */
-    @Column(name = "C_OPERORG",  columnDefinition="VARCHAR" )
-    @MetaData( value="机构", comments = "机构")
+    @Column(name = "C_OPERORG", columnDefinition = "VARCHAR")
+    @MetaData(value = "机构", comments = "机构")
     private String operOrg;
 
     /**
      * 电子合同服务商编号
      */
-    @Column(name = "L_SERVICE_CUSTNO",  columnDefinition="INTEGER" )
-    @MetaData( value="电子合同服务商编号", comments = "电子合同服务商编号")
+    @Column(name = "L_SERVICE_CUSTNO", columnDefinition = "INTEGER")
+    @MetaData(value = "电子合同服务商编号", comments = "电子合同服务商编号")
     private String serviceCustNo;
 
     /**
      * 电子合同服务商名称
      */
-    @Column(name = "C_SERVICE_CUSTNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="电子合同服务商名称", comments = "电子合同服务商名称")
+    @Column(name = "C_SERVICE_CUSTNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "电子合同服务商名称", comments = "电子合同服务商名称")
     private String serviceCustName;
 
     /**
      * 合同签署人编号
      */
-    @Column(name = "L_SIGNER_ID",  columnDefinition="INTEGER" )
-    @MetaData( value="合同签署人编号", comments = "合同签署人编号")
+    @Column(name = "L_SIGNER_ID", columnDefinition = "INTEGER")
+    @MetaData(value = "合同签署人编号", comments = "合同签署人编号")
     private Long signerId;
 
     /**
      * 合同签署人编号
      */
-    @Column(name = "L_SIGNER_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="合同签署人编号", comments = "合同签署人编号")
+    @Column(name = "L_SIGNER_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "合同签署人编号", comments = "合同签署人编号")
     private Long signerOperId;
 
     /**
      * 合同签署人名称
      */
-    @Column(name = "C_SIGNER_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="合同签署人名称", comments = "合同签署人名称")
+    @Column(name = "C_SIGNER_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "合同签署人名称", comments = "合同签署人名称")
     private String signerOperName;
 
     /**
      * 合同签署人帐号
      */
-    @Column(name = "C_SIGNER_ACCOUNT",  columnDefinition="VARCHAR" )
-    @MetaData( value="合同签署人帐号", comments = "合同签署人帐号")
+    @Column(name = "C_SIGNER_ACCOUNT", columnDefinition = "VARCHAR")
+    @MetaData(value = "合同签署人帐号", comments = "合同签署人帐号")
     private String signerAccount;
 
     /**
      * 合同签署人手机
      */
-    @Column(name = "C_SIGNER_MOBILE_NO",  columnDefinition="VARCHAR" )
-    @MetaData( value="合同签署人手机", comments = "合同签署人手机")
+    @Column(name = "C_SIGNER_MOBILE_NO", columnDefinition = "VARCHAR")
+    @MetaData(value = "合同签署人手机", comments = "合同签署人手机")
     private String signerMobileNo;
 
-
-    @Column(name = "D_MODI_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_MODI_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiDate;
 
-    @Column(name = "T_MODI_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_MODI_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiTime;
 
-    @Column(name = "C_MODI_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_MODI_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiOperName;
 
-    @Column(name = "L_MODI_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_MODI_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long modiOperId;
 
-    @Column(name = "T_REG_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_REG_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regTime;
 
-    @Column(name = "D_REG_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_REG_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regDate;
 
-    @Column(name = "C_REG_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_REG_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regOperName;
 
-    @Column(name = "L_REG_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_REG_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long regOperId;
 
     private static final long serialVersionUID = 1492408575313L;
@@ -387,6 +394,14 @@ public class ContractCorpAccount implements BetterjrEntity {
         signerMobileNo = anSignerMobileNo;
     }
 
+    public String getMobileNo() {
+        return this.mobileNo;
+    }
+
+    public void setMobileNo(final String anMobileNo) {
+        this.mobileNo = anMobileNo;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -419,7 +434,7 @@ public class ContractCorpAccount implements BetterjrEntity {
         sb.append(", regDate=").append(regDate);
         sb.append(", regOperName=").append(regOperName);
         sb.append(", regOperId=").append(regOperId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append(", mobileNo=").append(mobileNo);
         sb.append("]");
         return sb.toString();
     }
@@ -448,7 +463,8 @@ public class ContractCorpAccount implements BetterjrEntity {
                 && (this.getCustName() == null ? other.getCustName() == null : this.getCustName().equals(other.getCustName()))
                 && (this.getOperOrg() == null ? other.getOperOrg() == null : this.getOperOrg().equals(other.getOperOrg()))
                 && (this.getServiceCustNo() == null ? other.getServiceCustNo() == null : this.getServiceCustNo().equals(other.getServiceCustNo()))
-                && (this.getServiceCustName() == null ? other.getServiceCustName() == null : this.getServiceCustName().equals(other.getServiceCustName()))
+                && (this.getServiceCustName() == null ? other.getServiceCustName() == null
+                        : this.getServiceCustName().equals(other.getServiceCustName()))
                 && (this.getSignerId() == null ? other.getSignerId() == null : this.getSignerId().equals(other.getSignerId()))
                 && (this.getSignerOperId() == null ? other.getSignerOperId() == null : this.getSignerOperId().equals(other.getSignerOperId()))
                 && (this.getSignerOperName() == null ? other.getSignerOperName() == null : this.getSignerOperName().equals(other.getSignerOperName()))
@@ -461,7 +477,8 @@ public class ContractCorpAccount implements BetterjrEntity {
                 && (this.getRegTime() == null ? other.getRegTime() == null : this.getRegTime().equals(other.getRegTime()))
                 && (this.getRegDate() == null ? other.getRegDate() == null : this.getRegDate().equals(other.getRegDate()))
                 && (this.getRegOperName() == null ? other.getRegOperName() == null : this.getRegOperName().equals(other.getRegOperName()))
-                && (this.getRegOperId() == null ? other.getRegOperId() == null : this.getRegOperId().equals(other.getRegOperId()));
+                && (this.getRegOperId() == null ? other.getRegOperId() == null : this.getRegOperId().equals(other.getRegOperId()))
+                && (this.getMobileNo() == null ? other.getMobileNo() == null : this.getMobileNo().equals(other.getMobileNo()));
     }
 
     @Override
@@ -494,6 +511,7 @@ public class ContractCorpAccount implements BetterjrEntity {
         result = prime * result + ((getRegDate() == null) ? 0 : getRegDate().hashCode());
         result = prime * result + ((getRegOperName() == null) ? 0 : getRegOperName().hashCode());
         result = prime * result + ((getRegOperId() == null) ? 0 : getRegOperId().hashCode());
+        result = prime * result + ((getMobileNo() == null) ? 0 : getMobileNo().hashCode());
         return result;
     }
 

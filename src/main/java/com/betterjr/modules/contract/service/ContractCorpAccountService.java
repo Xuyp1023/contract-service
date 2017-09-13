@@ -8,16 +8,19 @@
 package com.betterjr.modules.contract.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.betterjr.common.service.BaseService;
 import com.betterjr.common.utils.BTAssert;
 import com.betterjr.common.utils.BetterStringUtils;
+import com.betterjr.common.utils.Collections3;
 import com.betterjr.common.utils.QueryTermBuilder;
 import com.betterjr.common.utils.UserUtils;
 import com.betterjr.mapper.pagehelper.Page;
@@ -40,6 +43,9 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
     @Resource
     private ContractSignerAccountService contractSignerAccountService;
 
+    @Autowired
+    private EsignFactory signFacory;
+
     /**
      *
      * @param anCustNo
@@ -57,7 +63,7 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
      * @param anCorpAccount
      * @return
      */
-    public ContractCorpAccount saveRegistCorpAccount(final ContractCorpAccount anCorpAccount) {
+    public ContractCorpAccount saveRegistCorpAccount(ContractCorpAccount anCorpAccount) {
         final Long custNo = anCorpAccount.getCustNo();
 
         final CustMechBase mechBase = custMechBaseService.findBaseInfo(custNo);
@@ -67,11 +73,10 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
         anCorpAccount.init(operator);
-
-        // TODO 调用 注册接口
-
+        anCorpAccount.setBusinStatus("0");
         final int result = this.insert(anCorpAccount);
-
+        anCorpAccount = signFacory.registCorpAccount(anCorpAccount);
+        this.updateByPrimaryKey(anCorpAccount);
         BTAssert.isTrue(result == 1, "电子合同服务企业注册失败！");
 
         return anCorpAccount;
@@ -83,7 +88,7 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
      * @return
      */
     public ContractCorpAccount findCorpAccount(final Long anId) {
-        final ContractCorpAccount corpAccount =  this.selectByPrimaryKey(anId);
+        final ContractCorpAccount corpAccount = this.selectByPrimaryKey(anId);
 
         return corpAccount;
     }
@@ -131,5 +136,24 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
         final Map<String, Object> conditionMap = QueryTermBuilder.newInstance().put("custNo", anCustNo).build();
 
         return this.selectPropertyByPage(conditionMap, anPageNum, anPageSize, anFlag == 1);
+    }
+
+    /**
+     * 查找在电子合同签署的账号信息
+     * 
+     * @param anOperId
+     *            操作员编号
+     * @return
+     */
+    public String findSignAccountId(final Long anCustNo, final Long anServiceCustNo) {
+        final Map<String, Object> queryTerm = QueryTermBuilder.newInstance().put("custNo", anCustNo).put("serviceCustNo", anServiceCustNo)
+                .put("businStatus", "1").build();
+        final List<ContractCorpAccount> tmpList = this.selectByProperty(queryTerm);
+        if (Collections3.isEmpty(tmpList)) {
+            return "";
+        }
+        else {
+            return Collections3.getFirst(tmpList).getAccount();
+        }
     }
 }

@@ -8,14 +8,17 @@
 package com.betterjr.modules.contract.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.betterjr.common.service.BaseService;
 import com.betterjr.common.utils.BTAssert;
 import com.betterjr.common.utils.BetterStringUtils;
+import com.betterjr.common.utils.Collections3;
 import com.betterjr.common.utils.QueryTermBuilder;
 import com.betterjr.common.utils.UserUtils;
 import com.betterjr.mapper.pagehelper.Page;
@@ -33,6 +36,9 @@ public class ContractSignerAccountService extends BaseService<ContractSignerAcco
 
     @Reference(interfaceClass = ICustOperatorService.class)
     private ICustOperatorService custOperatorService;
+
+    @Autowired
+    private EsignFactory signFactory;
 
     /**
      *
@@ -63,13 +69,12 @@ public class ContractSignerAccountService extends BaseService<ContractSignerAcco
 
         anSignerAccount.setOperName(custOperator.getName());
         anSignerAccount.setOperOrg(UserUtils.getOperOrg());
-
-
-        // TODO 注册，获取 account
-
         anSignerAccount.init(operator);
-
+        anSignerAccount.setBusinStatus("0");
         final int result = this.insert(anSignerAccount);
+        final ContractSignerAccount tmpSignerAccount = signFactory.registPersonAccount(anSignerAccount);
+        this.updateByPrimaryKey(tmpSignerAccount);
+
         BTAssert.isTrue(result == 1, "注册失败！");
         return anSignerAccount;
     }
@@ -111,5 +116,24 @@ public class ContractSignerAccountService extends BaseService<ContractSignerAcco
         BTAssert.notNull(custOperator, "没有找到此操作员！");
 
         return custOperator;
+    }
+
+    /**
+     * 查找在电子合同签署的账号信息
+     * 
+     * @param anOperId
+     *            操作员编号
+     * @return
+     */
+    public String findSignAccountId(final Long anOperId, final Long anServiceCustNo) {
+        final Map<String, Object> queryTerm = QueryTermBuilder.newInstance().put("operId", anOperId).put("serviceCustNo", anServiceCustNo)
+                .put("businStatus", "1").build();
+        final List<ContractSignerAccount> tmpList = this.selectByProperty(queryTerm);
+        if (Collections3.isEmpty(tmpList)) {
+            return "";
+        }
+        else {
+            return Collections3.getFirst(tmpList).getAccount();
+        }
     }
 }
