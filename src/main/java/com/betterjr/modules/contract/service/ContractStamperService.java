@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -24,11 +25,11 @@ import com.betterjr.common.utils.Base64Coder;
 import com.betterjr.common.utils.BetterStringUtils;
 import com.betterjr.common.utils.UserUtils;
 import com.betterjr.mapper.pagehelper.Page;
+import com.betterjr.modules.account.entity.CustInfo;
 import com.betterjr.modules.account.entity.CustOperatorInfo;
+import com.betterjr.modules.account.service.CustAccountService;
 import com.betterjr.modules.contract.dao.ContractStamperMapper;
 import com.betterjr.modules.contract.entity.ContractStamper;
-import com.betterjr.modules.customer.ICustMechBaseService;
-import com.betterjr.modules.customer.entity.CustMechBase;
 import com.betterjr.modules.document.ICustFileService;
 import com.betterjr.modules.document.entity.CustFileItem;
 import com.betterjr.modules.document.service.DataStoreService;
@@ -43,8 +44,11 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
     @Reference(interfaceClass = ICustFileService.class)
     private ICustFileService custFileService;
 
-    @Reference(interfaceClass = ICustMechBaseService.class)
-    private ICustMechBaseService custMechBaseService;
+//    @Reference(interfaceClass = ICustMechBaseService.class)
+//    private ICustMechBaseService custMechBaseService;
+    
+    @Autowired
+    private CustAccountService custAccountService;    
 
     @Resource
     private DataStoreService dataStoreService;
@@ -125,20 +129,22 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
         BTAssert.notNull(anContractStamper, "印章数据不允许为空！");
         BTAssert.isTrue(BetterStringUtils.isNotBlank(anOrginFileId), "原始印章文件不允许为空！");
 
-        final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anContractStamper.getCustNo());
-        BTAssert.notNull(custMechBase, "没有找到公司信息！");
+//        final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anContractStamper.getCustNo());
+        
+        final CustInfo custInfo = this.custAccountService.findCustInfo(anContractStamper.getCustNo());        
+        BTAssert.notNull(custInfo, "没有找到公司信息！");
 
         final boolean checkResult = this.findCheckStamper(anContractStamper.getCustNo());
         BTAssert.isTrue(checkResult == false, "此公司已经上传过印章！");
 
-        anContractStamper.setOperOrg(custMechBase.getOperOrg());
-        anContractStamper.setCustName(custMechBase.getCustName());
+        anContractStamper.setOperOrg(custInfo.getOperOrg());
+        anContractStamper.setCustName(custInfo.getCustName());
 
         final Long batchNo = custFileService.updateCustFileItemInfo(anOrginFileId, null);
         anContractStamper.setOriginStamper(batchNo);
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
-        BTAssert.isTrue(BetterStringUtils.equals(operator.getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(BetterStringUtils.equals(operator.getOperOrg(), custInfo.getOperOrg()), "操作失败！");
 
         anContractStamper.setBusinStatus("00"); // 已上传待制作状态
         anContractStamper.init(operator);
@@ -160,15 +166,17 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
         BTAssert.notNull(anContractStamper, "印章数据不允许为空！");
         BTAssert.notNull(anFileId, "印章文件不允许为空！");
 
-        final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anContractStamper.getCustNo());
-        BTAssert.notNull(custMechBase, "没有找到公司信息！");
+//        final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anContractStamper.getCustNo());
+
+        final CustInfo custInfo = this.custAccountService.findCustInfo(anContractStamper.getCustNo());        
+        BTAssert.notNull(custInfo, "没有找到公司信息！");
 
         final boolean checkResult = this.findCheckStamper(anContractStamper.getCustNo());
         BTAssert.isTrue(checkResult == false, "此公司已经上传过印章！");
 
         // 这里需要根据 所选择公司添加 operOrg
-        anContractStamper.setOperOrg(custMechBase.getOperOrg());
-        anContractStamper.setCustName(custMechBase.getCustName());
+        anContractStamper.setOperOrg(custInfo.getOperOrg());
+        anContractStamper.setCustName(custInfo.getCustName());
 
         anContractStamper.setOriginStamper(custFileService.updateCustFileItemInfo(anOrginFileId, null));
 
