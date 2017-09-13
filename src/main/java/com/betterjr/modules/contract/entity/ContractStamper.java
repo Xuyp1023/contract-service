@@ -22,22 +22,22 @@ public class ContractStamper implements BetterjrEntity {
      * 编号
      */
     @Id
-    @Column(name = "ID",  columnDefinition="INTEGER" )
-    @MetaData( value="编号", comments = "编号")
+    @Column(name = "ID", columnDefinition = "INTEGER")
+    @MetaData(value = "编号", comments = "编号")
     private Long id;
 
     /**
      * 名称
      */
-    @Column(name = "C_NAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="名称", comments = "名称")
+    @Column(name = "C_NAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "名称", comments = "名称")
     private String name;
 
     /**
      * 原始文件(BATCHNO)
      */
-    @Column(name = "L_ORIGIN_STAMPER",  columnDefinition="INTEGER" )
-    @MetaData( value="原始文件(BATCHNO)", comments = "原始文件(BATCHNO)")
+    @Column(name = "L_ORIGIN_STAMPER", columnDefinition = "INTEGER")
+    @MetaData(value = "原始文件(BATCHNO)", comments = "原始文件(BATCHNO)")
     private Long originStamper;
 
     @Transient
@@ -48,29 +48,29 @@ public class ContractStamper implements BetterjrEntity {
     /**
      * 原始文件日期
      */
-    @Column(name = "D_ORIGIN_DATE",  columnDefinition="CHAR" )
-    @MetaData( value="原始文件日期", comments = "原始文件日期")
+    @Column(name = "D_ORIGIN_DATE", columnDefinition = "CHAR")
+    @MetaData(value = "原始文件日期", comments = "原始文件日期")
     private String originDate;
 
     /**
      * 原始文件时间
      */
-    @Column(name = "T_ORIGIN_TIME",  columnDefinition="CHAR" )
-    @MetaData( value="原始文件时间", comments = "原始文件时间")
+    @Column(name = "T_ORIGIN_TIME", columnDefinition = "CHAR")
+    @MetaData(value = "原始文件时间", comments = "原始文件时间")
     private String originTime;
 
     /**
      * 印章文件
      */
-    @Column(name = "L_STAMPER",  columnDefinition="INTEGER" )
-    @MetaData( value="印章文件", comments = "印章文件")
+    @Column(name = "L_STAMPER", columnDefinition = "INTEGER")
+    @MetaData(value = "印章文件", comments = "印章文件")
     private Long stamper;
 
     /**
      * 印章文件
      */
-    @Column(name = "C_STAMPER_DATA",  columnDefinition="TEXT" )
-    @MetaData( value="印章文件内容", comments = "印章文件内容")
+    @Column(name = "C_STAMPER_DATA", columnDefinition = "TEXT")
+    @MetaData(value = "印章文件内容", comments = "印章文件内容")
     private String stamperData;
 
     @Transient
@@ -81,82 +81,89 @@ public class ContractStamper implements BetterjrEntity {
     /**
      * 制作日期
      */
-    @Column(name = "D_MAKE_DATE",  columnDefinition="CHAR" )
-    @MetaData( value="制作日期", comments = "制作日期")
+    @Column(name = "D_MAKE_DATE", columnDefinition = "CHAR")
+    @MetaData(value = "制作日期", comments = "制作日期")
     private String makeDate;
 
     /**
      * 制作时间
      */
-    @Column(name = "T_MAKE_TIME",  columnDefinition="CHAR" )
-    @MetaData( value="制作时间", comments = "制作时间")
+    @Column(name = "T_MAKE_TIME", columnDefinition = "CHAR")
+    @MetaData(value = "制作时间", comments = "制作时间")
     private String makeTime;
 
     /**
      * 所属公司
      */
-    @Column(name = "L_CUSTNO",  columnDefinition="INTEGER" )
-    @MetaData( value="所属公司", comments = "所属公司")
+    @Column(name = "L_CUSTNO", columnDefinition = "INTEGER")
+    @MetaData(value = "所属公司", comments = "所属公司")
     private Long custNo;
 
     /**
      * 所属公司名称
      */
-    @Column(name = "C_CUSTNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="所属公司名称", comments = "所属公司名称")
+    @Column(name = "C_CUSTNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "所属公司名称", comments = "所属公司名称")
     private String custName;
 
     /**
      * 所属机构
      */
-    @Column(name = "C_OPERORG",  columnDefinition="VARCHAR" )
-    @MetaData( value="所属机构", comments = "所属机构")
+    @Column(name = "C_OPERORG", columnDefinition = "VARCHAR")
+    @MetaData(value = "所属机构", comments = "所属机构")
     private String operOrg;
 
     /**
      * 业务状态
      */
-    @Column(name = "C_BUSIN_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="业务状态", comments = "业务状态")
+    @Column(name = "C_BUSIN_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "业务状态", comments = "业务状态")
     private String businStatus;
+
+    /**
+     * 客户类型：0：机构；1：个人
+     */
+    @Column(name = "C_CUSTTYPE", columnDefinition = "CHAR")
+    @MetaData(value = "客户类型：0：机构", comments = "客户类型：0：机构；1：个人")
+    private String custType;
 
     /**
      * 文档状态
      */
-    @Column(name = "C_DOC_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="文档状态", comments = "文档状态")
+    @Column(name = "C_DOC_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "文档状态", comments = "文档状态")
     private String docStatus;
 
-    @Column(name = "L_REG_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_REG_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long regOperId;
 
-    @Column(name = "C_REG_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_REG_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regOperName;
 
-    @Column(name = "D_REG_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_REG_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regDate;
 
-    @Column(name = "T_REG_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_REG_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regTime;
 
-    @Column(name = "L_MODI_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_MODI_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long modiOperId;
 
-    @Column(name = "C_MODI_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_MODI_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiOperName;
 
-    @Column(name = "D_MODI_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_MODI_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiDate;
 
-    @Column(name = "T_MODI_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_MODI_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiTime;
 
     private static final long serialVersionUID = 1492408575299L;
@@ -369,6 +376,14 @@ public class ContractStamper implements BetterjrEntity {
         this.modiTime = modiTime == null ? null : modiTime.trim();
     }
 
+    public String getCustType() {
+        return this.custType;
+    }
+
+    public void setCustType(final String anCustType) {
+        this.custType = anCustType;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -397,7 +412,7 @@ public class ContractStamper implements BetterjrEntity {
         sb.append(", modiOperName=").append(modiOperName);
         sb.append(", modiDate=").append(modiDate);
         sb.append(", modiTime=").append(modiTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append(", custType=").append(custType);
         sb.append("]");
         return sb.toString();
     }
@@ -435,7 +450,8 @@ public class ContractStamper implements BetterjrEntity {
                 && (this.getModiOperId() == null ? other.getModiOperId() == null : this.getModiOperId().equals(other.getModiOperId()))
                 && (this.getModiOperName() == null ? other.getModiOperName() == null : this.getModiOperName().equals(other.getModiOperName()))
                 && (this.getModiDate() == null ? other.getModiDate() == null : this.getModiDate().equals(other.getModiDate()))
-                && (this.getModiTime() == null ? other.getModiTime() == null : this.getModiTime().equals(other.getModiTime()));
+                && (this.getModiTime() == null ? other.getModiTime() == null : this.getModiTime().equals(other.getModiTime()))
+                && (this.getCustType() == null ? other.getCustType() == null : this.getCustType().equals(other.getCustType()));
     }
 
     @Override
@@ -464,6 +480,7 @@ public class ContractStamper implements BetterjrEntity {
         result = prime * result + ((getModiOperName() == null) ? 0 : getModiOperName().hashCode());
         result = prime * result + ((getModiDate() == null) ? 0 : getModiDate().hashCode());
         result = prime * result + ((getModiTime() == null) ? 0 : getModiTime().hashCode());
+        result = prime * result + ((getCustType() == null) ? 0 : getCustType().hashCode());
         return result;
     }
 

@@ -10,6 +10,7 @@ package com.betterjr.modules.contract.service;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -23,6 +24,8 @@ import com.betterjr.common.service.BaseService;
 import com.betterjr.common.utils.BTAssert;
 import com.betterjr.common.utils.Base64Coder;
 import com.betterjr.common.utils.BetterStringUtils;
+import com.betterjr.common.utils.Collections3;
+import com.betterjr.common.utils.QueryTermBuilder;
 import com.betterjr.common.utils.UserUtils;
 import com.betterjr.mapper.pagehelper.Page;
 import com.betterjr.modules.account.entity.CustInfo;
@@ -55,6 +58,7 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
 
     /**
      * 获取当前机构印章(所有状态)
+     * 
      * @param anCustNo
      *
      * @return
@@ -259,6 +263,7 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
 
     /**
      * 平台获取所有的印章
+     * 
      * @param anPageSize
      * @param anPageNum
      * @param anFlag
@@ -271,7 +276,8 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
 
         if (BetterStringUtils.isBlank((String) anParam.get("LIKEcustName"))) {
             anParam.remove("LIKEcustName");
-        } else {
+        }
+        else {
             anParam.put("LIKEcustName", "%" + (String) anParam.get("LIKEcustName") + "%");
         }
         if (BetterStringUtils.isBlank((String) anParam.get("businStatus"))) {
@@ -281,4 +287,24 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
         return this.selectPropertyByPage(anParam, anPageNum, anPageSize, anFlag == 1);
     }
 
+    /**
+     * 查找已经制作好的印章数据，具体条件是客户编号
+     * 
+     * @param anCustNo
+     *            机构客户编号或操作员编号
+     * @param anCustType
+     *            机构客户
+     * @return
+     */
+    public String findMakerStamper(final Long anCustNo, final int anCustType) {
+        final Map<String, Object> queryTerm = QueryTermBuilder.newInstance().put("custNo", anCustNo).put("custType", anCustType)
+                .put("businStatus", "01").build();
+        final List<ContractStamper> tmpList = this.selectByProperty(queryTerm);
+        if (Collections3.isEmpty(tmpList)) {
+            return "";
+        }
+        else {
+            return Collections3.getFirst(tmpList).getStamperData();
+        }
+    }
 }

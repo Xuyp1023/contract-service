@@ -5,18 +5,52 @@ import java.net.URL;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.Log4jConfigurer;
 
+import com.betterjr.modules.contract.entity.ContractCorpAccount;
+import com.betterjr.modules.contract.entity.ContractSignerAccount;
+import com.betterjr.modules.contract.service.ContractCorpAccountService;
+import com.betterjr.modules.contract.service.ContractSignerAccountService;
+
 public class Provider {
 
     public static void main(final String[] args) throws Exception {
         final URL url = Provider.class.getClassLoader().getSystemResource("log4j.properties");
         System.out.println(url.toString());
         Log4jConfigurer.initLogging(url.getFile());
-        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "spring-context-contract-dubbo-provider.xml" });
+        final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+                new String[] { "spring-context-contract-dubbo-provider.xml" });
         context.start();
-
+        // testRegistAccount(context);
+        System.out.println("Provider working");
         System.in.read();
         context.close();
         System.exit(0);
     }
 
+    public static void testSignPDF() {
+
+    }
+
+    public static void testRegistAccount(final ClassPathXmlApplicationContext anContext) {
+        final ContractSignerAccountService accountService = anContext.getBean(ContractSignerAccountService.class);
+        final ContractSignerAccount corpAccount = new ContractSignerAccount();
+        corpAccount.setIdentNo("150924198008172050");
+        corpAccount.setMobileNo("13828796911");
+        corpAccount.setOperName("孔彦博");
+        corpAccount.setOperId(1000704L);
+        accountService.saveRegistSignerAccount(corpAccount);
+    }
+
+    public static void testRegistCorpAccount(final ClassPathXmlApplicationContext anContext) {
+        final ContractCorpAccountService accountService = anContext.getBean(ContractCorpAccountService.class);
+        final ContractCorpAccount corpAccount = new ContractCorpAccount();
+        corpAccount.setCustNo(102209686L);
+        corpAccount.setIdentNo("53042619710718805X");
+        corpAccount.setMobileNo("13828796911");
+        corpAccount.setName("孔彦博");
+        corpAccount.setCustName("周一企业测试有限公司");
+        corpAccount.setOrgCode("30623383-5");
+        corpAccount.setType("1");
+
+        accountService.saveRegistCorpAccount(corpAccount);
+    }
 }
