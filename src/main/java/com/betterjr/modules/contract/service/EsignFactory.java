@@ -1,5 +1,7 @@
 package com.betterjr.modules.contract.service;
 
+import java.util.ArrayList;
+
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
@@ -16,7 +18,8 @@ import com.betterjr.modules.contract.entity.ContractSignerAccount;
 import com.timevale.esign.sdk.tech.bean.OrganizeBean;
 import com.timevale.esign.sdk.tech.bean.PersonBean;
 import com.timevale.esign.sdk.tech.bean.PosBean;
-import com.timevale.esign.sdk.tech.bean.SignPDFFileBean;
+import com.timevale.esign.sdk.tech.bean.SignPDFStreamBean;
+import com.timevale.esign.sdk.tech.bean.UpdateOrganizeBean;
 import com.timevale.esign.sdk.tech.bean.result.AddAccountResult;
 import com.timevale.esign.sdk.tech.bean.result.FileDigestSignResult;
 import com.timevale.esign.sdk.tech.bean.result.Result;
@@ -91,11 +94,38 @@ public class EsignFactory {
         return anSignerAccount;
     }
 
+    // 更新企业在电子合同签署方的注册信息
+    public ContractCorpAccount modifyCorpAccount(final ContractCorpAccount anCorpAccount) {
+        final UpdateOrganizeBean org = new UpdateOrganizeBean();
+        org.setName(anCorpAccount.getCustName());
+        org.setMobile(anCorpAccount.getMobileNo());
+        if ("1".equals(anCorpAccount.getType())) {
+            org.setAgentIdNo(anCorpAccount.getIdentNo());
+            org.setAgentName(anCorpAccount.getName());
+        }
+        else {
+            org.setLegalIdNo(anCorpAccount.getIdentNo());
+            org.setLegalName(anCorpAccount.getName());
+        }
+        final AccountService accountService = AccountServiceFactory.instance();
+        final Result result = accountService.updateAccount(anCorpAccount.getAccount(), org, new ArrayList());
+        if (result.getErrCode() == 0) {
+            anCorpAccount.setBusinStatus("1");
+        }
+        else {
+            anCorpAccount.setBusinStatus("0");
+        }
+
+        // 仅用于调试使用
+        anCorpAccount.setSignerAccount(result.getMsg());
+        return anCorpAccount;
+    }
+
     // 注册电子合同签章企业信息
     public ContractCorpAccount registCorpAccount(final ContractCorpAccount anCorpAccount) {
         final OrganizeBean org = new OrganizeBean();
         org.setName(anCorpAccount.getCustName());
-        org.setMobile(anCorpAccount.getSignerMobileNo());
+        org.setMobile(anCorpAccount.getMobileNo());
         org.setOrganCode(anCorpAccount.getOrgCode());
         org.setOrganType(0);
         org.setRegType(OrganRegType.NORMAL);
@@ -164,8 +194,8 @@ public class EsignFactory {
      *            签署后的电子合同文件
      * @return
      */
-    public ContractStubData signData(final String anAccountId, final String anStamperData, final ContractStubData anStub,
-            final String anSourceFileName, final String anDestFileName) {
+    public ContractStubData signData(final String anAccountId, final String anStamperData, final ContractStubData anStub, final byte[] anData,
+            final String anVcode) {
         final UserSignService userSign = UserSignServiceFactory.instance();
         final PosBean pos = new PosBean();
         pos.setKey(anStub.getKeyWord());
@@ -175,15 +205,16 @@ public class EsignFactory {
         pos.setPosY(anStub.getAxisY());
         pos.setWidth(200);
         pos.setAddSignTime(true);
-        final SignPDFFileBean fileBean = new SignPDFFileBean();
-        fileBean.setSrcPdfFile(anSourceFileName);
-        fileBean.setDstPdfFile(anDestFileName);
-        final FileDigestSignResult signResult = userSign.localSignPDF(anAccountId, anStamperData, fileBean, pos, SignType.Single);
+        final SignPDFStreamBean streamBean = new SignPDFStreamBean();
+        streamBean.setStream(anData);
+
+        final FileDigestSignResult signResult = userSign.localSignPDF(anAccountId, anStamperData, streamBean, pos, SignType.Single);
         final boolean isok = signResult.getErrCode() == 0;
         if (!isok) {
             throw new BytterDeclareException("签署电子合同出现异常，" + signResult.getMsg());
         }
         else {
+            anStub.setResult(signResult.getStream());
             anStub.setBusinStatus("01");
             anStub.setSignServiceId(signResult.getSignServiceId());
         }

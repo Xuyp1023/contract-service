@@ -64,7 +64,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
     private ContractStandardTypeService contractStandardTypeService;
 
     @Resource
-    private ContractTemplateStampPlaceService contractTemplateStampPlaceService;
+    private ContractTempStampPlaceService contractTemplateStampPlaceService;
 
     /**
      * 获取本公司 标准合同列表
@@ -193,10 +193,10 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
             if (contractTemplate.getOriginSignerCount() != null) {
                 final List<Map<String, Object>> tempStampPlaces = new ArrayList<>();
 
-                for (int i = 0 ; i < contractTemplate.getOriginSignerCount().intValue(); i ++) {
+                for (int i = 0; i < contractTemplate.getOriginSignerCount().intValue(); i++) {
                     final Map<String, Object> stampPlace = new HashMap<>();
                     stampPlace.put("key", "");
-                    stampPlace.put("signatory", ContractTemplateStampPlaceService.signatorys[i]);
+                    stampPlace.put("signatory", ContractTempStampPlaceService.signatorys[i]);
                     stampPlace.put("axisX", 0L);
                     stampPlace.put("axisY", 0L);
                     stampPlace.put("sequence", i);
@@ -204,7 +204,8 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
                 }
                 contractTemplate.setStampPlaces(tempStampPlaces);
             }
-        } else {
+        }
+        else {
             contractTemplate.setStampPlaces(stampPlaces.stream().map(contractTemplateStampPlace -> {
                 final Map<String, Object> stampPlace = new HashMap<>();
                 stampPlace.put("key", contractTemplateStampPlace.getKeyWord());
@@ -397,7 +398,6 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         BTAssert.isTrue(result == 1, "上传标准合同模板失败！");
 
-
         contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "00", "上传标准合同文本");
 
         return contractTemplate;
@@ -457,11 +457,13 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         if (BetterStringUtils.equals(anAuditStatus, "01")) { // 审核通过
             contractTemplate.setTextAuditStatus("01"); // 电子合同文本审核通过
-            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "01", "标准合同文本审核通过");
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "01",
+                    "标准合同文本审核通过");
         }
         else { // 审核不通过
             contractTemplate.setTextAuditStatus("02");// 电子合同文本审核驳回
-            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "03", "标准合同文本审核不通过");
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "03",
+                    "标准合同文本审核不通过");
         }
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
@@ -613,8 +615,8 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         // anStampPlaceList 分解处理
         for (int i = 0; i < anStampPlaceList.size(); i++) {
             final Map<String, Object> stampPlace = anStampPlaceList.get(i);
-            contractTemplateStampPlaceService.saveKeyWordStampPlace(anTemplateId, contractTemplate.getName(), Long.valueOf(i),
-                    (String) stampPlace.get("key"), Long.valueOf((Integer) stampPlace.get("axisX")), Long.valueOf((Integer) stampPlace.get("axisY")));
+            contractTemplateStampPlaceService.saveKeyWordStampPlace(anTemplateId, contractTemplate.getName(), i, (String) stampPlace.get("key"),
+                    Long.valueOf((Integer) stampPlace.get("axisX")), Long.valueOf((Integer) stampPlace.get("axisY")));
         }
 
         // 检查所有 印章位置是否已确认
@@ -649,12 +651,14 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         if (BetterStringUtils.equals(anAuditStatus, "01")) { // 审核通过
             contractTemplate.setTemplateAuditStatus("01"); // 电子合同文本审核通过
             // 记录 log
-            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "05", "审核标准合同模板通过");
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "05",
+                    "审核标准合同模板通过");
         }
         else { // 审核不通过
             contractTemplate.setTemplateAuditStatus("02");// 电子合同文本审核驳回
             // 记录 log
-            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "06", "审核标准合同模板不通过");
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "06",
+                    "审核标准合同模板不通过");
         }
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();

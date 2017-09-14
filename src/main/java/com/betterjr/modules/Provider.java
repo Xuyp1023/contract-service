@@ -9,6 +9,7 @@ import com.betterjr.modules.contract.entity.ContractCorpAccount;
 import com.betterjr.modules.contract.entity.ContractSignerAccount;
 import com.betterjr.modules.contract.service.ContractCorpAccountService;
 import com.betterjr.modules.contract.service.ContractSignerAccountService;
+import com.betterjr.modules.contract.service.EsignFactory;
 
 public class Provider {
 
@@ -19,7 +20,7 @@ public class Provider {
         final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
                 new String[] { "spring-context-contract-dubbo-provider.xml" });
         context.start();
-        // testRegistAccount(context);
+        testMOdifyCorpAccount(context);
         System.out.println("Provider working");
         System.in.read();
         context.close();
@@ -43,14 +44,31 @@ public class Provider {
     public static void testRegistCorpAccount(final ClassPathXmlApplicationContext anContext) {
         final ContractCorpAccountService accountService = anContext.getBean(ContractCorpAccountService.class);
         final ContractCorpAccount corpAccount = new ContractCorpAccount();
-        corpAccount.setCustNo(102209686L);
-        corpAccount.setIdentNo("53042619710718805X");
-        corpAccount.setMobileNo("13828796911");
-        corpAccount.setName("孔彦博");
-        corpAccount.setCustName("周一企业测试有限公司");
-        corpAccount.setOrgCode("30623383-5");
+        corpAccount.setCustNo(102209578L);
+        corpAccount.setIdentNo("15092419810612487X");
+        corpAccount.setMobileNo("13828796910");
+        corpAccount.setName("孙俊伟");
+        corpAccount.setCustName("中山市华莱登卫浴有限公司");
+        corpAccount.setOrgCode("76414182-3");
         corpAccount.setType("1");
 
         accountService.saveRegistCorpAccount(corpAccount);
     }
+
+    public static void testMOdifyCorpAccount(final ClassPathXmlApplicationContext anContext) {
+        final EsignFactory accountService = anContext.getBean(EsignFactory.class);
+        ContractCorpAccount corpAccount = new ContractCorpAccount();
+        corpAccount.setAccount("E629EEEE6A6A400181E313052430FCED");
+        corpAccount.setCustNo(102209578L);
+        corpAccount.setIdentNo("15092419810612487X");
+        corpAccount.setMobileNo("13828796910");
+        corpAccount.setName("孙俊伟");
+        corpAccount.setCustName("中山市华莱登卫浴有限公司");
+        corpAccount.setOrgCode("76414182-3");
+        corpAccount.setType("1");
+
+        corpAccount = accountService.modifyCorpAccount(corpAccount);
+        System.out.println(corpAccount);
+    }
+
 }
