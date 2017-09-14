@@ -13,12 +13,14 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.betterjr.common.mapper.BeanMapper;
 import com.betterjr.common.service.BaseService;
 import com.betterjr.common.utils.BTAssert;
 import com.betterjr.common.utils.Collections3;
 import com.betterjr.common.utils.UserUtils;
 import com.betterjr.modules.account.entity.CustOperatorInfo;
 import com.betterjr.modules.contract.dao.ContractTemplateStampPlaceMapper;
+import com.betterjr.modules.contract.data.ContractTempStampPlaceData;
 import com.betterjr.modules.contract.entity.ContractTemplateStampPlace;
 
 /**
@@ -26,8 +28,8 @@ import com.betterjr.modules.contract.entity.ContractTemplateStampPlace;
  *
  */
 @Service
-public class ContractTemplateStampPlaceService extends BaseService<ContractTemplateStampPlaceMapper, ContractTemplateStampPlace> {
-    public static String[] signatorys = {"甲","乙","丙","丁","戊","己","庚","辛","壬","癸"};
+public class ContractTempStampPlaceService extends BaseService<ContractTemplateStampPlaceMapper, ContractTemplateStampPlace> {
+    public static String[] signatorys = { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸" };
 
     /**
      *
@@ -35,7 +37,7 @@ public class ContractTemplateStampPlaceService extends BaseService<ContractTempl
      * @param anSequence
      * @return
      */
-    private ContractTemplateStampPlace findStampPlaceBySeq(final Long anTemplateId, final Long anSequence) {
+    private ContractTemplateStampPlace findStampPlaceBySeq(final Long anTemplateId, final Integer anSequence) {
         BTAssert.notNull(anTemplateId, "模板编号不允许为空！");
         BTAssert.notNull(anSequence, "签章位置序号不允许为空！");
 
@@ -48,11 +50,13 @@ public class ContractTemplateStampPlaceService extends BaseService<ContractTempl
 
     /**
      * 保存印章位置
+     * 
      * @param ContractTemplateId
      * @param anStampPlace
      * @return
      */
-    protected void saveKeyWordStampPlace(final Long anTemplateId, final String anTemplateName, final Long anSequence, final String anKeyWord, final Long anAxisX, final Long anAxisY) {
+    protected void saveKeyWordStampPlace(final Long anTemplateId, final String anTemplateName, final Integer anSequence, final String anKeyWord,
+            final Long anAxisX, final Long anAxisY) {
         final ContractTemplateStampPlace stampPlace = findStampPlaceBySeq(anTemplateId, anSequence);
 
         if (stampPlace == null) {
@@ -73,11 +77,13 @@ public class ContractTemplateStampPlaceService extends BaseService<ContractTempl
 
     /**
      * 删除印章位置
+     * 
      * @param ContractTemplateId
      * @param anStampPlaceId
      * @return
      */
-    private void saveInitStampPlace(final Long anTemplateId, final String anTemplateName, final Long anIndex, final String anKeyWord, final Long anAxisX, final Long anAxisY) {
+    private void saveInitStampPlace(final Long anTemplateId, final String anTemplateName, final Integer anIndex, final String anKeyWord,
+            final Long anAxisX, final Long anAxisY) {
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
         final ContractTemplateStampPlace stampPlace = new ContractTemplateStampPlace();
 
@@ -96,6 +102,7 @@ public class ContractTemplateStampPlaceService extends BaseService<ContractTempl
 
     /**
      * 获取模板 印章 位置列表
+     * 
      * @param ContractTemplateId
      * @return
      */
@@ -107,4 +114,18 @@ public class ContractTemplateStampPlaceService extends BaseService<ContractTempl
 
         return this.selectByProperty(conditionMap, "sequence");
     }
+
+    public ContractTempStampPlaceData findStampPlaceData(final Long anTemplateId, final Integer anOrder) {
+        final ContractTemplateStampPlace tmpPlace = findStampPlaceBySeq(anTemplateId, anOrder);
+        ContractTempStampPlaceData result = null;
+        if (tmpPlace == null) {
+            result = new ContractTempStampPlaceData();
+        }
+        else {
+            result = BeanMapper.map(tmpPlace, ContractTempStampPlaceData.class);
+        }
+
+        return result;
+    }
+
 }

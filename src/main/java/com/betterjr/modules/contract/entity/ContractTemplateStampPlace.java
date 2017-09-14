@@ -51,7 +51,7 @@ public class ContractTemplateStampPlace implements BetterjrEntity {
      */
     @Column(name = "N_SEQUENCE", columnDefinition = "INTEGER")
     @MetaData(value = "签约顺序", comments = "签约顺序")
-    private Long sequence;
+    private Integer sequence;
 
     /**
      * 位置类型
@@ -168,12 +168,12 @@ public class ContractTemplateStampPlace implements BetterjrEntity {
         this.signatory = signatory;
     }
 
-    public Long getSequence() {
+    public Integer getSequence() {
         return sequence;
     }
 
-    public void setSequence(final Long sequence) {
-        this.sequence = sequence;
+    public void setSequence(final Integer anSequence) {
+        this.sequence = anSequence;
     }
 
     public String getType() {
