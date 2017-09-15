@@ -130,7 +130,7 @@ public class EsignFactory {
         org.setOrganType(0);
         org.setRegType(OrganRegType.NORMAL);
         org.setUserType(Integer.parseInt(anCorpAccount.getType()));
-        if ("1".equals(anCorpAccount.getType())) {
+        if (1 == org.getUserType()) {
             org.setAgentIdNo(anCorpAccount.getIdentNo());
             org.setAgentName(anCorpAccount.getName());
         }
@@ -141,14 +141,14 @@ public class EsignFactory {
         }
         final AccountService accountService = AccountServiceFactory.instance();
         final AddAccountResult result = accountService.addAccount(org);
-        
-        if (result.getErrCode() != 0) {
-        	throw new java.lang.RuntimeException(result.getMsg());
+
+        if (result.getErrCode() == 0) {
+            anCorpAccount.setAccount(result.getAccountId());
+            anCorpAccount.setBusinStatus("1");
         }
-        
-        //anCorpAccount.setSignerAccount(result.getMsg());
-        anCorpAccount.setSignerAccount(result.getAccountId());
-        
+        else {
+            throw new java.lang.RuntimeException(result.getMsg());
+        }
         return anCorpAccount;
     }
 
