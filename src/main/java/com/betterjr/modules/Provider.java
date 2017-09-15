@@ -20,7 +20,7 @@ public class Provider {
         final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
                 new String[] { "spring-context-contract-dubbo-provider.xml" });
         context.start();
-        testMOdifyCorpAccount(context);
+        // testMOdifyCorpAccount(context);
         System.out.println("Provider working");
         System.in.read();
         context.close();
