@@ -141,15 +141,14 @@ public class EsignFactory {
         }
         final AccountService accountService = AccountServiceFactory.instance();
         final AddAccountResult result = accountService.addAccount(org);
-        if (result.getErrCode() == 0) {
-            anCorpAccount.setAccount(result.getAccountId());
-            anCorpAccount.setBusinStatus("1");
+        
+        if (result.getErrCode() != 0) {
+        	throw new java.lang.RuntimeException(result.getMsg());
         }
-        else {
-            anCorpAccount.setBusinStatus("0");
-        }
-        // 仅用于调试使用
-        anCorpAccount.setSignerAccount(result.getMsg());
+        
+        //anCorpAccount.setSignerAccount(result.getMsg());
+        anCorpAccount.setSignerAccount(result.getAccountId());
+        
         return anCorpAccount;
     }
 

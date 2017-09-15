@@ -108,7 +108,7 @@ public class ContractCorpAccount implements BetterjrEntity {
      */
     @Column(name = "L_SERVICE_CUSTNO", columnDefinition = "INTEGER")
     @MetaData(value = "电子合同服务商编号", comments = "电子合同服务商编号")
-    private String serviceCustNo;
+    private Long serviceCustNo;
 
     /**
      * 电子合同服务商名称
@@ -274,11 +274,11 @@ public class ContractCorpAccount implements BetterjrEntity {
         this.operOrg = operOrg;
     }
 
-    public String getServiceCustNo() {
+    public Long getServiceCustNo() {
         return serviceCustNo;
     }
 
-    public void setServiceCustNo(final String serviceCustNo) {
+    public void setServiceCustNo(final Long serviceCustNo) {
         this.serviceCustNo = serviceCustNo;
     }
 
