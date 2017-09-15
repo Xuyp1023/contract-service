@@ -69,7 +69,7 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
         final CustMechBase mechBase = custMechBaseService.findBaseInfo(custNo);
         BTAssert.notNull(mechBase, "没有找到公司信息");
 
-        // BTAssert.isTrue(BetterStringUtils.equals(mechBase.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(BetterStringUtils.equals(mechBase.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
         anCorpAccount.init(operator);

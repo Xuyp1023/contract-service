@@ -204,18 +204,21 @@ public class EsignFactory {
         pos.setPosX(anStub.getAxisX());
         pos.setPosY(anStub.getAxisY());
         pos.setWidth(200);
+        // pos.setQrcodeSign(true);
         pos.setAddSignTime(true);
         final SignPDFStreamBean streamBean = new SignPDFStreamBean();
         streamBean.setStream(anData);
+        streamBean.setFileName(anStub.getSignFileName());
 
-        final FileDigestSignResult signResult = userSign.localSignPDF(anAccountId, anStamperData, streamBean, pos, SignType.Single);
+        final FileDigestSignResult signResult = userSign.localSafeSignPDF(anAccountId, anStamperData, streamBean, pos,
+                pos.getPosType() == 0 ? SignType.Single : SignType.Key, anVcode);
         final boolean isok = signResult.getErrCode() == 0;
         if (!isok) {
             throw new BytterDeclareException("签署电子合同出现异常，" + signResult.getMsg());
         }
         else {
             anStub.setResult(signResult.getStream());
-            anStub.setBusinStatus("01");
+            anStub.setBusinStatus("1");
             anStub.setSignServiceId(signResult.getSignServiceId());
         }
         return anStub;
