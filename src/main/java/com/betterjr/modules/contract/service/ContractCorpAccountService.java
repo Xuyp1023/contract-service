@@ -64,22 +64,31 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
      * @return
      */
     public ContractCorpAccount saveRegistCorpAccount(ContractCorpAccount anCorpAccount) {
-        final Long custNo = anCorpAccount.getCustNo();
+    	
+    	try{        	
+            final Long custNo = anCorpAccount.getCustNo();
 
-        final CustMechBase mechBase = custMechBaseService.findBaseInfo(custNo);
-        BTAssert.notNull(mechBase, "没有找到公司信息");
+            final CustMechBase mechBase = custMechBaseService.findBaseInfo(custNo);
+            BTAssert.notNull(mechBase, "没有找到公司信息");
+            anCorpAccount.setCustName(mechBase.getCustName());
 
-        BTAssert.isTrue(BetterStringUtils.equals(mechBase.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
+            BTAssert.isTrue(BetterStringUtils.equals(mechBase.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
 
-        final CustOperatorInfo operator = UserUtils.getOperatorInfo();
-        anCorpAccount.init(operator);
-        anCorpAccount.setBusinStatus("0");
-        final int result = this.insert(anCorpAccount);
-        anCorpAccount = signFacory.registCorpAccount(anCorpAccount);
-        this.updateByPrimaryKey(anCorpAccount);
-        BTAssert.isTrue(result == 1, "电子合同服务企业注册失败！");
+            final CustOperatorInfo operator = UserUtils.getOperatorInfo();
+            anCorpAccount.init(operator);
+            anCorpAccount.setBusinStatus("0");
+            final int result = this.insert(anCorpAccount);
+            anCorpAccount = signFacory.registCorpAccount(anCorpAccount);
+            this.updateByPrimaryKey(anCorpAccount);
+            BTAssert.isTrue(result == 1, "电子合同服务企业注册失败！");
 
-        return anCorpAccount;
+            return anCorpAccount;
+    	}
+    	catch(java.lang.RuntimeException e){
+    		logger.error(e.getMessage(), e);
+    		throw e;
+    	}
+    	
     }
 
     /**

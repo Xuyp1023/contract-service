@@ -143,6 +143,7 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
 
         anContractStamper.setOperOrg(custInfo.getOperOrg());
         anContractStamper.setCustName(custInfo.getCustName());
+        anContractStamper.setCustType(custInfo.getCustType());
 
         final Long batchNo = custFileService.updateCustFileItemInfo(anOrginFileId, null);
         anContractStamper.setOriginStamper(batchNo);
@@ -181,6 +182,7 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
         // 这里需要根据 所选择公司添加 operOrg
         anContractStamper.setOperOrg(custInfo.getOperOrg());
         anContractStamper.setCustName(custInfo.getCustName());
+        anContractStamper.setCustType(custInfo.getCustType());
 
         anContractStamper.setOriginStamper(custFileService.updateCustFileItemInfo(anOrginFileId, null));
 
