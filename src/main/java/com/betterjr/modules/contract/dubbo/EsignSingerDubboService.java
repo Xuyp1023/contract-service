@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.betterjr.modules.contract.IEsignSingerService;
 import com.betterjr.modules.contract.data.ContractStubData;
+import com.betterjr.modules.contract.data.ContractTempStampPlaceData;
 import com.betterjr.modules.contract.service.ContractCorpAccountService;
 import com.betterjr.modules.contract.service.ContractSignerAccountService;
 import com.betterjr.modules.contract.service.ContractStamperService;
+import com.betterjr.modules.contract.service.ContractTempStampPlaceService;
 import com.betterjr.modules.contract.service.EsignFactory;
 
 @Service(interfaceClass = IEsignSingerService.class)
@@ -24,6 +26,9 @@ public class EsignSingerDubboService implements IEsignSingerService {
 
     @Autowired
     private ContractStamperService stamperService;
+
+    @Autowired
+    private ContractTempStampPlaceService stampPlaceService;
 
     @Override
     public boolean sendSMS(final Long anCustNo, final Boolean anPerson) {
@@ -46,6 +51,11 @@ public class EsignSingerDubboService implements IEsignSingerService {
             final Boolean anPerson) {
         final String tmpAccountId = findAccountId(anCustNo, anPerson);
         final String tmpStamperData = stamperService.findMakerStamper(anCustNo, anPerson.booleanValue() ? 1 : 0);
+        final ContractTempStampPlaceData tmpPlaceData = stampPlaceService.findStampPlaceData(anStub.getContractTemplateId(), anStub.getSequence());
+        anStub.setAxisX(tmpPlaceData.getAxisX());
+        anStub.setAxisY(tmpPlaceData.getAxisY());
+        anStub.setKeyWord(tmpPlaceData.getKeyWord());
+
         return signService.signData(tmpAccountId, tmpStamperData, anStub, anData, anVcode);
     }
 }
