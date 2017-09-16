@@ -152,6 +152,13 @@ public class ContractCorpAccount implements BetterjrEntity {
     @MetaData(value = "合同签署人手机", comments = "合同签署人手机")
     private String signerMobileNo;
 
+    /**
+     * 证件形式，0：三证合一，1：一证一码
+     */
+    @Column(name = "C_ORG_REGTYPE", columnDefinition = "VARCHAR")
+    @MetaData(value = "证件形式", comments = "证件形式")
+    private String orgRegType;
+
     @Column(name = "D_MODI_DATE", columnDefinition = "VARCHAR")
     @MetaData(value = "", comments = "")
     private String modiDate;
@@ -402,6 +409,14 @@ public class ContractCorpAccount implements BetterjrEntity {
         this.mobileNo = anMobileNo;
     }
 
+    public String getOrgRegType() {
+        return this.orgRegType;
+    }
+
+    public void setOrgRegType(final String anOrgRegType) {
+        this.orgRegType = anOrgRegType;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -435,6 +450,7 @@ public class ContractCorpAccount implements BetterjrEntity {
         sb.append(", regOperName=").append(regOperName);
         sb.append(", regOperId=").append(regOperId);
         sb.append(", mobileNo=").append(mobileNo);
+        sb.append(", orgRegType=").append(orgRegType);
         sb.append("]");
         return sb.toString();
     }
@@ -478,6 +494,7 @@ public class ContractCorpAccount implements BetterjrEntity {
                 && (this.getRegDate() == null ? other.getRegDate() == null : this.getRegDate().equals(other.getRegDate()))
                 && (this.getRegOperName() == null ? other.getRegOperName() == null : this.getRegOperName().equals(other.getRegOperName()))
                 && (this.getRegOperId() == null ? other.getRegOperId() == null : this.getRegOperId().equals(other.getRegOperId()))
+                && (this.getOrgRegType() == null ? other.getOrgRegType() == null : this.getOrgRegType().equals(other.getOrgRegType()))
                 && (this.getMobileNo() == null ? other.getMobileNo() == null : this.getMobileNo().equals(other.getMobileNo()));
     }
 
@@ -512,6 +529,7 @@ public class ContractCorpAccount implements BetterjrEntity {
         result = prime * result + ((getRegOperName() == null) ? 0 : getRegOperName().hashCode());
         result = prime * result + ((getRegOperId() == null) ? 0 : getRegOperId().hashCode());
         result = prime * result + ((getMobileNo() == null) ? 0 : getMobileNo().hashCode());
+        result = prime * result + ((getOrgRegType() == null) ? 0 : getOrgRegType().hashCode());
         return result;
     }
 

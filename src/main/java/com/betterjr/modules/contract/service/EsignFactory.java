@@ -128,7 +128,12 @@ public class EsignFactory {
         org.setMobile(anCorpAccount.getMobileNo());
         org.setOrganCode(anCorpAccount.getOrgCode());
         org.setOrganType(0);
-        org.setRegType(OrganRegType.NORMAL);
+        if ("0".equals(anCorpAccount.getOrgRegType())) {
+            org.setRegType(OrganRegType.NORMAL);
+        }
+        else {
+            org.setRegType(OrganRegType.MERGE);
+        }
         org.setUserType(Integer.parseInt(anCorpAccount.getType()));
         if (1 == org.getUserType()) {
             org.setAgentIdNo(anCorpAccount.getIdentNo());
@@ -202,7 +207,7 @@ public class EsignFactory {
         pos.setPosType(Integer.parseInt(anStub.getPositionType()));
         pos.setPosX(anStub.getAxisX());
         pos.setPosY(anStub.getAxisY());
-        pos.setWidth(200);
+        pos.setWidth(120);
         // pos.setQrcodeSign(true);
         pos.setAddSignTime(true);
         final SignPDFStreamBean streamBean = new SignPDFStreamBean();
