@@ -128,7 +128,7 @@ public class EsignFactory {
         org.setMobile(anCorpAccount.getMobileNo());
         org.setOrganCode(anCorpAccount.getOrgCode());
         org.setOrganType(0);
-        if ("0".equals(anCorpAccount.getOrgRegType())) {
+        if ("1".equals(anCorpAccount.getOrgRegType())) {
             org.setRegType(OrganRegType.NORMAL);
         }
         else {
