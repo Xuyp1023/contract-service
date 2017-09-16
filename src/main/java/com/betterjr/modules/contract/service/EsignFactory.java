@@ -173,6 +173,11 @@ public class EsignFactory {
      * @return
      */
     public boolean sendSMS(final String anAccountId) {
+
+        return true;
+    }
+
+    public boolean sendSMS1(final String anAccountId) {
         final MobileService mobileFactory = MobileServiceFactory.instance();
         final Result duanxin = mobileFactory.sendSignMobileCode(anAccountId);
         final boolean isok = duanxin.getErrCode() == 0;
@@ -207,15 +212,17 @@ public class EsignFactory {
         pos.setPosType(Integer.parseInt(anStub.getPositionType()));
         pos.setPosX(anStub.getAxisX());
         pos.setPosY(anStub.getAxisY());
-        pos.setWidth(120);
-        // pos.setQrcodeSign(true);
-        pos.setAddSignTime(true);
+        pos.setWidth(160);
+        pos.setQrcodeSign(false);
+        pos.setAddSignTime(false);
         final SignPDFStreamBean streamBean = new SignPDFStreamBean();
         streamBean.setStream(anData);
         streamBean.setFileName(anStub.getSignFileName());
 
-        final FileDigestSignResult signResult = userSign.localSafeSignPDF(anAccountId, anStamperData, streamBean, pos,
-                pos.getPosType() == 0 ? SignType.Single : SignType.Key, anVcode);
+        // final FileDigestSignResult signResult = userSign.localSafeSignPDF(anAccountId, anStamperData, streamBean, pos,
+        // pos.getPosType() == 0 ? SignType.Single : SignType.Key, anVcode);
+        final FileDigestSignResult signResult = userSign.localSignPDF(anAccountId, anStamperData, streamBean, pos,
+                pos.getPosType() == 0 ? SignType.Single : SignType.Key);
         final boolean isok = signResult.getErrCode() == 0;
         if (!isok) {
             throw new BytterDeclareException("签署电子合同出现异常，" + signResult.getMsg());
