@@ -25,9 +25,29 @@ public class EsignConfig {
     @Value("${esign.sign.algorithm}")
     private String algorithm;
 
+    @Value("${esign.sign.privateKey}")
     private String privateKey;
 
+    @Value("${esign.sign.publicKey}")
     private String publicKey;
+
+    @Value("${esign.seal.templateOrgType}")
+    private String sealtempOrgType;
+
+    @Value("${esign.seal.templatePersonType}")
+    private String sealPersonTempType;
+
+    @Value("${esign.seal.color}")
+    private String sealColor;
+
+    @Value("${esign.seal.hText}")
+    private String sealHText;
+
+    @Value("${esign.seal.qText}")
+    private String sealQText;
+
+    @Value("${esign.sign.validcode}")
+    private boolean validCode = true;
 
     public String getProjectId() {
         return this.projectId;
@@ -91,6 +111,54 @@ public class EsignConfig {
 
     public void setPublicKey(final String anPublicKey) {
         this.publicKey = anPublicKey;
+    }
+
+    public String getSealtempOrgType() {
+        return this.sealtempOrgType;
+    }
+
+    public void setSealtempOrgType(final String anSealtempOrgType) {
+        this.sealtempOrgType = anSealtempOrgType;
+    }
+
+    public String getSealPersonTempType() {
+        return this.sealPersonTempType;
+    }
+
+    public void setSealPersonTempType(final String anSealPersonTempType) {
+        this.sealPersonTempType = anSealPersonTempType;
+    }
+
+    public String getSealColor() {
+        return this.sealColor;
+    }
+
+    public void setSealColor(final String anSealColor) {
+        this.sealColor = anSealColor;
+    }
+
+    public String getSealHText() {
+        return this.sealHText;
+    }
+
+    public void setSealHText(final String anSealHText) {
+        this.sealHText = anSealHText;
+    }
+
+    public String getSealQText() {
+        return this.sealQText;
+    }
+
+    public void setSealQText(final String anSealQText) {
+        this.sealQText = anSealQText;
+    }
+
+    public boolean isValidCode() {
+        return this.validCode;
+    }
+
+    public void setValidCode(final boolean anValidCode) {
+        this.validCode = anValidCode;
     }
 
     @Override

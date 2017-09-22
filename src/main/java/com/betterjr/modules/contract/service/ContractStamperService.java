@@ -46,15 +46,23 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
 
     @Reference(interfaceClass = ICustFileService.class)
     private ICustFileService custFileService;
-
-//    @Reference(interfaceClass = ICustMechBaseService.class)
-//    private ICustMechBaseService custMechBaseService;
-    
     @Autowired
-    private CustAccountService custAccountService;    
+    private ContractCorpAccountService corpAccountService;
+
+    @Autowired
+    private ContractSignerAccountService signerAccountService;
+
+    // @Reference(interfaceClass = ICustMechBaseService.class)
+    // private ICustMechBaseService custMechBaseService;
+
+    @Autowired
+    private CustAccountService custAccountService;
 
     @Resource
     private DataStoreService dataStoreService;
+
+    @Autowired
+    private EsignFactory signFacory;
 
     /**
      * 获取当前机构印章(所有状态)
@@ -123,6 +131,15 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
         throw new BytterException("操作失败!");
     }
 
+    private String findAccountId(final Long anCustNo, final Boolean anPerson) {
+        if (anPerson) {
+            return signerAccountService.findSignAccountId(anCustNo, null);
+        }
+        else {
+            return corpAccountService.findSignAccountId(anCustNo, null);
+        }
+    }
+
     /**
      * 添加印章 用户
      *
@@ -131,11 +148,40 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
      */
     public ContractStamper saveAddOwnStamper(final ContractStamper anContractStamper, final String anOrginFileId) {
         BTAssert.notNull(anContractStamper, "印章数据不允许为空！");
+
+        final CustInfo custInfo = this.custAccountService.findCustInfo(anContractStamper.getCustNo());
+        BTAssert.notNull(custInfo, "没有找到公司信息！");
+
+        final boolean checkResult = this.findCheckStamper(anContractStamper.getCustNo());
+        BTAssert.isTrue(checkResult == false, "此公司已经制作过印章！");
+
+        anContractStamper.setOperOrg(custInfo.getOperOrg());
+        anContractStamper.setCustName(custInfo.getCustName());
+        anContractStamper.setCustType(custInfo.getCustType());
+
+        anContractStamper.setOriginStamper(0L);
+
+        final CustOperatorInfo operator = UserUtils.getOperatorInfo();
+        BTAssert.isTrue(BetterStringUtils.equals(operator.getOperOrg(), custInfo.getOperOrg()), "操作失败！");
+
+        anContractStamper.setBusinStatus("01"); // 已经由电子合同签署方提供电子合同章
+        anContractStamper.init(operator);
+        final String tmpAccount = this.findAccountId(anContractStamper.getCustNo(), false);
+        final String tmpSealData = this.signFacory.createSealOrganize(tmpAccount);
+        anContractStamper.setStamperData(tmpSealData);
+        final int result = this.insert(anContractStamper);
+        BTAssert.isTrue(result == 1, "原始印章创建失败！");
+
+        return anContractStamper;
+    }
+
+    public ContractStamper saveAddOwnStamper2(final ContractStamper anContractStamper, final String anOrginFileId) {
+        BTAssert.notNull(anContractStamper, "印章数据不允许为空！");
         BTAssert.isTrue(BetterStringUtils.isNotBlank(anOrginFileId), "原始印章文件不允许为空！");
 
-//        final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anContractStamper.getCustNo());
-        
-        final CustInfo custInfo = this.custAccountService.findCustInfo(anContractStamper.getCustNo());        
+        // final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anContractStamper.getCustNo());
+
+        final CustInfo custInfo = this.custAccountService.findCustInfo(anContractStamper.getCustNo());
         BTAssert.notNull(custInfo, "没有找到公司信息！");
 
         final boolean checkResult = this.findCheckStamper(anContractStamper.getCustNo());
@@ -171,9 +217,9 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
         BTAssert.notNull(anContractStamper, "印章数据不允许为空！");
         BTAssert.notNull(anFileId, "印章文件不允许为空！");
 
-//        final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anContractStamper.getCustNo());
+        // final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anContractStamper.getCustNo());
 
-        final CustInfo custInfo = this.custAccountService.findCustInfo(anContractStamper.getCustNo());        
+        final CustInfo custInfo = this.custAccountService.findCustInfo(anContractStamper.getCustNo());
         BTAssert.notNull(custInfo, "没有找到公司信息！");
 
         final boolean checkResult = this.findCheckStamper(anContractStamper.getCustNo());
