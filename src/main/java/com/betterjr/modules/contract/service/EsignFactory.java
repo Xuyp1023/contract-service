@@ -95,7 +95,9 @@ public class EsignFactory {
             anSignerAccount.setBusinStatus("1");
         }
         else {
+            logger.error("注册企业信息：" + anSignerAccount.toString());
             anSignerAccount.setBusinStatus("0");
+            throw new BytterDeclareException(result.getMsg());
         }
         return anSignerAccount;
     }
@@ -158,6 +160,7 @@ public class EsignFactory {
             anCorpAccount.setBusinStatus("1");
         }
         else {
+            logger.error("注册企业信息：" + anCorpAccount.toString());
             throw new java.lang.RuntimeException(result.getMsg());
         }
         return anCorpAccount;
