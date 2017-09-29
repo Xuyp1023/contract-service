@@ -64,13 +64,15 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
      * @return
      */
     public ContractCorpAccount saveRegistCorpAccount(ContractCorpAccount anCorpAccount) {
-    	
-    	try{        	
+
+        try {
             final Long custNo = anCorpAccount.getCustNo();
 
             final CustMechBase mechBase = custMechBaseService.findBaseInfo(custNo);
             BTAssert.notNull(mechBase, "没有找到公司信息");
             anCorpAccount.setCustName(mechBase.getCustName());
+            logger.info("custMechBaseService :" + mechBase.getOperOrg());
+            logger.info("UserUtils.getOperOrg() :" + UserUtils.getOperOrg());
 
             BTAssert.isTrue(BetterStringUtils.equals(mechBase.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
 
@@ -83,12 +85,12 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
             BTAssert.isTrue(result == 1, "电子合同服务企业注册失败！");
 
             return anCorpAccount;
-    	}
-    	catch(java.lang.RuntimeException e){
-    		logger.error(e.getMessage(), e);
-    		throw e;
-    	}
-    	
+        }
+        catch (final java.lang.RuntimeException e) {
+            logger.error(e.getMessage(), e);
+            throw e;
+        }
+
     }
 
     /**
