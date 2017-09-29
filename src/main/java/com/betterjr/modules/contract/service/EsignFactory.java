@@ -232,6 +232,11 @@ public class EsignFactory {
         final SignPDFStreamBean streamBean = new SignPDFStreamBean();
         streamBean.setStream(anData);
         streamBean.setFileName(anStub.getSignFileName());
+        if (logger.isDebugEnabled()) {
+            logger.debug("anAccountId " + anAccountId + ", anVcode= " + anVcode);
+            logger.debug("anStamperData " + anStamperData);
+            logger.debug("anStub " + anStub);
+        }
 
         FileDigestSignResult signResult = null;
         if (this.config.isValidCode()) {
@@ -289,6 +294,7 @@ public class EsignFactory {
         final OrganizeTemplateType template = OrganizeTemplateType.valueOf(this.config.getSealtempOrgType());
         final SealColor sColor = SealColor.valueOf(this.config.getSealColor());
 
+        logger.info("accountId = " + accountId + ", template = " + template + ", sColor = " + sColor + ", config =" + config);
         final AddSealResult sealResult = sealService.addTemplateSeal(accountId, template, sColor, this.config.getSealHText(),
                 this.config.getSealQText());
         final boolean isok = sealResult.getErrCode() == 0;
@@ -296,7 +302,7 @@ public class EsignFactory {
             return sealResult.getSealData();
         }
         else {
-            throw new BytterDeclareException("企业印章创建失败");
+            throw new BytterDeclareException("企业印章创建失败 ：" + sealResult.getMsg());
         }
     }
 
