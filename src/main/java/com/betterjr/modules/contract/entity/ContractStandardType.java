@@ -10,6 +10,9 @@ import javax.persistence.Table;
 import com.betterjr.common.annotation.MetaData;
 import com.betterjr.common.entity.BetterjrEntity;
 import com.betterjr.common.mapper.CustDateJsonSerializer;
+import com.betterjr.common.selectkey.SerialGenerator;
+import com.betterjr.common.utils.BetterDateUtils;
+import com.betterjr.modules.account.entity.CustOperatorInfo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Access(AccessType.FIELD)
@@ -79,7 +82,28 @@ public class ContractStandardType implements BetterjrEntity {
     @Column(name = "N_VERSION",  columnDefinition="INTEGER" )
     @MetaData( value="数据版本", comments = "数据版本")
     private Long version;
-
+    
+    /**
+     * 备注
+     */
+    @Column(name = "C_DESCRIPTION",  columnDefinition="CHAR" )
+    @MetaData( value="备注", comments = "备注")
+    private String description;
+    
+    /**
+     * 登记时间
+     */
+    @Column(name = "D_REG_DATE",  columnDefinition="CHAR" )
+    @MetaData( value="登记时间", comments = "登记时间")
+    private String regDate;
+    
+    /**
+     * 合同类型名
+     */
+    @Column(name = "C_TYPEID_NAME",  columnDefinition="CHAR" )
+    @MetaData( value="合同类型名", comments = "合同类型名")
+    private String typeIdName;
+    
     private static final long serialVersionUID = 1492408575297L;
 
     public Long getId() {
@@ -154,7 +178,31 @@ public class ContractStandardType implements BetterjrEntity {
         this.version = version;
     }
 
-    @Override
+    public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
+	public String getTypeIdName() {
+		return typeIdName;
+	}
+
+	public void setTypeIdName(String typeIdName) {
+		this.typeIdName = typeIdName;
+	}
+
+	@Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
@@ -211,5 +259,22 @@ public class ContractStandardType implements BetterjrEntity {
         result = prime * result + ((getDocStatus() == null) ? 0 : getDocStatus().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         return result;
+    }
+	
+    public void initAddValue() {	
+	    this.id = SerialGenerator.getLongValue("ContractStandardType.id");
+	    this.code=this.id.toString();
+	    //状态  00未启用  01启用 02停用
+	    this.businStatus = "00";
+	    this.docStatus = "01";
+	    this.version = 1L;
+	    this.regDate=BetterDateUtils.getNumDate();
+	    
+	    }
+    
+    public void initModifyValue(ContractStandardType contractStandardType) {
+        this.name = contractStandardType.getName();
+        this.description = contractStandardType.getDescription();
+        this.enableDate = BetterDateUtils.getNumDate();
     }
 }

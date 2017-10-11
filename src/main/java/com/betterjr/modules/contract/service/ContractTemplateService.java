@@ -232,9 +232,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      */
     public boolean saveEnableStandardType(final Long anCustNo, final String anStandardTypeIds) {
         BTAssert.notNull(anCustNo, "公司编号不允许为空！");
-
         final List<Long> standardTypeIds = COMMA_PATTERN.splitAsStream(anStandardTypeIds).map(Long::valueOf).collect(Collectors.toList());
-
         for (final Long typeId : standardTypeIds) {
             final ContractTemplate template = saveEnableStandardType(anCustNo, typeId);
             BTAssert.notNull(template, "标准合同启用失败！");
@@ -267,6 +265,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         final ContractTemplate contractTemplateNew = new ContractTemplate();
 
         contractTemplateNew.setName(standardType.getName());
+        contractTemplateNew.setTypeIdName(standardType.getTypeIdName());
         contractTemplateNew.setTypeId(standardType.getTypeId());
         contractTemplateNew.setStandardTypeId(standardType.getId());
         contractTemplateNew.setCustNo(custMechBase.getCustNo());

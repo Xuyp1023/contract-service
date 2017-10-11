@@ -15,9 +15,14 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.betterjr.common.data.SimpleDataEntity;
+import com.betterjr.common.exception.BytterTradeException;
 import com.betterjr.common.service.BaseService;
 import com.betterjr.common.utils.BTAssert;
+import com.betterjr.common.utils.BetterDateUtils;
+import com.betterjr.common.utils.BetterStringUtils;
+import com.betterjr.common.utils.QueryTermBuilder;
 import com.betterjr.common.utils.UserUtils;
+import com.betterjr.mapper.pagehelper.Page;
 import com.betterjr.modules.contract.dao.ContractStandardTypeMapper;
 import com.betterjr.modules.contract.entity.ContractStandardType;
 
@@ -27,7 +32,8 @@ import com.betterjr.modules.contract.entity.ContractStandardType;
  */
 @Service
 public class ContractStandardTypeService extends BaseService<ContractStandardTypeMapper, ContractStandardType> {
-    /**
+	
+	/**
      * 获取标准合同类型 已生效
      *
      * @param anTypeId
@@ -98,7 +104,6 @@ public class ContractStandardTypeService extends BaseService<ContractStandardTyp
      */
     public List<ContractStandardType> queryAllStandardType() {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败!");
-
         return this.selectAll();
     }
 
@@ -124,4 +129,115 @@ public class ContractStandardTypeService extends BaseService<ContractStandardTyp
 
         return contractStandardType;
     }
+    
+	   /**
+ 	   * 标准合同类型登记
+ 	   */
+    	public ContractStandardType addContractStandards(Map<String,Object> anMap, ContractStandardType contractStandardType) {
+   		// TODO Auto-generated method stub
+           logger.info("标准合同类型登记");
+           BTAssert.isTrue(UserUtils.platformUser(), "无权限进行操作！");
+           contractStandardType.initAddValue();
+           if(anMap.containsKey("description")){
+        	   contractStandardType.setDescription(anMap.get("description").toString());
+           }
+           if(anMap.containsKey("typeIdName")){
+        	   contractStandardType.setTypeIdName(anMap.get("typeIdName").toString());
+           }
+           contractStandardType.setTypeId(Long.valueOf(anMap.get("typeId").toString()));
+           contractStandardType.setBusinTypeId(Long.valueOf(anMap.get("typeId").toString()));
+           this.insert(contractStandardType);
+           return contractStandardType;
+       }
+   	
+   	   /**
+   	   * 已启用标准合同类型查询
+   	   */
+       public Page<ContractStandardType> queryContractStandardtType(int anPageNum, int anPageSize, String anFlag) {
+           Map<String, Object> anMap = QueryTermBuilder.newInstance().build();
+           //状态  00登记 01生效
+           anMap.put("businStatus", "01");
+           return this.selectPropertyByPage(anMap, anPageNum, anPageSize, "1".equals(anFlag), "id");
+       }
+       
+       /**
+        * 编辑标准合同类型
+        */
+       public ContractStandardType saveModifyContractType(ContractStandardType anContractStandardType, Long anId) {
+    	   ContractStandardType contractStandardType = this.selectByPrimaryKey(anId);
+    	   contractStandardType.setVersion(contractStandardType.getVersion()+1L);
+           BTAssert.notNull(contractStandardType, "无法获取对应标准合同类型！");
+           // 仅未启用状态下可以编辑
+           if (!BetterStringUtils.equals("00", contractStandardType.getBusinStatus())) {
+               throw new BytterTradeException(40001, "无权限进行操作！！");
+           }
+           contractStandardType.initModifyValue(anContractStandardType);
+           this.updateByPrimaryKeySelective(contractStandardType);
+           return contractStandardType;
+       }
+
+       /**
+        * 删除标准合同类型
+        */
+       public int saveDeleteContractStandardType(Long anId) {
+    	   ContractStandardType contractStandardType = this.selectByPrimaryKey(anId);
+           BTAssert.notNull(contractStandardType, "无法获取对标准应合同类型！");
+           // 仅未启用状态下可以编辑
+           if (!BetterStringUtils.equals("00", contractStandardType.getBusinStatus())){
+               throw new BytterTradeException(40001, "无权限进行操作！");
+           }
+           return this.delete(contractStandardType);
+       }
+       
+       /**
+        * 标准合同类型待审核查询
+        */
+       public Page<ContractStandardType> queryUnEnableContractStandardType(int anPageNum, int anPageSize, String anFlag) {
+           Map<String, Object> anMap = QueryTermBuilder.newInstance().build();
+           //状态  00登记 01生效
+           anMap.put("businStatus", "00");
+           return this.selectPropertyByPage(anMap, anPageNum, anPageSize, "1".equals(anFlag), "id");
+       }
+       
+       /**
+        * 启用标准合同类型
+        */
+       public ContractStandardType saveEnableContractStandardTyp(Long anId) {
+    	   ContractStandardType contractStandardType = this.selectByPrimaryKey(anId);
+           BTAssert.notNull(contractStandardType, "无法获取对应合同类型！");
+           //设置状态启用, 00登记 01启动
+           contractStandardType.setBusinStatus("01");
+           BetterDateUtils betterDateUtils=new BetterDateUtils();
+           contractStandardType.setEnableDate(betterDateUtils.getNumDate());
+           this.updateByPrimaryKeySelective(contractStandardType);
+           return contractStandardType;
+       }
+       
+       /**
+        * 查询所有标准合同类型
+        */
+       public  Page<ContractStandardType> queryAllContractStandardTyp(Map<String, Object> anParam, int anPageNum, int anPageSize, String anFlag){
+    	   Map<String, Object> anMap = QueryTermBuilder.newInstance().build();
+    	   if (BetterStringUtils.isBlank((String) anParam.get("businStatus"))) {
+    		   	anMap.put("docStatus", "01");
+            }
+    	    else {
+    	    	anMap.put("businStatus", anParam.get("businStatus").toString());
+            }
+    	    return this.selectPropertyByPage(anMap, anPageNum, anPageSize, "1".equals(anFlag));
+       }
+       /**
+        * 停用标准合同类型
+        */
+       public ContractStandardType saveStopContractStandardTyp(Long anId) {
+    	   ContractStandardType contractStandardType = this.selectByPrimaryKey(anId);
+           BTAssert.notNull(contractStandardType, "无法获取对应合同类型！");
+           //设置状态启用, 00登记 01启动 02停用
+           contractStandardType.setBusinStatus("02");
+           BetterDateUtils betterDateUtils=new BetterDateUtils();
+           contractStandardType.setEnableDate(betterDateUtils.getNumDate());
+           this.updateByPrimaryKeySelective(contractStandardType);
+           return contractStandardType;
+       }
+
 }
