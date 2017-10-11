@@ -342,7 +342,11 @@ public class ContractTemplate implements BetterjrEntity {
     @Column(name = "T_MODI_TIME",  columnDefinition="VARCHAR" )
     @MetaData( value="", comments = "")
     private String modiTime;
-
+    
+    @Column(name = "C_TYPEID_NAME",  columnDefinition="VARCHAR" )
+    @MetaData( value="", comments = "")
+    private String typeIdName;
+    
     private static final long serialVersionUID = 1492408575302L;
 
 
@@ -763,7 +767,15 @@ public class ContractTemplate implements BetterjrEntity {
         this.modiTime = modiTime == null ? null : modiTime.trim();
     }
 
-    @Override
+    public String getTypeIdName() {
+		return typeIdName;
+	}
+
+	public void setTypeIdName(String typeIdName) {
+		this.typeIdName = typeIdName;
+	}
+
+	@Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
