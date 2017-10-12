@@ -8,6 +8,7 @@
 package com.betterjr.modules.contract.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ import com.betterjr.common.utils.BetterStringUtils;
 import com.betterjr.common.utils.Collections3;
 import com.betterjr.common.utils.UserUtils;
 import com.betterjr.mapper.pagehelper.Page;
+import com.betterjr.modules.account.entity.CustInfo;
 import com.betterjr.modules.account.entity.CustOperatorInfo;
 import com.betterjr.modules.contract.dao.ContractTemplateMapper;
 import com.betterjr.modules.contract.entity.ContractStandardType;
@@ -81,12 +83,11 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
-
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
-
+        System.out.println("UserUtils.getOperatorInfo()=="+UserUtils.getOperatorInfo());
+        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()), "操作失败！"); 
         final Map<String, Object> conditionMap = new HashMap<>();
         conditionMap.put("custNo", anCustNo);
-        conditionMap.put("operOrg", UserUtils.getOperOrg());
+        conditionMap.put("operOrg", UserUtils.getOperatorInfo().getOperOrg());
 
         if (BetterStringUtils.equals(anBusinStatus, "00")) {
             conditionMap.put("businStatus", "00");
@@ -110,9 +111,8 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
-
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
-
+        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
+ 
         return contractStandardTypeService.queryUnusedStandardType(anTypeId, anCustNo);
     }
 
@@ -217,7 +217,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
             }).collect(Collectors.toList()));
         }
 
-        if (UserUtils.platformUser() || BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperOrg())) {
+        if (UserUtils.platformUser() || BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg())) {
             return contractTemplate;
         }
         throw new BytterException("操作失败!");
@@ -320,7 +320,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
 
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
 
         final Map<String, Object> conditionMap = new HashMap<>();
         conditionMap.put("businStatus", "00");// 从未使用过的
@@ -348,7 +348,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         if (BetterStringUtils.isBlank((String) anParam.get("textAuditStatus"))) {
             anParam.remove("textAuditStatus");
         }
-        anParam.put("operOrg", UserUtils.getOperOrg()); // 查询自己机构的数据
+        anParam.put("operOrg", UserUtils.getOperatorInfo().getOperOrg()); // 查询自己机构的数据
         anParam.put("businStatus", new String[] { "01", "02" });// 查询 电子合同文本, 包括进入电子合同模板阶段的数据
 
         return this.selectPropertyByPage(anParam, anPageNum, anPageSize, anFlag == 1);
@@ -367,7 +367,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         final ContractTemplate contractTemplate = findContractTemplate(anTemplateId);
         BTAssert.notNull(contractTemplate, "没有找到合同模板！");
 
-        BTAssert.isTrue(BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()), "操作失败！");
 
         BTAssert.isTrue(BetterStringUtils.equals("00", contractTemplate.getBusinStatus())
                 || (BetterStringUtils.equals("01", contractTemplate.getBusinStatus())
@@ -538,7 +538,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         if (BetterStringUtils.isBlank((String) anParam.get("templateAuditStatus"))) {
             anParam.remove("templateAuditStatus");
         }
-        anParam.put("operOrg", UserUtils.getOperOrg()); // 查询自己机构的数据
+        anParam.put("operOrg", UserUtils.getOperatorInfo().getOperOrg()); // 查询自己机构的数据
         anParam.put("businStatus", "02");// 查询 电子合同文本, 包括进入电子合同模板阶段的数据
 
         return this.selectPropertyByPage(anParam, anPageNum, anPageSize, anFlag == 1);
@@ -636,7 +636,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
 
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
 
         BTAssert.isTrue(BetterStringUtils.isNotBlank(anAuditStatus) || BetterStringUtils.equals(anAuditStatus, "01")
                 || BetterStringUtils.equals(anAuditStatus, "02"), "审核状态不正确！");
@@ -684,8 +684,9 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         BTAssert.notNull(contractTemplate, "没有找到电子合同模板！");
 
-        BTAssert.isTrue(UserUtils.platformUser() || BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(UserUtils.platformUser() || BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()), "操作失败！");
 
         return contractTemplateLogService.queryTemplateLog(anTemplateId);
     }
+    
 }
