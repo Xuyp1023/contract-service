@@ -83,7 +83,6 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
-        System.out.println("UserUtils.getOperatorInfo()=="+UserUtils.getOperatorInfo());
         BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()), "操作失败！"); 
         final Map<String, Object> conditionMap = new HashMap<>();
         conditionMap.put("custNo", anCustNo);
@@ -327,7 +326,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         if (anTypeId != null) {
             conditionMap.put("typeId", anTypeId);
         }
-
+        conditionMap.put("custNo", anCustNo);
         return this.selectPropertyByPage(conditionMap, anPageNum, anPageSize, anFlag == 1);
     }
 
