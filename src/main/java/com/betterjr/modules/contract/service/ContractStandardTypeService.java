@@ -224,7 +224,7 @@ public class ContractStandardTypeService extends BaseService<ContractStandardTyp
     	    else {
     	    	anMap.put("businStatus", anParam.get("businStatus").toString());
             }
-    	    return this.selectPropertyByPage(anMap, anPageNum, anPageSize, "1".equals(anFlag));
+    	    return this.selectPropertyByPage(anMap, anPageNum, anPageSize, "1".equals(anFlag),"id desc");
        }
        /**
         * 停用标准合同类型
