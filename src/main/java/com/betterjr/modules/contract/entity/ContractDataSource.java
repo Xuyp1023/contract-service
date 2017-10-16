@@ -18,103 +18,103 @@ public class ContractDataSource implements BetterjrEntity {
      * 编号
      */
     @Id
-    @Column(name = "ID",  columnDefinition="INTEGER" )
-    @MetaData( value="编号", comments = "编号")
+    @Column(name = "ID", columnDefinition = "INTEGER")
+    @MetaData(value = "编号", comments = "编号")
     private Long id;
 
     /**
      * 名称
      */
-    @Column(name = "C_NAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="名称", comments = "名称")
+    @Column(name = "C_NAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "名称", comments = "名称")
     private String name;
 
     /**
      * 类型
      */
-    @Column(name = "C_TYPE",  columnDefinition="VARCHAR" )
-    @MetaData( value="类型", comments = "类型")
+    @Column(name = "C_TYPE", columnDefinition = "VARCHAR")
+    @MetaData(value = "类型", comments = "类型")
     private String type;
 
     /**
      * 数据
      */
-    @Column(name = "C_DATA",  columnDefinition="LONGTEXT" )
-    @MetaData( value="数据", comments = "数据")
+    @Column(name = "C_DATA", columnDefinition = "LONGTEXT")
+    @MetaData(value = "数据", comments = "数据")
     private String data;
 
     /**
      * 外部数据
      */
-    @Column(name = "C_EXTERNAL_DATA",  columnDefinition="LONGTEXT" )
-    @MetaData( value="外部数据", comments = "外部数据")
+    @Column(name = "C_EXTERNAL_DATA", columnDefinition = "LONGTEXT")
+    @MetaData(value = "外部数据", comments = "外部数据")
     private String externalData;
 
     /**
      * 业务状态
      */
-    @Column(name = "C_BUSIN_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="业务状态", comments = "业务状态")
+    @Column(name = "C_BUSIN_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "业务状态", comments = "业务状态")
     private String businStatus;
 
     /**
      * 文档状态
      */
-    @Column(name = "C_DOC_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="文档状态", comments = "文档状态")
+    @Column(name = "C_DOC_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "文档状态", comments = "文档状态")
     private String docStatus;
 
     /**
      * 公司
      */
-    @Column(name = "L_CUSTNO",  columnDefinition="INTEGER" )
-    @MetaData( value="公司", comments = "公司")
+    @Column(name = "L_CUSTNO", columnDefinition = "INTEGER")
+    @MetaData(value = "公司", comments = "公司")
     private Long custNo;
 
     /**
      * 公司名称
      */
-    @Column(name = "C_CUSTNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="公司名称", comments = "公司名称")
+    @Column(name = "C_CUSTNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "公司名称", comments = "公司名称")
     private String custName;
 
     /**
      * 机构
      */
-    @Column(name = "C_OPERORG",  columnDefinition="VARCHAR" )
-    @MetaData( value="机构", comments = "机构")
+    @Column(name = "C_OPERORG", columnDefinition = "VARCHAR")
+    @MetaData(value = "机构", comments = "机构")
     private String operOrg;
 
-    @Column(name = "D_MODI_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_MODI_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiDate;
 
-    @Column(name = "T_MODI_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_MODI_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiTime;
 
-    @Column(name = "C_MODI_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_MODI_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiOperName;
 
-    @Column(name = "L_MODI_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_MODI_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long modiOperId;
 
-    @Column(name = "T_REG_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_REG_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regTime;
 
-    @Column(name = "D_REG_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_REG_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regDate;
 
-    @Column(name = "C_REG_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_REG_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regOperName;
 
-    @Column(name = "L_REG_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_REG_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long regOperId;
 
     private static final long serialVersionUID = 1492408575307L;
@@ -308,20 +308,33 @@ public class ContractDataSource implements BetterjrEntity {
                 && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
                 && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
                 && (this.getData() == null ? other.getData() == null : this.getData().equals(other.getData()))
-                && (this.getExternalData() == null ? other.getExternalData() == null : this.getExternalData().equals(other.getExternalData()))
-                && (this.getBusinStatus() == null ? other.getBusinStatus() == null : this.getBusinStatus().equals(other.getBusinStatus()))
-                && (this.getDocStatus() == null ? other.getDocStatus() == null : this.getDocStatus().equals(other.getDocStatus()))
+                && (this.getExternalData() == null ? other.getExternalData() == null
+                        : this.getExternalData().equals(other.getExternalData()))
+                && (this.getBusinStatus() == null ? other.getBusinStatus() == null
+                        : this.getBusinStatus().equals(other.getBusinStatus()))
+                && (this.getDocStatus() == null ? other.getDocStatus() == null
+                        : this.getDocStatus().equals(other.getDocStatus()))
                 && (this.getCustNo() == null ? other.getCustNo() == null : this.getCustNo().equals(other.getCustNo()))
-                && (this.getCustName() == null ? other.getCustName() == null : this.getCustName().equals(other.getCustName()))
-                && (this.getOperOrg() == null ? other.getOperOrg() == null : this.getOperOrg().equals(other.getOperOrg()))
-                && (this.getModiDate() == null ? other.getModiDate() == null : this.getModiDate().equals(other.getModiDate()))
-                && (this.getModiTime() == null ? other.getModiTime() == null : this.getModiTime().equals(other.getModiTime()))
-                && (this.getModiOperName() == null ? other.getModiOperName() == null : this.getModiOperName().equals(other.getModiOperName()))
-                && (this.getModiOperId() == null ? other.getModiOperId() == null : this.getModiOperId().equals(other.getModiOperId()))
-                && (this.getRegTime() == null ? other.getRegTime() == null : this.getRegTime().equals(other.getRegTime()))
-                && (this.getRegDate() == null ? other.getRegDate() == null : this.getRegDate().equals(other.getRegDate()))
-                && (this.getRegOperName() == null ? other.getRegOperName() == null : this.getRegOperName().equals(other.getRegOperName()))
-                && (this.getRegOperId() == null ? other.getRegOperId() == null : this.getRegOperId().equals(other.getRegOperId()));
+                && (this.getCustName() == null ? other.getCustName() == null
+                        : this.getCustName().equals(other.getCustName()))
+                && (this.getOperOrg() == null ? other.getOperOrg() == null
+                        : this.getOperOrg().equals(other.getOperOrg()))
+                && (this.getModiDate() == null ? other.getModiDate() == null
+                        : this.getModiDate().equals(other.getModiDate()))
+                && (this.getModiTime() == null ? other.getModiTime() == null
+                        : this.getModiTime().equals(other.getModiTime()))
+                && (this.getModiOperName() == null ? other.getModiOperName() == null
+                        : this.getModiOperName().equals(other.getModiOperName()))
+                && (this.getModiOperId() == null ? other.getModiOperId() == null
+                        : this.getModiOperId().equals(other.getModiOperId()))
+                && (this.getRegTime() == null ? other.getRegTime() == null
+                        : this.getRegTime().equals(other.getRegTime()))
+                && (this.getRegDate() == null ? other.getRegDate() == null
+                        : this.getRegDate().equals(other.getRegDate()))
+                && (this.getRegOperName() == null ? other.getRegOperName() == null
+                        : this.getRegOperName().equals(other.getRegOperName()))
+                && (this.getRegOperId() == null ? other.getRegOperId() == null
+                        : this.getRegOperId().equals(other.getRegOperId()));
     }
 
     @Override

@@ -470,32 +470,55 @@ public class ContractCorpAccount implements BetterjrEntity {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
                 && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
                 && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-                && (this.getOrgCode() == null ? other.getOrgCode() == null : this.getOrgCode().equals(other.getOrgCode()))
-                && (this.getIdentNo() == null ? other.getIdentNo() == null : this.getIdentNo().equals(other.getIdentNo()))
-                && (this.getAccount() == null ? other.getAccount() == null : this.getAccount().equals(other.getAccount()))
-                && (this.getBusinStatus() == null ? other.getBusinStatus() == null : this.getBusinStatus().equals(other.getBusinStatus()))
-                && (this.getDocStatus() == null ? other.getDocStatus() == null : this.getDocStatus().equals(other.getDocStatus()))
+                && (this.getOrgCode() == null ? other.getOrgCode() == null
+                        : this.getOrgCode().equals(other.getOrgCode()))
+                && (this.getIdentNo() == null ? other.getIdentNo() == null
+                        : this.getIdentNo().equals(other.getIdentNo()))
+                && (this.getAccount() == null ? other.getAccount() == null
+                        : this.getAccount().equals(other.getAccount()))
+                && (this.getBusinStatus() == null ? other.getBusinStatus() == null
+                        : this.getBusinStatus().equals(other.getBusinStatus()))
+                && (this.getDocStatus() == null ? other.getDocStatus() == null
+                        : this.getDocStatus().equals(other.getDocStatus()))
                 && (this.getCustNo() == null ? other.getCustNo() == null : this.getCustNo().equals(other.getCustNo()))
-                && (this.getCustName() == null ? other.getCustName() == null : this.getCustName().equals(other.getCustName()))
-                && (this.getOperOrg() == null ? other.getOperOrg() == null : this.getOperOrg().equals(other.getOperOrg()))
-                && (this.getServiceCustNo() == null ? other.getServiceCustNo() == null : this.getServiceCustNo().equals(other.getServiceCustNo()))
+                && (this.getCustName() == null ? other.getCustName() == null
+                        : this.getCustName().equals(other.getCustName()))
+                && (this.getOperOrg() == null ? other.getOperOrg() == null
+                        : this.getOperOrg().equals(other.getOperOrg()))
+                && (this.getServiceCustNo() == null ? other.getServiceCustNo() == null
+                        : this.getServiceCustNo().equals(other.getServiceCustNo()))
                 && (this.getServiceCustName() == null ? other.getServiceCustName() == null
                         : this.getServiceCustName().equals(other.getServiceCustName()))
-                && (this.getSignerId() == null ? other.getSignerId() == null : this.getSignerId().equals(other.getSignerId()))
-                && (this.getSignerOperId() == null ? other.getSignerOperId() == null : this.getSignerOperId().equals(other.getSignerOperId()))
-                && (this.getSignerOperName() == null ? other.getSignerOperName() == null : this.getSignerOperName().equals(other.getSignerOperName()))
-                && (this.getSignerAccount() == null ? other.getSignerAccount() == null : this.getSignerAccount().equals(other.getSignerAccount()))
-                && (this.getSignerMobileNo() == null ? other.getSignerMobileNo() == null : this.getSignerMobileNo().equals(other.getSignerMobileNo()))
-                && (this.getModiDate() == null ? other.getModiDate() == null : this.getModiDate().equals(other.getModiDate()))
-                && (this.getModiTime() == null ? other.getModiTime() == null : this.getModiTime().equals(other.getModiTime()))
-                && (this.getModiOperName() == null ? other.getModiOperName() == null : this.getModiOperName().equals(other.getModiOperName()))
-                && (this.getModiOperId() == null ? other.getModiOperId() == null : this.getModiOperId().equals(other.getModiOperId()))
-                && (this.getRegTime() == null ? other.getRegTime() == null : this.getRegTime().equals(other.getRegTime()))
-                && (this.getRegDate() == null ? other.getRegDate() == null : this.getRegDate().equals(other.getRegDate()))
-                && (this.getRegOperName() == null ? other.getRegOperName() == null : this.getRegOperName().equals(other.getRegOperName()))
-                && (this.getRegOperId() == null ? other.getRegOperId() == null : this.getRegOperId().equals(other.getRegOperId()))
-                && (this.getOrgRegType() == null ? other.getOrgRegType() == null : this.getOrgRegType().equals(other.getOrgRegType()))
-                && (this.getMobileNo() == null ? other.getMobileNo() == null : this.getMobileNo().equals(other.getMobileNo()));
+                && (this.getSignerId() == null ? other.getSignerId() == null
+                        : this.getSignerId().equals(other.getSignerId()))
+                && (this.getSignerOperId() == null ? other.getSignerOperId() == null
+                        : this.getSignerOperId().equals(other.getSignerOperId()))
+                && (this.getSignerOperName() == null ? other.getSignerOperName() == null
+                        : this.getSignerOperName().equals(other.getSignerOperName()))
+                && (this.getSignerAccount() == null ? other.getSignerAccount() == null
+                        : this.getSignerAccount().equals(other.getSignerAccount()))
+                && (this.getSignerMobileNo() == null ? other.getSignerMobileNo() == null
+                        : this.getSignerMobileNo().equals(other.getSignerMobileNo()))
+                && (this.getModiDate() == null ? other.getModiDate() == null
+                        : this.getModiDate().equals(other.getModiDate()))
+                && (this.getModiTime() == null ? other.getModiTime() == null
+                        : this.getModiTime().equals(other.getModiTime()))
+                && (this.getModiOperName() == null ? other.getModiOperName() == null
+                        : this.getModiOperName().equals(other.getModiOperName()))
+                && (this.getModiOperId() == null ? other.getModiOperId() == null
+                        : this.getModiOperId().equals(other.getModiOperId()))
+                && (this.getRegTime() == null ? other.getRegTime() == null
+                        : this.getRegTime().equals(other.getRegTime()))
+                && (this.getRegDate() == null ? other.getRegDate() == null
+                        : this.getRegDate().equals(other.getRegDate()))
+                && (this.getRegOperName() == null ? other.getRegOperName() == null
+                        : this.getRegOperName().equals(other.getRegOperName()))
+                && (this.getRegOperId() == null ? other.getRegOperId() == null
+                        : this.getRegOperId().equals(other.getRegOperId()))
+                && (this.getOrgRegType() == null ? other.getOrgRegType() == null
+                        : this.getOrgRegType().equals(other.getOrgRegType()))
+                && (this.getMobileNo() == null ? other.getMobileNo() == null
+                        : this.getMobileNo().equals(other.getMobileNo()));
     }
 
     @Override

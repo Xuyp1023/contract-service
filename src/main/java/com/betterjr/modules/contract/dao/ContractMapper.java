@@ -5,5 +5,4 @@ import com.betterjr.mapper.common.Mapper;
 import com.betterjr.modules.contract.entity.Contract;
 
 @BetterjrMapper
-public interface ContractMapper extends Mapper<Contract> {
-}
+public interface ContractMapper extends Mapper<Contract> {}

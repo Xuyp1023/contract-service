@@ -75,8 +75,7 @@ public class EsignFactory {
         final Result result = SDK.init(projectConfig, httpConfig, signConfig);
         if (result.getErrCode() == 0) {
             logger.info("init Esign success");
-        }
-        else {
+        } else {
             logger.error("init Esign has error ," + result.getMsg());
         }
     }
@@ -93,8 +92,7 @@ public class EsignFactory {
         if (result.getErrCode() == 0) {
             anSignerAccount.setAccount(result.getAccountId());
             anSignerAccount.setBusinStatus("1");
-        }
-        else {
+        } else {
             logger.error("注册企业信息：" + anSignerAccount.toString());
             anSignerAccount.setBusinStatus("0");
             throw new BytterDeclareException(result.getMsg());
@@ -110,8 +108,7 @@ public class EsignFactory {
         if ("1".equals(anCorpAccount.getType())) {
             org.setAgentIdNo(anCorpAccount.getIdentNo());
             org.setAgentName(anCorpAccount.getName());
-        }
-        else {
+        } else {
             org.setLegalIdNo(anCorpAccount.getIdentNo());
             org.setLegalName(anCorpAccount.getName());
         }
@@ -119,8 +116,7 @@ public class EsignFactory {
         final Result result = accountService.updateAccount(anCorpAccount.getAccount(), org, new ArrayList());
         if (result.getErrCode() == 0) {
             anCorpAccount.setBusinStatus("1");
-        }
-        else {
+        } else {
             anCorpAccount.setBusinStatus("0");
         }
 
@@ -138,16 +134,14 @@ public class EsignFactory {
         org.setOrganType(0);
         if ("1".equals(anCorpAccount.getOrgRegType())) {
             org.setRegType(OrganRegType.NORMAL);
-        }
-        else {
+        } else {
             org.setRegType(OrganRegType.MERGE);
         }
         org.setUserType(Integer.parseInt(anCorpAccount.getType()));
         if (1 == org.getUserType()) {
             org.setAgentIdNo(anCorpAccount.getIdentNo());
             org.setAgentName(anCorpAccount.getName());
-        }
-        else {
+        } else {
             org.setLegalIdNo(anCorpAccount.getIdentNo());
             org.setLegalName(anCorpAccount.getName());
             org.setLegalArea(0);
@@ -158,8 +152,7 @@ public class EsignFactory {
         if (result.getErrCode() == 0) {
             anCorpAccount.setAccount(result.getAccountId());
             anCorpAccount.setBusinStatus("1");
-        }
-        else {
+        } else {
             logger.error("注册企业信息：" + anCorpAccount.toString());
             throw new java.lang.RuntimeException(result.getMsg());
         }
@@ -217,8 +210,8 @@ public class EsignFactory {
      *            签署后的电子合同文件
      * @return
      */
-    public ContractStubData signData(final String anAccountId, final String anStamperData, final ContractStubData anStub, final byte[] anData,
-            final String anVcode) {
+    public ContractStubData signData(final String anAccountId, final String anStamperData,
+            final ContractStubData anStub, final byte[] anData, final String anVcode) {
         final UserSignService userSign = UserSignServiceFactory.instance();
         final PosBean pos = new PosBean();
         pos.setKey(anStub.getKeyWord());
@@ -242,16 +235,15 @@ public class EsignFactory {
         if (this.config.isValidCode()) {
             signResult = userSign.localSafeSignPDF(anAccountId, anStamperData, streamBean, pos,
                     pos.getPosType() == 0 ? SignType.Single : SignType.Key, anVcode);
-        }
-        else {
-            signResult = userSign.localSignPDF(anAccountId, anStamperData, streamBean, pos, pos.getPosType() == 0 ? SignType.Single : SignType.Key);
+        } else {
+            signResult = userSign.localSignPDF(anAccountId, anStamperData, streamBean, pos,
+                    pos.getPosType() == 0 ? SignType.Single : SignType.Key);
         }
 
         final boolean isok = signResult.getErrCode() == 0;
         if (!isok) {
             throw new BytterDeclareException("签署电子合同出现异常，" + signResult.getMsg());
-        }
-        else {
+        } else {
             anStub.setResult(signResult.getStream());
             anStub.setBusinStatus("1");
             anStub.setSignServiceId(signResult.getSignServiceId());
@@ -275,8 +267,7 @@ public class EsignFactory {
         final boolean isok = sealResult.getErrCode() == 0;
         if (isok) {
             return sealResult.getSealData();
-        }
-        else {
+        } else {
             throw new BytterDeclareException("个人印章创建失败");
         }
     }
@@ -294,14 +285,14 @@ public class EsignFactory {
         final OrganizeTemplateType template = OrganizeTemplateType.valueOf(this.config.getSealtempOrgType());
         final SealColor sColor = SealColor.valueOf(this.config.getSealColor());
 
-        logger.info("accountId = " + accountId + ", template = " + template + ", sColor = " + sColor + ", config =" + config);
-        final AddSealResult sealResult = sealService.addTemplateSeal(accountId, template, sColor, this.config.getSealHText(),
-                this.config.getSealQText());
+        logger.info("accountId = " + accountId + ", template = " + template + ", sColor = " + sColor + ", config ="
+                + config);
+        final AddSealResult sealResult = sealService.addTemplateSeal(accountId, template, sColor,
+                this.config.getSealHText(), this.config.getSealQText());
         final boolean isok = sealResult.getErrCode() == 0;
         if (isok) {
             return sealResult.getSealData();
-        }
-        else {
+        } else {
             throw new BytterDeclareException("企业印章创建失败 ：" + sealResult.getMsg());
         }
     }

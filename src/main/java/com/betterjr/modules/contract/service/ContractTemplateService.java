@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -81,13 +82,13 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
+        BTAssert.isTrue(StringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
                 "操作失败！");
         final Map<String, Object> conditionMap = new HashMap<>();
         conditionMap.put("custNo", anCustNo);
         conditionMap.put("operOrg", UserUtils.getOperatorInfo().getOperOrg());
 
-        if (BetterStringUtils.equals(anBusinStatus, "00")) {
+        if (StringUtils.equals(anBusinStatus, "00")) {
             conditionMap.put("businStatus", "00");
         } else { // 除了 未使用的
             conditionMap.remove("businStatus");
@@ -108,7 +109,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
+        BTAssert.isTrue(StringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
                 "操作失败！");
 
         return contractStandardTypeService.queryUnusedStandardType(anTypeId, anCustNo);
@@ -217,7 +218,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         }
 
         if (UserUtils.platformUser()
-                || BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg())) {
+                || StringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg())) {
             return contractTemplate;
         }
         throw new BytterException("操作失败!");
@@ -258,7 +259,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         final ContractStandardType standardType = contractStandardTypeService.findStandardType(anStandardTypeId);
         BTAssert.notNull(standardType, "没有找到标准合同类型信息！");
 
-        BTAssert.isTrue(BetterStringUtils.equals(operator.getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(StringUtils.equals(operator.getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
 
         final ContractTemplate contractTemplate = findContractTemplate(anCustNo, anStandardTypeId);
         BTAssert.isNull(contractTemplate, "选择的标准合同模板已经存在！");
@@ -296,12 +297,12 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
 
-        BTAssert.isTrue(BetterStringUtils.equals(operator.getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(StringUtils.equals(operator.getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
 
         final ContractTemplate contractTemplate = findContractTemplate(anCustNo, anStandardTypeId);
         BTAssert.notNull(contractTemplate, "选择的标准合同模板不存在！");
 
-        BTAssert.isTrue(BetterStringUtils.equals("00", contractTemplate.getBusinStatus()), "该标准合同模板已经被使用，不允许删除！");
+        BTAssert.isTrue(StringUtils.equals("00", contractTemplate.getBusinStatus()), "该标准合同模板已经被使用，不允许删除！");
 
         final int result = this.delete(contractTemplate);
 
@@ -321,7 +322,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
 
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
+        BTAssert.isTrue(StringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
                 "操作失败！");
 
         final Map<String, Object> conditionMap = new HashMap<>();
@@ -342,12 +343,12 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
     public Page<ContractTemplate> queryText(final Map<String, Object> anParam, final int anFlag, final int anPageNum,
             final int anPageSize) {
 
-        if (BetterStringUtils.isBlank((String) anParam.get("custNo"))) {
+        if (StringUtils.isBlank((String) anParam.get("custNo"))) {
             anParam.remove("custNo");
         } else {
             anParam.put("custNo", Long.valueOf((String) anParam.get("custNo")));
         }
-        if (BetterStringUtils.isBlank((String) anParam.get("textAuditStatus"))) {
+        if (StringUtils.isBlank((String) anParam.get("textAuditStatus"))) {
             anParam.remove("textAuditStatus");
         }
         anParam.put("operOrg", UserUtils.getOperatorInfo().getOperOrg()); // 查询自己机构的数据
@@ -370,16 +371,16 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         BTAssert.notNull(contractTemplate, "没有找到合同模板！");
 
         BTAssert.isTrue(
-                BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()),
+                StringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()),
                 "操作失败！");
 
         BTAssert.isTrue(
-                BetterStringUtils.equals("00", contractTemplate.getBusinStatus())
-                        || (BetterStringUtils.equals("01", contractTemplate.getBusinStatus())
-                                && BetterStringUtils.equals("02", contractTemplate.getTextAuditStatus())),
+                StringUtils.equals("00", contractTemplate.getBusinStatus())
+                        || (StringUtils.equals("01", contractTemplate.getBusinStatus())
+                                && StringUtils.equals("02", contractTemplate.getTextAuditStatus())),
                 "该标准合同模板已经被上传模板，不允许重复上传！");
 
-        if (BetterStringUtils.equals("00", contractTemplate.getBusinStatus())) {
+        if (StringUtils.equals("00", contractTemplate.getBusinStatus())) {
             contractTemplate
                     .setOriginApplyNo(SequenceFactory.generate("PLAT_COMMON", "#{Date:yyyyMMdd}#{Seq:12}", "D"));
         }
@@ -439,12 +440,12 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
             final int anPageNum, final int anPageSize) {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败！");
 
-        if (BetterStringUtils.isBlank((String) anParam.get("custNo"))) {
+        if (StringUtils.isBlank((String) anParam.get("custNo"))) {
             anParam.remove("custNo");
         } else {
             anParam.put("custNo", Long.valueOf((String) anParam.get("custNo")));
         }
-        if (BetterStringUtils.isBlank((String) anParam.get("textAuditStatus"))) {
+        if (StringUtils.isBlank((String) anParam.get("textAuditStatus"))) {
             anParam.remove("textAuditStatus");
         }
         anParam.put("businStatus", new String[] { "01", "02" });// 查询 电子合同文本, 包括进入电子合同模板阶段的数据
@@ -464,15 +465,15 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
             final String anAuditRemark) {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败!");
 
-        BTAssert.isTrue(BetterStringUtils.isNotBlank(anAuditStatus) || BetterStringUtils.equals(anAuditStatus, "01")
-                || BetterStringUtils.equals(anAuditStatus, "02"), "审核状态不正确！");
+        BTAssert.isTrue(StringUtils.isNotBlank(anAuditStatus) || StringUtils.equals(anAuditStatus, "01")
+                || StringUtils.equals(anAuditStatus, "02"), "审核状态不正确！");
 
         final ContractTemplate contractTemplate = findContractTemplate(anTemplateId);
 
         BTAssert.notNull(contractTemplate, "没有找到电子合同模板！");
-        BTAssert.isTrue(BetterStringUtils.equals("01", contractTemplate.getBusinStatus()), "电子合同模板状态错误！");
+        BTAssert.isTrue(StringUtils.equals("01", contractTemplate.getBusinStatus()), "电子合同模板状态错误！");
 
-        if (BetterStringUtils.equals(anAuditStatus, "01")) { // 审核通过
+        if (StringUtils.equals(anAuditStatus, "01")) { // 审核通过
             contractTemplate.setTextAuditStatus("01"); // 电子合同文本审核通过
             contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
                     contractTemplate.getCustName(), "01", "审核标准合同文本模板，审核结果：审核通过");
@@ -526,12 +527,12 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
             final int anPageNum, final int anPageSize) {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败！");
 
-        if (BetterStringUtils.isBlank((String) anParam.get("custNo"))) {
+        if (StringUtils.isBlank((String) anParam.get("custNo"))) {
             anParam.remove("custNo");
         } else {
             anParam.put("custNo", Long.valueOf((String) anParam.get("custNo")));
         }
-        if (BetterStringUtils.isBlank((String) anParam.get("templateAuditStatus"))) {
+        if (StringUtils.isBlank((String) anParam.get("templateAuditStatus"))) {
             anParam.remove("templateAuditStatus");
         }
         anParam.put("businStatus", "02");// 查询 电子合同文本, 包括进入电子合同模板阶段的数据
@@ -548,12 +549,12 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
     public Page<ContractTemplate> queryAuditTemplate(final Map<String, Object> anParam, final int anFlag,
             final int anPageNum, final int anPageSize) {
 
-        if (BetterStringUtils.isBlank((String) anParam.get("custNo"))) {
+        if (StringUtils.isBlank((String) anParam.get("custNo"))) {
             anParam.remove("custNo");
         } else {
             anParam.put("custNo", Long.valueOf((String) anParam.get("custNo")));
         }
-        if (BetterStringUtils.isBlank((String) anParam.get("templateAuditStatus"))) {
+        if (StringUtils.isBlank((String) anParam.get("templateAuditStatus"))) {
             anParam.remove("templateAuditStatus");
         }
         anParam.put("operOrg", UserUtils.getOperatorInfo().getOperOrg()); // 查询自己机构的数据
@@ -573,14 +574,14 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
             final String anCommon) {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败!");
 
-        BTAssert.notNull(BetterStringUtils.isNotBlank(anTemplateFileId), "模板文件不允许为空！");
+        BTAssert.notNull(StringUtils.isNotBlank(anTemplateFileId), "模板文件不允许为空！");
 
         final ContractTemplate contractTemplate = findContractTemplate(anTemplateId);
 
         BTAssert.isTrue(
-                BetterStringUtils.equals("02", contractTemplate.getBusinStatus())
-                        || (BetterStringUtils.equals("01", contractTemplate.getBusinStatus())
-                                && BetterStringUtils.equals("01", contractTemplate.getTextAuditStatus())),
+                StringUtils.equals("02", contractTemplate.getBusinStatus())
+                        || (StringUtils.equals("01", contractTemplate.getBusinStatus())
+                                && StringUtils.equals("01", contractTemplate.getTextAuditStatus())),
                 "标准合同模板状态不正确！");
 
         // 检查印章位置 contractTemplateStampPlaceService
@@ -635,9 +636,9 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         BTAssert.notNull(contractTemplate, "标准合同模板未找到！");
 
         BTAssert.isTrue(
-                BetterStringUtils.equals("02", contractTemplate.getBusinStatus())
-                        || (BetterStringUtils.equals("01", contractTemplate.getBusinStatus())
-                                && BetterStringUtils.equals("01", contractTemplate.getTextAuditStatus())),
+                StringUtils.equals("02", contractTemplate.getBusinStatus())
+                        || (StringUtils.equals("01", contractTemplate.getBusinStatus())
+                                && StringUtils.equals("01", contractTemplate.getTextAuditStatus())),
                 "标准合同模板状态不正确！");
 
         BTAssert.isTrue(contractTemplate.getOriginSignerCount().equals(Long.valueOf(anStampPlaceList.size())),
@@ -670,19 +671,19 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
 
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
+        BTAssert.isTrue(StringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
                 "操作失败！");
 
-        BTAssert.isTrue(BetterStringUtils.isNotBlank(anAuditStatus) || BetterStringUtils.equals(anAuditStatus, "01")
-                || BetterStringUtils.equals(anAuditStatus, "02"), "审核状态不正确！");
+        BTAssert.isTrue(StringUtils.isNotBlank(anAuditStatus) || StringUtils.equals(anAuditStatus, "01")
+                || StringUtils.equals(anAuditStatus, "02"), "审核状态不正确！");
 
         final ContractTemplate contractTemplate = findContractTemplate(anTemplateId);
 
         BTAssert.notNull(contractTemplate, "没有找到电子合同模板！");
         BTAssert.isTrue(anCustNo.equals(contractTemplate.getCustNo()), "操作失败！");
-        BTAssert.isTrue(BetterStringUtils.equals("02", contractTemplate.getBusinStatus()), "电子合同模板状态错误！");
+        BTAssert.isTrue(StringUtils.equals("02", contractTemplate.getBusinStatus()), "电子合同模板状态错误！");
 
-        if (BetterStringUtils.equals(anAuditStatus, "01")) { // 审核通过
+        if (StringUtils.equals(anAuditStatus, "01")) { // 审核通过
             contractTemplate.setTemplateAuditStatus("01"); // 电子合同文本审核通过
             // 记录 log
             contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
@@ -719,7 +720,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         BTAssert.notNull(contractTemplate, "没有找到电子合同模板！");
 
         BTAssert.isTrue(UserUtils.platformUser()
-                || BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()),
+                || StringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()),
                 "操作失败！");
 
         return contractTemplateLogService.queryTemplateLog(anTemplateId);

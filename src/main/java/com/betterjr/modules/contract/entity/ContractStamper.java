@@ -431,27 +431,47 @@ public class ContractStamper implements BetterjrEntity {
         final ContractStamper other = (ContractStamper) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
                 && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-                && (this.getOriginStamper() == null ? other.getOriginStamper() == null : this.getOriginStamper().equals(other.getOriginStamper()))
-                && (this.getOriginDate() == null ? other.getOriginDate() == null : this.getOriginDate().equals(other.getOriginDate()))
-                && (this.getOriginTime() == null ? other.getOriginTime() == null : this.getOriginTime().equals(other.getOriginTime()))
-                && (this.getStamper() == null ? other.getStamper() == null : this.getStamper().equals(other.getStamper()))
-                && (this.getStamperData() == null ? other.getStamperData() == null : this.getStamperData().equals(other.getStamperData()))
-                && (this.getMakeDate() == null ? other.getMakeDate() == null : this.getMakeDate().equals(other.getMakeDate()))
-                && (this.getMakeTime() == null ? other.getMakeTime() == null : this.getMakeTime().equals(other.getMakeTime()))
+                && (this.getOriginStamper() == null ? other.getOriginStamper() == null
+                        : this.getOriginStamper().equals(other.getOriginStamper()))
+                && (this.getOriginDate() == null ? other.getOriginDate() == null
+                        : this.getOriginDate().equals(other.getOriginDate()))
+                && (this.getOriginTime() == null ? other.getOriginTime() == null
+                        : this.getOriginTime().equals(other.getOriginTime()))
+                && (this.getStamper() == null ? other.getStamper() == null
+                        : this.getStamper().equals(other.getStamper()))
+                && (this.getStamperData() == null ? other.getStamperData() == null
+                        : this.getStamperData().equals(other.getStamperData()))
+                && (this.getMakeDate() == null ? other.getMakeDate() == null
+                        : this.getMakeDate().equals(other.getMakeDate()))
+                && (this.getMakeTime() == null ? other.getMakeTime() == null
+                        : this.getMakeTime().equals(other.getMakeTime()))
                 && (this.getCustNo() == null ? other.getCustNo() == null : this.getCustNo().equals(other.getCustNo()))
-                && (this.getCustName() == null ? other.getCustName() == null : this.getCustName().equals(other.getCustName()))
-                && (this.getOperOrg() == null ? other.getOperOrg() == null : this.getOperOrg().equals(other.getOperOrg()))
-                && (this.getBusinStatus() == null ? other.getBusinStatus() == null : this.getBusinStatus().equals(other.getBusinStatus()))
-                && (this.getDocStatus() == null ? other.getDocStatus() == null : this.getDocStatus().equals(other.getDocStatus()))
-                && (this.getRegOperId() == null ? other.getRegOperId() == null : this.getRegOperId().equals(other.getRegOperId()))
-                && (this.getRegOperName() == null ? other.getRegOperName() == null : this.getRegOperName().equals(other.getRegOperName()))
-                && (this.getRegDate() == null ? other.getRegDate() == null : this.getRegDate().equals(other.getRegDate()))
-                && (this.getRegTime() == null ? other.getRegTime() == null : this.getRegTime().equals(other.getRegTime()))
-                && (this.getModiOperId() == null ? other.getModiOperId() == null : this.getModiOperId().equals(other.getModiOperId()))
-                && (this.getModiOperName() == null ? other.getModiOperName() == null : this.getModiOperName().equals(other.getModiOperName()))
-                && (this.getModiDate() == null ? other.getModiDate() == null : this.getModiDate().equals(other.getModiDate()))
-                && (this.getModiTime() == null ? other.getModiTime() == null : this.getModiTime().equals(other.getModiTime()))
-                && (this.getCustType() == null ? other.getCustType() == null : this.getCustType().equals(other.getCustType()));
+                && (this.getCustName() == null ? other.getCustName() == null
+                        : this.getCustName().equals(other.getCustName()))
+                && (this.getOperOrg() == null ? other.getOperOrg() == null
+                        : this.getOperOrg().equals(other.getOperOrg()))
+                && (this.getBusinStatus() == null ? other.getBusinStatus() == null
+                        : this.getBusinStatus().equals(other.getBusinStatus()))
+                && (this.getDocStatus() == null ? other.getDocStatus() == null
+                        : this.getDocStatus().equals(other.getDocStatus()))
+                && (this.getRegOperId() == null ? other.getRegOperId() == null
+                        : this.getRegOperId().equals(other.getRegOperId()))
+                && (this.getRegOperName() == null ? other.getRegOperName() == null
+                        : this.getRegOperName().equals(other.getRegOperName()))
+                && (this.getRegDate() == null ? other.getRegDate() == null
+                        : this.getRegDate().equals(other.getRegDate()))
+                && (this.getRegTime() == null ? other.getRegTime() == null
+                        : this.getRegTime().equals(other.getRegTime()))
+                && (this.getModiOperId() == null ? other.getModiOperId() == null
+                        : this.getModiOperId().equals(other.getModiOperId()))
+                && (this.getModiOperName() == null ? other.getModiOperName() == null
+                        : this.getModiOperName().equals(other.getModiOperName()))
+                && (this.getModiDate() == null ? other.getModiDate() == null
+                        : this.getModiDate().equals(other.getModiDate()))
+                && (this.getModiTime() == null ? other.getModiTime() == null
+                        : this.getModiTime().equals(other.getModiTime()))
+                && (this.getCustType() == null ? other.getCustType() == null
+                        : this.getCustType().equals(other.getCustType()));
     }
 
     @Override

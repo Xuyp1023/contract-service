@@ -18,166 +18,166 @@ public class Contract implements BetterjrEntity {
      * 编号
      */
     @Id
-    @Column(name = "ID",  columnDefinition="INTEGER" )
-    @MetaData( value="编号", comments = "编号")
+    @Column(name = "ID", columnDefinition = "INTEGER")
+    @MetaData(value = "编号", comments = "编号")
     private Long id;
 
     /**
      * 电子合同编号
      */
-    @Column(name = "C_NO",  columnDefinition="VARCHAR" )
-    @MetaData( value="电子合同编号", comments = "电子合同编号")
+    @Column(name = "C_NO", columnDefinition = "VARCHAR")
+    @MetaData(value = "电子合同编号", comments = "电子合同编号")
     private String no;
 
     /**
      * 电子合同名称
      */
-    @Column(name = "C_NAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="电子合同名称", comments = "电子合同名称")
+    @Column(name = "C_NAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "电子合同名称", comments = "电子合同名称")
     private String name;
 
     /**
      * 类型
      */
-    @Column(name = "C_TYPE",  columnDefinition="VARCHAR" )
-    @MetaData( value="类型", comments = "类型")
+    @Column(name = "C_TYPE", columnDefinition = "VARCHAR")
+    @MetaData(value = "类型", comments = "类型")
     private String type;
 
     /**
      * 合同类型
      */
-    @Column(name = "L_TYPE_ID",  columnDefinition="INTEGER" )
-    @MetaData( value="合同类型", comments = "合同类型")
+    @Column(name = "L_TYPE_ID", columnDefinition = "INTEGER")
+    @MetaData(value = "合同类型", comments = "合同类型")
     private Long typeId;
 
     /**
      * 标准合同类型
      */
-    @Column(name = "L_STANDARD_TYPE_ID",  columnDefinition="INTEGER" )
-    @MetaData( value="标准合同类型", comments = "标准合同类型")
+    @Column(name = "L_STANDARD_TYPE_ID", columnDefinition = "INTEGER")
+    @MetaData(value = "标准合同类型", comments = "标准合同类型")
     private Long standardTypeId;
 
     /**
      * 数据源编号
      */
-    @Column(name = "L_DATA_SOURCE_ID",  columnDefinition="INTEGER" )
-    @MetaData( value="数据源编号", comments = "数据源编号")
+    @Column(name = "L_DATA_SOURCE_ID", columnDefinition = "INTEGER")
+    @MetaData(value = "数据源编号", comments = "数据源编号")
     private Long dataSourceId;
 
     /**
      * 合同原始html
      */
-    @Column(name = "L_ORIGIN_HTML",  columnDefinition="INTEGER" )
-    @MetaData( value="合同原始html", comments = "合同原始html")
+    @Column(name = "L_ORIGIN_HTML", columnDefinition = "INTEGER")
+    @MetaData(value = "合同原始html", comments = "合同原始html")
     private Long originHtml;
 
     /**
      * 合同原始pdf
      */
-    @Column(name = "L_ORIGIN_PDF",  columnDefinition="INTEGER" )
-    @MetaData( value="合同原始pdf", comments = "合同原始pdf")
+    @Column(name = "L_ORIGIN_PDF", columnDefinition = "INTEGER")
+    @MetaData(value = "合同原始pdf", comments = "合同原始pdf")
     private Long originPdf;
 
     /**
      * 签署开始日期
      */
-    @Column(name = "D_SIGN_START_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="签署开始日期", comments = "签署开始日期")
+    @Column(name = "D_SIGN_START_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "签署开始日期", comments = "签署开始日期")
     private String signStartDate;
 
     /**
      * 签署开始时间
      */
-    @Column(name = "T_SIGN_START_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="签署开始时间", comments = "签署开始时间")
+    @Column(name = "T_SIGN_START_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "签署开始时间", comments = "签署开始时间")
     private String signStartTime;
 
     /**
      * 签署结束日期
      */
-    @Column(name = "D_SIGN_END_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="签署结束日期", comments = "签署结束日期")
+    @Column(name = "D_SIGN_END_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "签署结束日期", comments = "签署结束日期")
     private String signEndDate;
 
     /**
      * 签署结束时间
      */
-    @Column(name = "T_SIGN_END_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="签署结束时间", comments = "签署结束时间")
+    @Column(name = "T_SIGN_END_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "签署结束时间", comments = "签署结束时间")
     private String signEndTime;
 
     /**
      * 签署后pdf
      */
-    @Column(name = "L_SIGN_PDF",  columnDefinition="INTEGER" )
-    @MetaData( value="签署后pdf", comments = "签署后pdf")
+    @Column(name = "L_SIGN_PDF", columnDefinition = "INTEGER")
+    @MetaData(value = "签署后pdf", comments = "签署后pdf")
     private Long signPdf;
 
     /**
      * 业务状态
      */
-    @Column(name = "C_BUSIN_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="业务状态", comments = "业务状态")
+    @Column(name = "C_BUSIN_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "业务状态", comments = "业务状态")
     private String businStatus;
 
     /**
      * 文档状态
      */
-    @Column(name = "C_DOC_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="文档状态", comments = "文档状态")
+    @Column(name = "C_DOC_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "文档状态", comments = "文档状态")
     private String docStatus;
 
     /**
      * 公司
      */
-    @Column(name = "L_CUSTNO",  columnDefinition="INTEGER" )
-    @MetaData( value="公司", comments = "公司")
+    @Column(name = "L_CUSTNO", columnDefinition = "INTEGER")
+    @MetaData(value = "公司", comments = "公司")
     private Long custNo;
 
     /**
      * 公司名称
      */
-    @Column(name = "C_CUSTNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="公司名称", comments = "公司名称")
+    @Column(name = "C_CUSTNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "公司名称", comments = "公司名称")
     private String custName;
 
     /**
      * 机构
      */
-    @Column(name = "C_OPERORG",  columnDefinition="VARCHAR" )
-    @MetaData( value="机构", comments = "机构")
+    @Column(name = "C_OPERORG", columnDefinition = "VARCHAR")
+    @MetaData(value = "机构", comments = "机构")
     private String operOrg;
 
-    @Column(name = "D_MODI_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_MODI_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiDate;
 
-    @Column(name = "T_MODI_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_MODI_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiTime;
 
-    @Column(name = "C_MODI_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_MODI_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiOperName;
 
-    @Column(name = "L_MODI_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_MODI_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long modiOperId;
 
-    @Column(name = "T_REG_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_REG_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regTime;
 
-    @Column(name = "D_REG_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_REG_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regDate;
 
-    @Column(name = "C_REG_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_REG_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regOperName;
 
-    @Column(name = "L_REG_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_REG_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long regOperId;
 
     private static final long serialVersionUID = 1492408575309L;
@@ -453,28 +453,49 @@ public class Contract implements BetterjrEntity {
                 && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
                 && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
                 && (this.getTypeId() == null ? other.getTypeId() == null : this.getTypeId().equals(other.getTypeId()))
-                && (this.getStandardTypeId() == null ? other.getStandardTypeId() == null : this.getStandardTypeId().equals(other.getStandardTypeId()))
-                && (this.getDataSourceId() == null ? other.getDataSourceId() == null : this.getDataSourceId().equals(other.getDataSourceId()))
-                && (this.getOriginHtml() == null ? other.getOriginHtml() == null : this.getOriginHtml().equals(other.getOriginHtml()))
-                && (this.getOriginPdf() == null ? other.getOriginPdf() == null : this.getOriginPdf().equals(other.getOriginPdf()))
-                && (this.getSignStartDate() == null ? other.getSignStartDate() == null : this.getSignStartDate().equals(other.getSignStartDate()))
-                && (this.getSignStartTime() == null ? other.getSignStartTime() == null : this.getSignStartTime().equals(other.getSignStartTime()))
-                && (this.getSignEndDate() == null ? other.getSignEndDate() == null : this.getSignEndDate().equals(other.getSignEndDate()))
-                && (this.getSignEndTime() == null ? other.getSignEndTime() == null : this.getSignEndTime().equals(other.getSignEndTime()))
-                && (this.getSignPdf() == null ? other.getSignPdf() == null : this.getSignPdf().equals(other.getSignPdf()))
-                && (this.getBusinStatus() == null ? other.getBusinStatus() == null : this.getBusinStatus().equals(other.getBusinStatus()))
-                && (this.getDocStatus() == null ? other.getDocStatus() == null : this.getDocStatus().equals(other.getDocStatus()))
+                && (this.getStandardTypeId() == null ? other.getStandardTypeId() == null
+                        : this.getStandardTypeId().equals(other.getStandardTypeId()))
+                && (this.getDataSourceId() == null ? other.getDataSourceId() == null
+                        : this.getDataSourceId().equals(other.getDataSourceId()))
+                && (this.getOriginHtml() == null ? other.getOriginHtml() == null
+                        : this.getOriginHtml().equals(other.getOriginHtml()))
+                && (this.getOriginPdf() == null ? other.getOriginPdf() == null
+                        : this.getOriginPdf().equals(other.getOriginPdf()))
+                && (this.getSignStartDate() == null ? other.getSignStartDate() == null
+                        : this.getSignStartDate().equals(other.getSignStartDate()))
+                && (this.getSignStartTime() == null ? other.getSignStartTime() == null
+                        : this.getSignStartTime().equals(other.getSignStartTime()))
+                && (this.getSignEndDate() == null ? other.getSignEndDate() == null
+                        : this.getSignEndDate().equals(other.getSignEndDate()))
+                && (this.getSignEndTime() == null ? other.getSignEndTime() == null
+                        : this.getSignEndTime().equals(other.getSignEndTime()))
+                && (this.getSignPdf() == null ? other.getSignPdf() == null
+                        : this.getSignPdf().equals(other.getSignPdf()))
+                && (this.getBusinStatus() == null ? other.getBusinStatus() == null
+                        : this.getBusinStatus().equals(other.getBusinStatus()))
+                && (this.getDocStatus() == null ? other.getDocStatus() == null
+                        : this.getDocStatus().equals(other.getDocStatus()))
                 && (this.getCustNo() == null ? other.getCustNo() == null : this.getCustNo().equals(other.getCustNo()))
-                && (this.getCustName() == null ? other.getCustName() == null : this.getCustName().equals(other.getCustName()))
-                && (this.getOperOrg() == null ? other.getOperOrg() == null : this.getOperOrg().equals(other.getOperOrg()))
-                && (this.getModiDate() == null ? other.getModiDate() == null : this.getModiDate().equals(other.getModiDate()))
-                && (this.getModiTime() == null ? other.getModiTime() == null : this.getModiTime().equals(other.getModiTime()))
-                && (this.getModiOperName() == null ? other.getModiOperName() == null : this.getModiOperName().equals(other.getModiOperName()))
-                && (this.getModiOperId() == null ? other.getModiOperId() == null : this.getModiOperId().equals(other.getModiOperId()))
-                && (this.getRegTime() == null ? other.getRegTime() == null : this.getRegTime().equals(other.getRegTime()))
-                && (this.getRegDate() == null ? other.getRegDate() == null : this.getRegDate().equals(other.getRegDate()))
-                && (this.getRegOperName() == null ? other.getRegOperName() == null : this.getRegOperName().equals(other.getRegOperName()))
-                && (this.getRegOperId() == null ? other.getRegOperId() == null : this.getRegOperId().equals(other.getRegOperId()));
+                && (this.getCustName() == null ? other.getCustName() == null
+                        : this.getCustName().equals(other.getCustName()))
+                && (this.getOperOrg() == null ? other.getOperOrg() == null
+                        : this.getOperOrg().equals(other.getOperOrg()))
+                && (this.getModiDate() == null ? other.getModiDate() == null
+                        : this.getModiDate().equals(other.getModiDate()))
+                && (this.getModiTime() == null ? other.getModiTime() == null
+                        : this.getModiTime().equals(other.getModiTime()))
+                && (this.getModiOperName() == null ? other.getModiOperName() == null
+                        : this.getModiOperName().equals(other.getModiOperName()))
+                && (this.getModiOperId() == null ? other.getModiOperId() == null
+                        : this.getModiOperId().equals(other.getModiOperId()))
+                && (this.getRegTime() == null ? other.getRegTime() == null
+                        : this.getRegTime().equals(other.getRegTime()))
+                && (this.getRegDate() == null ? other.getRegDate() == null
+                        : this.getRegDate().equals(other.getRegDate()))
+                && (this.getRegOperName() == null ? other.getRegOperName() == null
+                        : this.getRegOperName().equals(other.getRegOperName()))
+                && (this.getRegOperId() == null ? other.getRegOperId() == null
+                        : this.getRegOperId().equals(other.getRegOperId()));
     }
 
     @Override

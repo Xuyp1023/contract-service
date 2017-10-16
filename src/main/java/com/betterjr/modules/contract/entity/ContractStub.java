@@ -512,37 +512,62 @@ public class ContractStub implements BetterjrEntity {
         }
         final ContractStub other = (ContractStub) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getContractId() == null ? other.getContractId() == null : this.getContractId().equals(other.getContractId()))
-                && (this.getSignatory() == null ? other.getSignatory() == null : this.getSignatory().equals(other.getSignatory()))
-                && (this.getSequence() == null ? other.getSequence() == null : this.getSequence().equals(other.getSequence()))
+                && (this.getContractId() == null ? other.getContractId() == null
+                        : this.getContractId().equals(other.getContractId()))
+                && (this.getSignatory() == null ? other.getSignatory() == null
+                        : this.getSignatory().equals(other.getSignatory()))
+                && (this.getSequence() == null ? other.getSequence() == null
+                        : this.getSequence().equals(other.getSequence()))
                 && (this.getOperId() == null ? other.getOperId() == null : this.getOperId().equals(other.getOperId()))
-                && (this.getOperName() == null ? other.getOperName() == null : this.getOperName().equals(other.getOperName()))
-                && (this.getCorpAccountId() == null ? other.getCorpAccountId() == null : this.getCorpAccountId().equals(other.getCorpAccountId()))
+                && (this.getOperName() == null ? other.getOperName() == null
+                        : this.getOperName().equals(other.getOperName()))
+                && (this.getCorpAccountId() == null ? other.getCorpAccountId() == null
+                        : this.getCorpAccountId().equals(other.getCorpAccountId()))
                 && (this.getSignerAccountId() == null ? other.getSignerAccountId() == null
                         : this.getSignerAccountId().equals(other.getSignerAccountId()))
-                && (this.getCorpSignerId() == null ? other.getCorpSignerId() == null : this.getCorpSignerId().equals(other.getCorpSignerId()))
-                && (this.getPositionType() == null ? other.getPositionType() == null : this.getPositionType().equals(other.getPositionType()))
-                && (this.getPagination() == null ? other.getPagination() == null : this.getPagination().equals(other.getPagination()))
+                && (this.getCorpSignerId() == null ? other.getCorpSignerId() == null
+                        : this.getCorpSignerId().equals(other.getCorpSignerId()))
+                && (this.getPositionType() == null ? other.getPositionType() == null
+                        : this.getPositionType().equals(other.getPositionType()))
+                && (this.getPagination() == null ? other.getPagination() == null
+                        : this.getPagination().equals(other.getPagination()))
                 && (this.getAxisX() == null ? other.getAxisX() == null : this.getAxisX().equals(other.getAxisX()))
                 && (this.getAxisY() == null ? other.getAxisY() == null : this.getAxisY().equals(other.getAxisY()))
-                && (this.getKeyWord() == null ? other.getKeyWord() == null : this.getKeyWord().equals(other.getKeyWord()))
-                && (this.getSignDate() == null ? other.getSignDate() == null : this.getSignDate().equals(other.getSignDate()))
-                && (this.getSignTime() == null ? other.getSignTime() == null : this.getSignTime().equals(other.getSignTime()))
-                && (this.getSignPdf() == null ? other.getSignPdf() == null : this.getSignPdf().equals(other.getSignPdf()))
-                && (this.getBusinStatus() == null ? other.getBusinStatus() == null : this.getBusinStatus().equals(other.getBusinStatus()))
-                && (this.getDocStatus() == null ? other.getDocStatus() == null : this.getDocStatus().equals(other.getDocStatus()))
+                && (this.getKeyWord() == null ? other.getKeyWord() == null
+                        : this.getKeyWord().equals(other.getKeyWord()))
+                && (this.getSignDate() == null ? other.getSignDate() == null
+                        : this.getSignDate().equals(other.getSignDate()))
+                && (this.getSignTime() == null ? other.getSignTime() == null
+                        : this.getSignTime().equals(other.getSignTime()))
+                && (this.getSignPdf() == null ? other.getSignPdf() == null
+                        : this.getSignPdf().equals(other.getSignPdf()))
+                && (this.getBusinStatus() == null ? other.getBusinStatus() == null
+                        : this.getBusinStatus().equals(other.getBusinStatus()))
+                && (this.getDocStatus() == null ? other.getDocStatus() == null
+                        : this.getDocStatus().equals(other.getDocStatus()))
                 && (this.getCustNo() == null ? other.getCustNo() == null : this.getCustNo().equals(other.getCustNo()))
-                && (this.getCustName() == null ? other.getCustName() == null : this.getCustName().equals(other.getCustName()))
-                && (this.getOperOrg() == null ? other.getOperOrg() == null : this.getOperOrg().equals(other.getOperOrg()))
-                && (this.getModiDate() == null ? other.getModiDate() == null : this.getModiDate().equals(other.getModiDate()))
-                && (this.getModiTime() == null ? other.getModiTime() == null : this.getModiTime().equals(other.getModiTime()))
-                && (this.getModiOperName() == null ? other.getModiOperName() == null : this.getModiOperName().equals(other.getModiOperName()))
-                && (this.getModiOperId() == null ? other.getModiOperId() == null : this.getModiOperId().equals(other.getModiOperId()))
-                && (this.getRegTime() == null ? other.getRegTime() == null : this.getRegTime().equals(other.getRegTime()))
-                && (this.getRegDate() == null ? other.getRegDate() == null : this.getRegDate().equals(other.getRegDate()))
-                && (this.getRegOperName() == null ? other.getRegOperName() == null : this.getRegOperName().equals(other.getRegOperName()))
-                && (this.getRegOperId() == null ? other.getRegOperId() == null : this.getRegOperId().equals(other.getRegOperId()))
-                && (this.getSignServiceId() == null ? other.getSignServiceId() == null : this.getSignServiceId().equals(other.getSignServiceId()));
+                && (this.getCustName() == null ? other.getCustName() == null
+                        : this.getCustName().equals(other.getCustName()))
+                && (this.getOperOrg() == null ? other.getOperOrg() == null
+                        : this.getOperOrg().equals(other.getOperOrg()))
+                && (this.getModiDate() == null ? other.getModiDate() == null
+                        : this.getModiDate().equals(other.getModiDate()))
+                && (this.getModiTime() == null ? other.getModiTime() == null
+                        : this.getModiTime().equals(other.getModiTime()))
+                && (this.getModiOperName() == null ? other.getModiOperName() == null
+                        : this.getModiOperName().equals(other.getModiOperName()))
+                && (this.getModiOperId() == null ? other.getModiOperId() == null
+                        : this.getModiOperId().equals(other.getModiOperId()))
+                && (this.getRegTime() == null ? other.getRegTime() == null
+                        : this.getRegTime().equals(other.getRegTime()))
+                && (this.getRegDate() == null ? other.getRegDate() == null
+                        : this.getRegDate().equals(other.getRegDate()))
+                && (this.getRegOperName() == null ? other.getRegOperName() == null
+                        : this.getRegOperName().equals(other.getRegOperName()))
+                && (this.getRegOperId() == null ? other.getRegOperId() == null
+                        : this.getRegOperId().equals(other.getRegOperId()))
+                && (this.getSignServiceId() == null ? other.getSignServiceId() == null
+                        : this.getSignServiceId().equals(other.getSignServiceId()));
     }
 
     @Override

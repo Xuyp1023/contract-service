@@ -28,7 +28,8 @@ import com.betterjr.modules.contract.entity.ContractTemplateStampPlace;
  *
  */
 @Service
-public class ContractTempStampPlaceService extends BaseService<ContractTemplateStampPlaceMapper, ContractTemplateStampPlace> {
+public class ContractTempStampPlaceService
+        extends BaseService<ContractTemplateStampPlaceMapper, ContractTemplateStampPlace> {
     public static String[] signatorys = { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸" };
 
     /**
@@ -55,14 +56,13 @@ public class ContractTempStampPlaceService extends BaseService<ContractTemplateS
      * @param anStampPlace
      * @return
      */
-    protected void saveKeyWordStampPlace(final Long anTemplateId, final String anTemplateName, final Integer anSequence, final String anKeyWord,
-            final Long anAxisX, final Long anAxisY) {
+    protected void saveKeyWordStampPlace(final Long anTemplateId, final String anTemplateName, final Integer anSequence,
+            final String anKeyWord, final Long anAxisX, final Long anAxisY) {
         final ContractTemplateStampPlace stampPlace = findStampPlaceBySeq(anTemplateId, anSequence);
 
         if (stampPlace == null) {
             saveInitStampPlace(anTemplateId, anTemplateName, anSequence, anKeyWord, anAxisX, anAxisY);
-        }
-        else {
+        } else {
             stampPlace.setKeyWord(anKeyWord);
 
             stampPlace.setAxisX(anAxisX);
@@ -82,8 +82,8 @@ public class ContractTempStampPlaceService extends BaseService<ContractTemplateS
      * @param anStampPlaceId
      * @return
      */
-    private void saveInitStampPlace(final Long anTemplateId, final String anTemplateName, final Integer anIndex, final String anKeyWord,
-            final Long anAxisX, final Long anAxisY) {
+    private void saveInitStampPlace(final Long anTemplateId, final String anTemplateName, final Integer anIndex,
+            final String anKeyWord, final Long anAxisX, final Long anAxisY) {
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
         final ContractTemplateStampPlace stampPlace = new ContractTemplateStampPlace();
 
@@ -120,8 +120,7 @@ public class ContractTempStampPlaceService extends BaseService<ContractTemplateS
         ContractTempStampPlaceData result = null;
         if (tmpPlace == null) {
             result = new ContractTempStampPlaceData();
-        }
-        else {
+        } else {
             result = BeanMapper.map(tmpPlace, ContractTempStampPlaceData.class);
         }
 

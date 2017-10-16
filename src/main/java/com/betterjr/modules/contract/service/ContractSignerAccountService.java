@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,10 +63,10 @@ public class ContractSignerAccountService extends BaseService<ContractSignerAcco
         final CustOperatorInfo custOperator = custOperatorService.findCustOperatorById(operId);
 
         BTAssert.notNull(custOperator, "没有找到此操作员！");
-        BTAssert.isTrue(BetterStringUtils.equals(custOperator.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(StringUtils.equals(custOperator.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
-        BTAssert.isTrue(BetterStringUtils.equals(operator.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(StringUtils.equals(operator.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
 
         anSignerAccount.setOperName(custOperator.getName());
         anSignerAccount.setOperOrg(UserUtils.getOperOrg());
@@ -98,7 +99,8 @@ public class ContractSignerAccountService extends BaseService<ContractSignerAcco
      * @param anFlag
      * @return
      */
-    public Page<ContractSignerAccount> querySignerAccountInfo(final Long anCustNo, final int anFlag, final int anPageNum, final int anPageSize) {
+    public Page<ContractSignerAccount> querySignerAccountInfo(final Long anCustNo, final int anFlag,
+            final int anPageNum, final int anPageSize) {
         BTAssert.notNull(anCustNo, "公司编号不允许为空！");
 
         final Map<String, Object> conditionMap = QueryTermBuilder.newInstance().put("custNo", anCustNo).build();
@@ -126,13 +128,12 @@ public class ContractSignerAccountService extends BaseService<ContractSignerAcco
      * @return
      */
     public String findSignAccountId(final Long anOperId, final Long anServiceCustNo) {
-        final Map<String, Object> queryTerm = QueryTermBuilder.newInstance().put("operId", anOperId).put("serviceCustNo", anServiceCustNo)
-                .put("businStatus", "1").build();
+        final Map<String, Object> queryTerm = QueryTermBuilder.newInstance().put("operId", anOperId)
+                .put("serviceCustNo", anServiceCustNo).put("businStatus", "1").build();
         final List<ContractSignerAccount> tmpList = this.selectByProperty(queryTerm);
         if (Collections3.isEmpty(tmpList)) {
             return "";
-        }
-        else {
+        } else {
             return Collections3.getFirst(tmpList).getAccount();
         }
     }

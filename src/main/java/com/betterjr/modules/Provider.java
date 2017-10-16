@@ -14,7 +14,8 @@ import com.betterjr.modules.contract.service.EsignFactory;
 public class Provider {
 
     public static void main(final String[] args) throws Exception {
-        final URL url = Provider.class.getClassLoader().getSystemResource("log4j.properties");
+        Provider.class.getClassLoader();
+        final URL url = ClassLoader.getSystemResource("log4j.properties");
         System.out.println(url.toString());
         Log4jConfigurer.initLogging(url.getFile());
         final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(

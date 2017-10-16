@@ -5,5 +5,4 @@ import com.betterjr.mapper.common.Mapper;
 import com.betterjr.modules.contract.entity.ContractTemplateStampPlace;
 
 @BetterjrMapper
-public interface ContractTemplateStampPlaceMapper extends Mapper<ContractTemplateStampPlace> {
-}
+public interface ContractTemplateStampPlaceMapper extends Mapper<ContractTemplateStampPlace> {}

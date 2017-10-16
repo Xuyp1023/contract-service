@@ -7,6 +7,7 @@
 // ============================================================================
 package com.betterjr.modules.contract.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.betterjr.common.service.BaseService;
@@ -45,7 +46,7 @@ public class ContractDataSourceService extends BaseService<ContractDataSourceMap
      */
     public ContractDataSource saveAddExternalData(final Long anDataSourceId, final String anExternalData) {
         BTAssert.notNull(anDataSourceId, "数据源编号不允许为空！");
-        BTAssert.isTrue(BetterStringUtils.isNotBlank(anExternalData), "外部数据不允许为空！");
+        BTAssert.isTrue(StringUtils.isNotBlank(anExternalData), "外部数据不允许为空！");
 
         final ContractDataSource dataSource = this.selectByPrimaryKey(anDataSourceId);
         BTAssert.notNull(dataSource, "没有找到数据源！");

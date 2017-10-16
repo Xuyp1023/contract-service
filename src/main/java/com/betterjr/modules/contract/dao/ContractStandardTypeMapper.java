@@ -18,5 +18,6 @@ public interface ContractStandardTypeMapper extends Mapper<ContractStandardType>
 
     @Select("SELECT * FROM t_sys_contract_standard_type t1 WHERE t1.L_TYPE_ID = #{typeId} AND t1.C_BUSIN_STATUS = '01' AND NOT EXISTS(SELECT 1 FROM t_sys_contract_template t2 WHERE t2.L_CUSTNO = #{custNo} AND t2.L_STANDARD_TYPE_ID = t1.ID)")
     @ResultType(ContractStandardType.class)
-    public List<ContractStandardType> queryCustUnusedStandardType2(@Param("typeId") Long anTypeId,@Param("custNo") Long custNo);
+    public List<ContractStandardType> queryCustUnusedStandardType2(@Param("typeId") Long anTypeId,
+            @Param("custNo") Long custNo);
 }
