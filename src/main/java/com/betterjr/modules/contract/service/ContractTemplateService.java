@@ -8,7 +8,6 @@
 package com.betterjr.modules.contract.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,6 @@ import com.betterjr.common.utils.BetterStringUtils;
 import com.betterjr.common.utils.Collections3;
 import com.betterjr.common.utils.UserUtils;
 import com.betterjr.mapper.pagehelper.Page;
-import com.betterjr.modules.account.entity.CustInfo;
 import com.betterjr.modules.account.entity.CustOperatorInfo;
 import com.betterjr.modules.contract.dao.ContractTemplateMapper;
 import com.betterjr.modules.contract.entity.ContractStandardType;
@@ -77,22 +75,21 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param anFlag
      * @return
      */
-    public Page<ContractTemplate> queryStandardType(final Long anCustNo, final String anBusinStatus, final int anFlag, final int anPageNum,
-            final int anPageSize) {
+    public Page<ContractTemplate> queryStandardType(final Long anCustNo, final String anBusinStatus, final int anFlag,
+            final int anPageNum, final int anPageSize) {
         BTAssert.notNull(anCustNo, "公司编号不允许为空！");
 
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
-        System.out.println("UserUtils.getOperatorInfo()=="+UserUtils.getOperatorInfo());
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()), "操作失败！"); 
+        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
+                "操作失败！");
         final Map<String, Object> conditionMap = new HashMap<>();
         conditionMap.put("custNo", anCustNo);
         conditionMap.put("operOrg", UserUtils.getOperatorInfo().getOperOrg());
 
         if (BetterStringUtils.equals(anBusinStatus, "00")) {
             conditionMap.put("businStatus", "00");
-        }
-        else { // 除了 未使用的
+        } else { // 除了 未使用的
             conditionMap.remove("businStatus");
             conditionMap.put("NEbusinStatus", "00");
         }
@@ -111,8 +108,9 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
- 
+        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
+                "操作失败！");
+
         return contractStandardTypeService.queryUnusedStandardType(anTypeId, anCustNo);
     }
 
@@ -121,7 +119,8 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param contractStandardType
      * @return
      */
-    public boolean checkExists(final List<ContractTemplate> contractTemplates, final ContractStandardType contractStandardType) {
+    public boolean checkExists(final List<ContractTemplate> contractTemplates,
+            final ContractStandardType contractStandardType) {
         for (final ContractTemplate contractTemplate : contractTemplates) {
             if (contractTemplate.getStandardTypeId().equals(contractStandardType.getId())) {
                 return true;
@@ -186,7 +185,8 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         }
 
         // 取位置
-        final List<ContractTemplateStampPlace> stampPlaces = contractTemplateStampPlaceService.queryStampPlace(anTemplateId);
+        final List<ContractTemplateStampPlace> stampPlaces = contractTemplateStampPlaceService
+                .queryStampPlace(anTemplateId);
 
         if (Collections3.isEmpty(stampPlaces)) {
 
@@ -204,8 +204,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
                 }
                 contractTemplate.setStampPlaces(tempStampPlaces);
             }
-        }
-        else {
+        } else {
             contractTemplate.setStampPlaces(stampPlaces.stream().map(contractTemplateStampPlace -> {
                 final Map<String, Object> stampPlace = new HashMap<>();
                 stampPlace.put("key", contractTemplateStampPlace.getKeyWord());
@@ -217,7 +216,8 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
             }).collect(Collectors.toList()));
         }
 
-        if (UserUtils.platformUser() || BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg())) {
+        if (UserUtils.platformUser()
+                || BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg())) {
             return contractTemplate;
         }
         throw new BytterException("操作失败!");
@@ -232,7 +232,8 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      */
     public boolean saveEnableStandardType(final Long anCustNo, final String anStandardTypeIds) {
         BTAssert.notNull(anCustNo, "公司编号不允许为空！");
-        final List<Long> standardTypeIds = COMMA_PATTERN.splitAsStream(anStandardTypeIds).map(Long::valueOf).collect(Collectors.toList());
+        final List<Long> standardTypeIds = COMMA_PATTERN.splitAsStream(anStandardTypeIds).map(Long::valueOf)
+                .collect(Collectors.toList());
         for (final Long typeId : standardTypeIds) {
             final ContractTemplate template = saveEnableStandardType(anCustNo, typeId);
             BTAssert.notNull(template, "标准合同启用失败！");
@@ -313,21 +314,22 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param anCustNo
      * @return
      */
-    public Page<ContractTemplate> queryUnusedContractTemplate(final Long anCustNo, final Long anTypeId, final int anFlag, final int anPageNum,
-            final int anPageSize) {
+    public Page<ContractTemplate> queryUnusedContractTemplate(final Long anCustNo, final Long anTypeId,
+            final int anFlag, final int anPageNum, final int anPageSize) {
         BTAssert.notNull(anCustNo, "公司编号不允许为空！");
 
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
 
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
+                "操作失败！");
 
         final Map<String, Object> conditionMap = new HashMap<>();
         conditionMap.put("businStatus", "00");// 从未使用过的
         if (anTypeId != null) {
             conditionMap.put("typeId", anTypeId);
         }
-
+        conditionMap.put("custNo", anCustNo);
         return this.selectPropertyByPage(conditionMap, anPageNum, anPageSize, anFlag == 1);
     }
 
@@ -337,12 +339,12 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param anCustNo
      * @return
      */
-    public Page<ContractTemplate> queryText(final Map<String, Object> anParam, final int anFlag, final int anPageNum, final int anPageSize) {
+    public Page<ContractTemplate> queryText(final Map<String, Object> anParam, final int anFlag, final int anPageNum,
+            final int anPageSize) {
 
         if (BetterStringUtils.isBlank((String) anParam.get("custNo"))) {
             anParam.remove("custNo");
-        }
-        else {
+        } else {
             anParam.put("custNo", Long.valueOf((String) anParam.get("custNo")));
         }
         if (BetterStringUtils.isBlank((String) anParam.get("textAuditStatus"))) {
@@ -350,8 +352,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         }
         anParam.put("operOrg", UserUtils.getOperatorInfo().getOperOrg()); // 查询自己机构的数据
         anParam.put("businStatus", new String[] { "01", "02" });// 查询 电子合同文本, 包括进入电子合同模板阶段的数据
-
-        return this.selectPropertyByPage(anParam, anPageNum, anPageSize, anFlag == 1);
+        return this.selectPropertyByPage(anParam, anPageNum, anPageSize, anFlag == 1, "originApplyNo Desc");
     }
 
     /**
@@ -361,21 +362,26 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param anStandardTypeId
      * @return
      */
-    public ContractTemplate saveUploadText(final Long anTemplateId, final String anOriginTemplateId, final String anOrginSimpleId,
-            final Long anOriginSignerCount, final String anOriginNoPattern, final String anOriginComment) {
+    public ContractTemplate saveUploadText(final Long anTemplateId, final String anOriginTemplateId,
+            final String anOrginSimpleId, final Long anOriginSignerCount, final String anOriginNoPattern,
+            final String anOriginComment) {
 
         final ContractTemplate contractTemplate = findContractTemplate(anTemplateId);
         BTAssert.notNull(contractTemplate, "没有找到合同模板！");
 
-        BTAssert.isTrue(BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()), "操作失败！");
+        BTAssert.isTrue(
+                BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()),
+                "操作失败！");
 
-        BTAssert.isTrue(BetterStringUtils.equals("00", contractTemplate.getBusinStatus())
-                || (BetterStringUtils.equals("01", contractTemplate.getBusinStatus())
-                        && BetterStringUtils.equals("02", contractTemplate.getTextAuditStatus())),
+        BTAssert.isTrue(
+                BetterStringUtils.equals("00", contractTemplate.getBusinStatus())
+                        || (BetterStringUtils.equals("01", contractTemplate.getBusinStatus())
+                                && BetterStringUtils.equals("02", contractTemplate.getTextAuditStatus())),
                 "该标准合同模板已经被上传模板，不允许重复上传！");
 
         if (BetterStringUtils.equals("00", contractTemplate.getBusinStatus())) {
-            contractTemplate.setOriginApplyNo(SequenceFactory.generate("PLAT_COMMON", "#{Date:yyyyMMdd}#{Seq:12}", "D"));
+            contractTemplate
+                    .setOriginApplyNo(SequenceFactory.generate("PLAT_COMMON", "#{Date:yyyyMMdd}#{Seq:12}", "D"));
         }
         contractTemplate.setOriginTemplate(custFileService.updateCustFileItemInfo(anOriginTemplateId, null));
         contractTemplate.setOriginSimple(custFileService.updateCustFileItemInfo(anOrginSimpleId, null));
@@ -396,9 +402,20 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         final int result = this.updateByPrimaryKeySelective(contractTemplate);
 
         BTAssert.isTrue(result == 1, "上传标准合同模板失败！");
-
-        contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "00", "上传标准合同文本");
-
+        // 根据文本审核状态，插入相应的日志
+        if ("00".equals(contractTemplate.getTextAuditStatus())) {
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                    contractTemplate.getCustName(), "00",
+                    "上传标准合同文本" + "“" + custFileService.findOne(Long.valueOf(anOriginTemplateId)).getFileName() + "”");
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                    contractTemplate.getCustName(), "00",
+                    "上传标准合同样例" + "“" + custFileService.findOne(Long.valueOf(anOrginSimpleId)).getFileName() + "”");
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                    contractTemplate.getCustName(), "00", "提交申请");
+        } else {
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                    contractTemplate.getCustName(), "00", "重新上传申请");
+        }
         return contractTemplate;
     }
 
@@ -418,13 +435,13 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param anCustNo
      * @return
      */
-    public Page<ContractTemplate> queryAuditText(final Map<String, Object> anParam, final int anFlag, final int anPageNum, final int anPageSize) {
+    public Page<ContractTemplate> queryAuditText(final Map<String, Object> anParam, final int anFlag,
+            final int anPageNum, final int anPageSize) {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败！");
 
         if (BetterStringUtils.isBlank((String) anParam.get("custNo"))) {
             anParam.remove("custNo");
-        }
-        else {
+        } else {
             anParam.put("custNo", Long.valueOf((String) anParam.get("custNo")));
         }
         if (BetterStringUtils.isBlank((String) anParam.get("textAuditStatus"))) {
@@ -432,7 +449,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         }
         anParam.put("businStatus", new String[] { "01", "02" });// 查询 电子合同文本, 包括进入电子合同模板阶段的数据
 
-        return this.selectPropertyByPage(anParam, anPageNum, anPageSize, anFlag == 1);
+        return this.selectPropertyByPage(anParam, anPageNum, anPageSize, anFlag == 1, "originApplyNo Desc");
     }
 
     /**
@@ -443,7 +460,8 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param anAuditComment
      * @return
      */
-    public ContractTemplate saveAuditText(final Long anTemplateId, final String anAuditStatus, final String anAuditRemark) {
+    public ContractTemplate saveAuditText(final Long anTemplateId, final String anAuditStatus,
+            final String anAuditRemark) {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败!");
 
         BTAssert.isTrue(BetterStringUtils.isNotBlank(anAuditStatus) || BetterStringUtils.equals(anAuditStatus, "01")
@@ -456,13 +474,12 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         if (BetterStringUtils.equals(anAuditStatus, "01")) { // 审核通过
             contractTemplate.setTextAuditStatus("01"); // 电子合同文本审核通过
-            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "01",
-                    "标准合同文本审核通过");
-        }
-        else { // 审核不通过
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                    contractTemplate.getCustName(), "01", "审核标准合同文本模板，审核结果：审核通过");
+        } else { // 审核不通过
             contractTemplate.setTextAuditStatus("02");// 电子合同文本审核驳回
-            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "03",
-                    "标准合同文本审核不通过");
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                    contractTemplate.getCustName(), "03", "审核标准合同文本模板，审核结果：审核不通过");
         }
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
@@ -486,7 +503,8 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param anCustNo
      * @return
      */
-    public Page<ContractTemplate> queryUnusedText(final Long anCustNo, final int anFlag, final int anPageNum, final int anPageSize) {
+    public Page<ContractTemplate> queryUnusedText(final Long anCustNo, final int anFlag, final int anPageNum,
+            final int anPageSize) {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败！");
 
         final Map<String, Object> conditionMap = new HashMap<>();
@@ -504,13 +522,13 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param anCustNo
      * @return
      */
-    public Page<ContractTemplate> queryTemplate(final Map<String, Object> anParam, final int anFlag, final int anPageNum, final int anPageSize) {
+    public Page<ContractTemplate> queryTemplate(final Map<String, Object> anParam, final int anFlag,
+            final int anPageNum, final int anPageSize) {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败！");
 
         if (BetterStringUtils.isBlank((String) anParam.get("custNo"))) {
             anParam.remove("custNo");
-        }
-        else {
+        } else {
             anParam.put("custNo", Long.valueOf((String) anParam.get("custNo")));
         }
         if (BetterStringUtils.isBlank((String) anParam.get("templateAuditStatus"))) {
@@ -518,7 +536,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         }
         anParam.put("businStatus", "02");// 查询 电子合同文本, 包括进入电子合同模板阶段的数据
 
-        return this.selectPropertyByPage(anParam, anPageNum, anPageSize, anFlag == 1);
+        return this.selectPropertyByPage(anParam, anPageNum, anPageSize, anFlag == 1, "originApplyNo Desc");
     }
 
     /**
@@ -527,12 +545,12 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param anCustNo
      * @return
      */
-    public Page<ContractTemplate> queryAuditTemplate(final Map<String, Object> anParam, final int anFlag, final int anPageNum, final int anPageSize) {
+    public Page<ContractTemplate> queryAuditTemplate(final Map<String, Object> anParam, final int anFlag,
+            final int anPageNum, final int anPageSize) {
 
         if (BetterStringUtils.isBlank((String) anParam.get("custNo"))) {
             anParam.remove("custNo");
-        }
-        else {
+        } else {
             anParam.put("custNo", Long.valueOf((String) anParam.get("custNo")));
         }
         if (BetterStringUtils.isBlank((String) anParam.get("templateAuditStatus"))) {
@@ -541,7 +559,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         anParam.put("operOrg", UserUtils.getOperatorInfo().getOperOrg()); // 查询自己机构的数据
         anParam.put("businStatus", "02");// 查询 电子合同文本, 包括进入电子合同模板阶段的数据
 
-        return this.selectPropertyByPage(anParam, anPageNum, anPageSize, anFlag == 1);
+        return this.selectPropertyByPage(anParam, anPageNum, anPageSize, anFlag == 1, "originApplyNo Desc");
     }
 
     /**
@@ -551,20 +569,23 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param anFileId
      * @return
      */
-    public ContractTemplate saveUploadTemplate(final Long anTemplateId, final String anTemplateFileId, final String anCommon) {
+    public ContractTemplate saveUploadTemplate(final Long anTemplateId, final String anTemplateFileId,
+            final String anCommon) {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败!");
 
         BTAssert.notNull(BetterStringUtils.isNotBlank(anTemplateFileId), "模板文件不允许为空！");
 
         final ContractTemplate contractTemplate = findContractTemplate(anTemplateId);
 
-        BTAssert.isTrue(BetterStringUtils.equals("02", contractTemplate.getBusinStatus())
-                || (BetterStringUtils.equals("01", contractTemplate.getBusinStatus())
-                        && BetterStringUtils.equals("01", contractTemplate.getTextAuditStatus())),
+        BTAssert.isTrue(
+                BetterStringUtils.equals("02", contractTemplate.getBusinStatus())
+                        || (BetterStringUtils.equals("01", contractTemplate.getBusinStatus())
+                                && BetterStringUtils.equals("01", contractTemplate.getTextAuditStatus())),
                 "标准合同模板状态不正确！");
 
         // 检查印章位置 contractTemplateStampPlaceService
-        final List<ContractTemplateStampPlace> stampPlaces = contractTemplateStampPlaceService.queryStampPlace(anTemplateId);
+        final List<ContractTemplateStampPlace> stampPlaces = contractTemplateStampPlaceService
+                .queryStampPlace(anTemplateId);
         if (stampPlaces.isEmpty()) {
             throw new BytterException("印章位置未设置！");
         }
@@ -585,8 +606,17 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         BTAssert.isTrue(result == 1, "上传模板失败！");
 
-        contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "04", "上传标准合同模板");
+        if ("00".equals(contractTemplate.getTemplateAuditStatus())) {
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                    contractTemplate.getCustName(), "04",
+                    "上传电子合同模板" + "“" + custFileService.findOne(Long.valueOf(anTemplateFileId)).getFileName() + "”");
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                    contractTemplate.getCustName(), "04", "提交申请");
+        } else {
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                    contractTemplate.getCustName(), "04", "重新发起申请");
 
+        }
         return contractTemplate;
     }
 
@@ -604,18 +634,21 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         BTAssert.notNull(contractTemplate, "标准合同模板未找到！");
 
-        BTAssert.isTrue(BetterStringUtils.equals("02", contractTemplate.getBusinStatus())
-                || (BetterStringUtils.equals("01", contractTemplate.getBusinStatus())
-                        && BetterStringUtils.equals("01", contractTemplate.getTextAuditStatus())),
+        BTAssert.isTrue(
+                BetterStringUtils.equals("02", contractTemplate.getBusinStatus())
+                        || (BetterStringUtils.equals("01", contractTemplate.getBusinStatus())
+                                && BetterStringUtils.equals("01", contractTemplate.getTextAuditStatus())),
                 "标准合同模板状态不正确！");
 
-        BTAssert.isTrue(contractTemplate.getOriginSignerCount().equals(Long.valueOf(anStampPlaceList.size())), "印章数量不正确！");
+        BTAssert.isTrue(contractTemplate.getOriginSignerCount().equals(Long.valueOf(anStampPlaceList.size())),
+                "印章数量不正确！");
 
         // anStampPlaceList 分解处理
         for (int i = 0; i < anStampPlaceList.size(); i++) {
             final Map<String, Object> stampPlace = anStampPlaceList.get(i);
-            contractTemplateStampPlaceService.saveKeyWordStampPlace(anTemplateId, contractTemplate.getName(), i, (String) stampPlace.get("key"),
-                    Long.valueOf((Integer) stampPlace.get("axisX")), Long.valueOf((Integer) stampPlace.get("axisY")));
+            contractTemplateStampPlaceService.saveKeyWordStampPlace(anTemplateId, contractTemplate.getName(), i,
+                    (String) stampPlace.get("key"), Long.valueOf((Integer) stampPlace.get("axisX")),
+                    Long.valueOf((Integer) stampPlace.get("axisY")));
         }
 
         // 检查所有 印章位置是否已确认
@@ -630,13 +663,15 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
      * @param anAuditComment
      * @return
      */
-    public ContractTemplate saveAuditTemplate(final Long anCustNo, final Long anTemplateId, final String anAuditStatus, final String anAuditRemark) {
+    public ContractTemplate saveAuditTemplate(final Long anCustNo, final Long anTemplateId, final String anAuditStatus,
+            final String anAuditRemark) {
         BTAssert.notNull(anCustNo, "公司编号不允许为空！");
 
         final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anCustNo);
         BTAssert.notNull(custMechBase, "没有找到公司信息！");
 
-        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(BetterStringUtils.equals(UserUtils.getOperatorInfo().getOperOrg(), custMechBase.getOperOrg()),
+                "操作失败！");
 
         BTAssert.isTrue(BetterStringUtils.isNotBlank(anAuditStatus) || BetterStringUtils.equals(anAuditStatus, "01")
                 || BetterStringUtils.equals(anAuditStatus, "02"), "审核状态不正确！");
@@ -650,14 +685,13 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         if (BetterStringUtils.equals(anAuditStatus, "01")) { // 审核通过
             contractTemplate.setTemplateAuditStatus("01"); // 电子合同文本审核通过
             // 记录 log
-            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "05",
-                    "审核标准合同模板通过");
-        }
-        else { // 审核不通过
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                    contractTemplate.getCustName(), "05", "审核电子合同模板，审核结果:审核通过");
+        } else { // 审核不通过
             contractTemplate.setTemplateAuditStatus("02");// 电子合同文本审核驳回
             // 记录 log
-            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(), contractTemplate.getCustName(), "06",
-                    "审核标准合同模板不通过");
+            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                    contractTemplate.getCustName(), "06", "审核电子合同模板，审核结果:审核不通过");
         }
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
@@ -666,7 +700,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         contractTemplate.setTemplateAuditDate(BetterDateUtils.getNumDate());
         contractTemplate.setTemplateAuditTime(BetterDateUtils.getNumTime());
         contractTemplate.modify(operator);
-        contractTemplate.setTextAuditRemark(anAuditRemark);
+        contractTemplate.setTemplateAuditRemark(anAuditRemark);
 
         final int result = this.updateByPrimaryKeySelective(contractTemplate);
 
@@ -684,9 +718,11 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         BTAssert.notNull(contractTemplate, "没有找到电子合同模板！");
 
-        BTAssert.isTrue(UserUtils.platformUser() || BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()), "操作失败！");
+        BTAssert.isTrue(UserUtils.platformUser()
+                || BetterStringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()),
+                "操作失败！");
 
         return contractTemplateLogService.queryTemplateLog(anTemplateId);
     }
-    
+
 }
