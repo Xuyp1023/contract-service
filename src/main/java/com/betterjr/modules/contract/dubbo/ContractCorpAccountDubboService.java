@@ -34,7 +34,8 @@ public class ContractCorpAccountDubboService implements IContractCorpAccountServ
     public String webSaveRegistCorpAccount(final Map<String, Object> anParam) {
         final ContractCorpAccount contractCorpAccount = RuleServiceDubboFilterInvoker.getInputObj();
 
-        return AjaxObject.newOk("注册企业帐号成功！", contractCorpAccountService.saveRegistCorpAccount(contractCorpAccount)).toJson();
+        return AjaxObject.newOk("注册企业帐号成功！", contractCorpAccountService.saveRegistCorpAccount(contractCorpAccount))
+                .toJson();
     }
 
     /* (non-Javadoc)
@@ -59,15 +60,21 @@ public class ContractCorpAccountDubboService implements IContractCorpAccountServ
      */
     @Override
     public String webSaveCorpSigner(final Long anCorpAccountId, final Long anSignerAccountId) {
-        return AjaxObject.newOk("设置企业帐号签署人成功！", contractCorpAccountService.saveCorpSigner(anCorpAccountId, anSignerAccountId)).toJson();
+        return AjaxObject
+                .newOk("设置企业帐号签署人成功！", contractCorpAccountService.saveCorpSigner(anCorpAccountId, anSignerAccountId))
+                .toJson();
     }
 
     /* (non-Javadoc)
      * @see com.betterjr.modules.contract.IContractCorpAccountService#webQueryCorpAccountInfo(java.lang.Long)
      */
     @Override
-    public String webQueryCorpAccountInfo(final Long anCustNo, final int anFlag, final int anPageNum, final int anPageSize) {
-        return AjaxObject.newOkWithPage("查询企业帐号信息成功！", contractCorpAccountService.queryCorpAccountInfo(anCustNo, anFlag, anPageNum, anPageSize)).toJson();
+    public String webQueryCorpAccountInfo(final Long anCustNo, final int anFlag, final int anPageNum,
+            final int anPageSize) {
+        return AjaxObject
+                .newOkWithPage("查询企业帐号信息成功！",
+                        contractCorpAccountService.queryCorpAccountInfo(anCustNo, anFlag, anPageNum, anPageSize))
+                .toJson();
     }
 
 }

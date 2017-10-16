@@ -40,18 +40,18 @@ public class EsignSingerDubboService implements IEsignSingerService {
     private String findAccountId(final Long anCustNo, final Boolean anPerson) {
         if (anPerson) {
             return signerAccountService.findSignAccountId(anCustNo, null);
-        }
-        else {
+        } else {
             return corpAccountService.findSignAccountId(anCustNo, null);
         }
     }
 
     @Override
-    public ContractStubData signData(final Long anCustNo, final ContractStubData anStub, final byte[] anData, final String anVcode,
-            final Boolean anPerson) {
+    public ContractStubData signData(final Long anCustNo, final ContractStubData anStub, final byte[] anData,
+            final String anVcode, final Boolean anPerson) {
         final String tmpAccountId = findAccountId(anCustNo, anPerson);
         final String tmpStamperData = stamperService.findMakerStamper(anCustNo, anPerson.booleanValue() ? 1 : 0);
-        final ContractTempStampPlaceData tmpPlaceData = stampPlaceService.findStampPlaceData(anStub.getContractTemplateId(), anStub.getSequence());
+        final ContractTempStampPlaceData tmpPlaceData = stampPlaceService
+                .findStampPlaceData(anStub.getContractTemplateId(), anStub.getSequence());
         anStub.setAxisX(tmpPlaceData.getAxisX());
         anStub.setAxisY(tmpPlaceData.getAxisY());
         anStub.setKeyWord(tmpPlaceData.getKeyWord());

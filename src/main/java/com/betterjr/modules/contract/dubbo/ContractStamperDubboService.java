@@ -32,7 +32,8 @@ public class ContractStamperDubboService implements IContractStamperService {
      */
     @Override
     public String webQueryOwnStamper(final Long anCustNo, final int anFlag, final int anPageNum, final int anPageSize) {
-        return AjaxObject.newOkWithPage("印章查询成功！", contractStamperService.queryOwnStamper(anCustNo, anFlag, anPageNum, anPageSize)).toJson();
+        return AjaxObject.newOkWithPage("印章查询成功！",
+                contractStamperService.queryOwnStamper(anCustNo, anFlag, anPageNum, anPageSize)).toJson();
     }
 
     /* (non-Javadoc)
@@ -41,16 +42,20 @@ public class ContractStamperDubboService implements IContractStamperService {
     @Override
     public String webSaveAddOwnStamper(final Map<String, Object> anParam, final String anOriginFileId) {
         final ContractStamper contractStamper = RuleServiceDubboFilterInvoker.getInputObj();
-        return AjaxObject.newOk("上传合同印章成功！", contractStamperService.saveAddOwnStamper(contractStamper, anOriginFileId)).toJson();
+        return AjaxObject.newOk("上传合同印章成功！", contractStamperService.saveAddOwnStamper(contractStamper, anOriginFileId))
+                .toJson();
     }
 
     /* (non-Javadoc)
      * @see com.betterjr.modules.contract.IContractStamperService#webSaveAddStamper(java.util.Map, java.lang.String, java.lang.String)
      */
     @Override
-    public String webSaveAddStamper(final Map<String, Object> anParam, final String anOriginFileId, final String anFileId) {
+    public String webSaveAddStamper(final Map<String, Object> anParam, final String anOriginFileId,
+            final String anFileId) {
         final ContractStamper contractStamper = RuleServiceDubboFilterInvoker.getInputObj();
-        return AjaxObject.newOk("上传合同印章成功！", contractStamperService.saveAddStamper(contractStamper, anOriginFileId, anFileId)).toJson();
+        return AjaxObject
+                .newOk("上传合同印章成功！", contractStamperService.saveAddStamper(contractStamper, anOriginFileId, anFileId))
+                .toJson();
     }
 
     /* (non-Javadoc)
@@ -65,9 +70,12 @@ public class ContractStamperDubboService implements IContractStamperService {
      * @see com.betterjr.modules.contract.IContractStamperService#webQueryAllStamper(java.util.Map)
      */
     @Override
-    public String webQueryAllStamper(final Map<String, Object> anParam, final int anFlag, final int anPageNum, final int anPageSize) {
+    public String webQueryAllStamper(final Map<String, Object> anParam, final int anFlag, final int anPageNum,
+            final int anPageSize) {
         final Map<String, Object> param = RuleServiceDubboFilterInvoker.getInputObj();
-        return AjaxObject.newOkWithPage("印章查询成功！", contractStamperService.queryAllStamper(param, anFlag, anPageNum, anPageSize)).toJson();
+        return AjaxObject
+                .newOkWithPage("印章查询成功！", contractStamperService.queryAllStamper(param, anFlag, anPageNum, anPageSize))
+                .toJson();
     }
 
     /* (non-Javadoc)

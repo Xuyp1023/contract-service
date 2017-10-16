@@ -28,43 +28,43 @@ public class ContractTemplate implements BetterjrEntity {
      * 编号
      */
     @Id
-    @Column(name = "ID",  columnDefinition="INTEGER" )
-    @MetaData( value="编号", comments = "编号")
+    @Column(name = "ID", columnDefinition = "INTEGER")
+    @MetaData(value = "编号", comments = "编号")
     private Long id;
 
     /**
      * 合同类型
      */
-    @Column(name = "L_TYPE_ID",  columnDefinition="INTEGER" )
-    @MetaData( value="合同类型", comments = "合同类型")
+    @Column(name = "L_TYPE_ID", columnDefinition = "INTEGER")
+    @MetaData(value = "合同类型", comments = "合同类型")
     private Long typeId;
 
     /**
      * 标准合同类型
      */
-    @Column(name = "L_STANDARD_TYPE_ID",  columnDefinition="INTEGER" )
-    @MetaData( value="标准合同类型", comments = "标准合同类型")
+    @Column(name = "L_STANDARD_TYPE_ID", columnDefinition = "INTEGER")
+    @MetaData(value = "标准合同类型", comments = "标准合同类型")
     private Long standardTypeId;
 
     /**
      * 模板名称
      */
-    @Column(name = "C_NAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="模板名称", comments = "模板名称")
+    @Column(name = "C_NAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "模板名称", comments = "模板名称")
     private String name;
 
     /**
      * 申请编号
      */
-    @Column(name = "C_ORIGIN_APPLY_NO",  columnDefinition="VARCHAR" )
-    @MetaData( value="申请编号", comments = "申请编号")
+    @Column(name = "C_ORIGIN_APPLY_NO", columnDefinition = "VARCHAR")
+    @MetaData(value = "申请编号", comments = "申请编号")
     private String originApplyNo;
 
     /**
      * 原始模板
      */
-    @Column(name = "L_ORIGIN_TEMPLATE",  columnDefinition="INTEGER" )
-    @MetaData( value="原始模板", comments = "原始模板")
+    @Column(name = "L_ORIGIN_TEMPLATE", columnDefinition = "INTEGER")
+    @MetaData(value = "原始模板", comments = "原始模板")
     private Long originTemplate;
 
     @Transient
@@ -75,8 +75,8 @@ public class ContractTemplate implements BetterjrEntity {
     /**
      * 原始示例文件
      */
-    @Column(name = "L_ORIGIN_SIMPLE",  columnDefinition="INTEGER" )
-    @MetaData( value="原始示例文件", comments = "原始示例文件")
+    @Column(name = "L_ORIGIN_SIMPLE", columnDefinition = "INTEGER")
+    @MetaData(value = "原始示例文件", comments = "原始示例文件")
     private Long originSimple;
 
     @Transient
@@ -88,58 +88,58 @@ public class ContractTemplate implements BetterjrEntity {
      * 原始文件日期
      */
     @JsonSerialize(using = CustDateJsonSerializer.class)
-    @Column(name = "D_ORIGIN_DATE",  columnDefinition="CHAR" )
-    @MetaData( value="原始文件日期", comments = "原始文件日期")
+    @Column(name = "D_ORIGIN_DATE", columnDefinition = "CHAR")
+    @MetaData(value = "原始文件日期", comments = "原始文件日期")
     private String originDate;
 
     /**
      * 原始文件时间
      */
     @JsonSerialize(using = CustTimeJsonSerializer.class)
-    @Column(name = "T_ORIGIN_TIME",  columnDefinition="CHAR" )
-    @MetaData( value="原始文件时间", comments = "原始文件时间")
+    @Column(name = "T_ORIGIN_TIME", columnDefinition = "CHAR")
+    @MetaData(value = "原始文件时间", comments = "原始文件时间")
     private String originTime;
 
     /**
      * 原始备注
      */
-    @Column(name = "C_ORIGIN_COMMENT",  columnDefinition="VARCHAR" )
-    @MetaData( value="原始备注", comments = "原始备注")
+    @Column(name = "C_ORIGIN_COMMENT", columnDefinition = "VARCHAR")
+    @MetaData(value = "原始备注", comments = "原始备注")
     private String originComment;
 
     /**
      * 签署人数量
      */
-    @Column(name = "N_ORIGIN_SIGNER_COUNT",  columnDefinition="INTEGER" )
-    @MetaData( value="签署人数量", comments = "签署人数量")
+    @Column(name = "N_ORIGIN_SIGNER_COUNT", columnDefinition = "INTEGER")
+    @MetaData(value = "签署人数量", comments = "签署人数量")
     private Long originSignerCount;
 
     /**
      * 合同编号模式
      */
-    @Column(name = "C_ORIGIN_NO_PATTERN",  columnDefinition="VARCHAR" )
-    @MetaData( value="合同编号模式", comments = "合同编号模式")
+    @Column(name = "C_ORIGIN_NO_PATTERN", columnDefinition = "VARCHAR")
+    @MetaData(value = "合同编号模式", comments = "合同编号模式")
     private String originNoPattern;
 
     /**
      * 申请人编号
      */
-    @Column(name = "L_ORIGIN_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="申请人编号", comments = "申请人编号")
+    @Column(name = "L_ORIGIN_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "申请人编号", comments = "申请人编号")
     private Long originOperId;
 
     /**
      * 申请人姓名
      */
-    @Column(name = "C_ORIGIN_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="申请人姓名", comments = "申请人姓名")
+    @Column(name = "C_ORIGIN_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "申请人姓名", comments = "申请人姓名")
     private String originOperName;
 
     /**
      * 模板文件
      */
-    @Column(name = "L_TEMPLATE",  columnDefinition="INTEGER" )
-    @MetaData( value="模板文件", comments = "模板文件")
+    @Column(name = "L_TEMPLATE", columnDefinition = "INTEGER")
+    @MetaData(value = "模板文件", comments = "模板文件")
     private Long template;
 
     @Transient
@@ -149,207 +149,204 @@ public class ContractTemplate implements BetterjrEntity {
     @Transient
     private List<Map<String, Object>> stampPlaces;
 
-
     /**
      * 制作日期
      */
     @JsonSerialize(using = CustDateJsonSerializer.class)
-    @Column(name = "D_MAKE_DATE",  columnDefinition="CHAR" )
-    @MetaData( value="制作日期", comments = "制作日期")
+    @Column(name = "D_MAKE_DATE", columnDefinition = "CHAR")
+    @MetaData(value = "制作日期", comments = "制作日期")
     private String makeDate;
 
     /**
      * 制作时间
      */
     @JsonSerialize(using = CustTimeJsonSerializer.class)
-    @Column(name = "T_MAKE_TIME",  columnDefinition="CHAR" )
-    @MetaData( value="制作时间", comments = "制作时间")
+    @Column(name = "T_MAKE_TIME", columnDefinition = "CHAR")
+    @MetaData(value = "制作时间", comments = "制作时间")
     private String makeTime;
 
     /**
      * 制作人
      */
-    @Column(name = "L_MAKE_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="制作人", comments = "制作人")
+    @Column(name = "L_MAKE_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "制作人", comments = "制作人")
     private Long makeOperId;
 
     /**
      * 制作人名称
      */
-    @Column(name = "C_MAKE_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="制作人名称", comments = "制作人名称")
+    @Column(name = "C_MAKE_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "制作人名称", comments = "制作人名称")
     private String makeOperName;
 
     /**
      * 备注
      */
-    @Column(name = "C_COMMON",  columnDefinition="VARCHAR" )
-    @MetaData( value="备注", comments = "备注")
+    @Column(name = "C_COMMON", columnDefinition = "VARCHAR")
+    @MetaData(value = "备注", comments = "备注")
     private String common;
 
     /**
      * 所属公司
      */
-    @Column(name = "L_CUSTNO",  columnDefinition="INTEGER" )
-    @MetaData( value="所属公司", comments = "所属公司")
+    @Column(name = "L_CUSTNO", columnDefinition = "INTEGER")
+    @MetaData(value = "所属公司", comments = "所属公司")
     private Long custNo;
 
     /**
      * 所属公司名称
      */
-    @Column(name = "C_CUSTNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="所属公司名称", comments = "所属公司名称")
+    @Column(name = "C_CUSTNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "所属公司名称", comments = "所属公司名称")
     private String custName;
 
     /**
      * 所属机构
      */
-    @Column(name = "C_OPERORG",  columnDefinition="VARCHAR" )
-    @MetaData( value="所属机构", comments = "所属机构")
+    @Column(name = "C_OPERORG", columnDefinition = "VARCHAR")
+    @MetaData(value = "所属机构", comments = "所属机构")
     private String operOrg;
 
     /**
      * 审核意见
      */
-    @Column(name = "C_TEXT_AUDIT_REMARK",  columnDefinition="VARCHAR" )
-    @MetaData( value="审核意见", comments = "审核意见")
+    @Column(name = "C_TEXT_AUDIT_REMARK", columnDefinition = "VARCHAR")
+    @MetaData(value = "审核意见", comments = "审核意见")
     private String textAuditRemark;
 
     /**
      * 审核状态
      */
-    @Column(name = "C_TEXT_AUDIT_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="审核状态", comments = "审核状态")
+    @Column(name = "C_TEXT_AUDIT_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "审核状态", comments = "审核状态")
     private String textAuditStatus;
 
     /**
      * 审核操作员
      */
-    @Column(name = "L_TEXT_AUDIT_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_TEXT_AUDIT_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long textAuditOperId;
 
     /**
      * 审核操作员
      */
-    @Column(name = "C_TEXT_AUDIT_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_TEXT_AUDIT_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String textAuditOperName;
 
     /**
      * 审核日期
      */
     @JsonSerialize(using = CustDateJsonSerializer.class)
-    @Column(name = "D_TEXT_AUDIT_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_TEXT_AUDIT_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String textAuditDate;
 
     /**
      * 审核时间
      */
     @JsonSerialize(using = CustTimeJsonSerializer.class)
-    @Column(name = "T_TEXT_AUDIT_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_TEXT_AUDIT_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String textAuditTime;
 
     /**
      * 审核操作员
      */
-    @Column(name = "L_TEMPLATE_AUDIT_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_TEMPLATE_AUDIT_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long templateAuditOperId;
 
     /**
      * 审核操作员
      */
-    @Column(name = "C_TEMPLATE_AUDIT_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_TEMPLATE_AUDIT_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String templateAuditOperName;
 
     /**
      * 审核日期
      */
     @JsonSerialize(using = CustDateJsonSerializer.class)
-    @Column(name = "D_TEMPLATE_AUDIT_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_TEMPLATE_AUDIT_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String templateAuditDate;
 
     /**
      * 审核时间
      */
     @JsonSerialize(using = CustTimeJsonSerializer.class)
-    @Column(name = "T_TEMPLATE_AUDIT_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_TEMPLATE_AUDIT_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String templateAuditTime;
 
     /**
      * 审核意见
      */
-    @Column(name = "C_TEMPLATE_AUDIT_REMARK",  columnDefinition="VARCHAR" )
-    @MetaData( value="审核意见", comments = "审核意见")
+    @Column(name = "C_TEMPLATE_AUDIT_REMARK", columnDefinition = "VARCHAR")
+    @MetaData(value = "审核意见", comments = "审核意见")
     private String templateAuditRemark;
 
     /**
      * 审核状态
      */
-    @Column(name = "C_TEMPLATE_AUDIT_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="审核状态", comments = "审核状态")
+    @Column(name = "C_TEMPLATE_AUDIT_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "审核状态", comments = "审核状态")
     private String templateAuditStatus;
     /**
      * 业务状态
      */
-    @Column(name = "C_BUSIN_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="业务状态", comments = "业务状态")
+    @Column(name = "C_BUSIN_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "业务状态", comments = "业务状态")
     private String businStatus;
 
     /**
      * 文档状态
      */
-    @Column(name = "C_DOC_STATUS",  columnDefinition="CHAR" )
-    @MetaData( value="文档状态", comments = "文档状态")
+    @Column(name = "C_DOC_STATUS", columnDefinition = "CHAR")
+    @MetaData(value = "文档状态", comments = "文档状态")
     private String docStatus;
 
-    @Column(name = "L_REG_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_REG_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long regOperId;
 
-    @Column(name = "C_REG_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_REG_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regOperName;
 
     @JsonSerialize(using = CustDateJsonSerializer.class)
-    @Column(name = "D_REG_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_REG_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regDate;
 
-    @Column(name = "T_REG_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_REG_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String regTime;
 
-    @Column(name = "L_MODI_OPERID",  columnDefinition="INTEGER" )
-    @MetaData( value="", comments = "")
+    @Column(name = "L_MODI_OPERID", columnDefinition = "INTEGER")
+    @MetaData(value = "", comments = "")
     private Long modiOperId;
 
-    @Column(name = "C_MODI_OPERNAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "C_MODI_OPERNAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiOperName;
 
     @JsonSerialize(using = CustDateJsonSerializer.class)
-    @Column(name = "D_MODI_DATE",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "D_MODI_DATE", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiDate;
 
-    @Column(name = "T_MODI_TIME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+    @Column(name = "T_MODI_TIME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String modiTime;
-    
-    @Column(name = "C_TYPEID_NAME",  columnDefinition="VARCHAR" )
-    @MetaData( value="", comments = "")
+
+    @Column(name = "C_TYPEID_NAME", columnDefinition = "VARCHAR")
+    @MetaData(value = "", comments = "")
     private String typeIdName;
-    
+
     private static final long serialVersionUID = 1492408575302L;
-
-
 
     public List<Map<String, Object>> getStampPlaces() {
         return stampPlaces;
@@ -768,14 +765,14 @@ public class ContractTemplate implements BetterjrEntity {
     }
 
     public String getTypeIdName() {
-		return typeIdName;
-	}
+        return typeIdName;
+    }
 
-	public void setTypeIdName(String typeIdName) {
-		this.typeIdName = typeIdName;
-	}
+    public void setTypeIdName(String typeIdName) {
+        this.typeIdName = typeIdName;
+    }
 
-	@Override
+    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
@@ -845,49 +842,89 @@ public class ContractTemplate implements BetterjrEntity {
         final ContractTemplate other = (ContractTemplate) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
                 && (this.getTypeId() == null ? other.getTypeId() == null : this.getTypeId().equals(other.getTypeId()))
-                && (this.getStandardTypeId() == null ? other.getStandardTypeId() == null : this.getStandardTypeId().equals(other.getStandardTypeId()))
+                && (this.getStandardTypeId() == null ? other.getStandardTypeId() == null
+                        : this.getStandardTypeId().equals(other.getStandardTypeId()))
                 && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-                && (this.getOriginApplyNo() == null ? other.getOriginApplyNo() == null : this.getOriginApplyNo().equals(other.getOriginApplyNo()))
-                && (this.getOriginTemplate() == null ? other.getOriginTemplate() == null : this.getOriginTemplate().equals(other.getOriginTemplate()))
-                && (this.getOriginSimple() == null ? other.getOriginSimple() == null : this.getOriginSimple().equals(other.getOriginSimple()))
-                && (this.getOriginDate() == null ? other.getOriginDate() == null : this.getOriginDate().equals(other.getOriginDate()))
-                && (this.getOriginTime() == null ? other.getOriginTime() == null : this.getOriginTime().equals(other.getOriginTime()))
-                && (this.getOriginComment() == null ? other.getOriginComment() == null : this.getOriginComment().equals(other.getOriginComment()))
-                && (this.getOriginSignerCount() == null ? other.getOriginSignerCount() == null : this.getOriginSignerCount().equals(other.getOriginSignerCount()))
-                && (this.getOriginNoPattern() == null ? other.getOriginNoPattern() == null : this.getOriginNoPattern().equals(other.getOriginNoPattern()))
-                && (this.getOriginOperId() == null ? other.getOriginOperId() == null : this.getOriginOperId().equals(other.getOriginOperId()))
-                && (this.getOriginOperName() == null ? other.getOriginOperName() == null : this.getOriginOperName().equals(other.getOriginOperName()))
-                && (this.getTemplate() == null ? other.getTemplate() == null : this.getTemplate().equals(other.getTemplate()))
-                && (this.getMakeDate() == null ? other.getMakeDate() == null : this.getMakeDate().equals(other.getMakeDate()))
-                && (this.getMakeTime() == null ? other.getMakeTime() == null : this.getMakeTime().equals(other.getMakeTime()))
-                && (this.getMakeOperId() == null ? other.getMakeOperId() == null : this.getMakeOperId().equals(other.getMakeOperId()))
-                && (this.getMakeOperName() == null ? other.getMakeOperName() == null : this.getMakeOperName().equals(other.getMakeOperName()))
+                && (this.getOriginApplyNo() == null ? other.getOriginApplyNo() == null
+                        : this.getOriginApplyNo().equals(other.getOriginApplyNo()))
+                && (this.getOriginTemplate() == null ? other.getOriginTemplate() == null
+                        : this.getOriginTemplate().equals(other.getOriginTemplate()))
+                && (this.getOriginSimple() == null ? other.getOriginSimple() == null
+                        : this.getOriginSimple().equals(other.getOriginSimple()))
+                && (this.getOriginDate() == null ? other.getOriginDate() == null
+                        : this.getOriginDate().equals(other.getOriginDate()))
+                && (this.getOriginTime() == null ? other.getOriginTime() == null
+                        : this.getOriginTime().equals(other.getOriginTime()))
+                && (this.getOriginComment() == null ? other.getOriginComment() == null
+                        : this.getOriginComment().equals(other.getOriginComment()))
+                && (this.getOriginSignerCount() == null ? other.getOriginSignerCount() == null
+                        : this.getOriginSignerCount().equals(other.getOriginSignerCount()))
+                && (this.getOriginNoPattern() == null ? other.getOriginNoPattern() == null
+                        : this.getOriginNoPattern().equals(other.getOriginNoPattern()))
+                && (this.getOriginOperId() == null ? other.getOriginOperId() == null
+                        : this.getOriginOperId().equals(other.getOriginOperId()))
+                && (this.getOriginOperName() == null ? other.getOriginOperName() == null
+                        : this.getOriginOperName().equals(other.getOriginOperName()))
+                && (this.getTemplate() == null ? other.getTemplate() == null
+                        : this.getTemplate().equals(other.getTemplate()))
+                && (this.getMakeDate() == null ? other.getMakeDate() == null
+                        : this.getMakeDate().equals(other.getMakeDate()))
+                && (this.getMakeTime() == null ? other.getMakeTime() == null
+                        : this.getMakeTime().equals(other.getMakeTime()))
+                && (this.getMakeOperId() == null ? other.getMakeOperId() == null
+                        : this.getMakeOperId().equals(other.getMakeOperId()))
+                && (this.getMakeOperName() == null ? other.getMakeOperName() == null
+                        : this.getMakeOperName().equals(other.getMakeOperName()))
                 && (this.getCommon() == null ? other.getCommon() == null : this.getCommon().equals(other.getCommon()))
                 && (this.getCustNo() == null ? other.getCustNo() == null : this.getCustNo().equals(other.getCustNo()))
-                && (this.getCustName() == null ? other.getCustName() == null : this.getCustName().equals(other.getCustName()))
-                && (this.getOperOrg() == null ? other.getOperOrg() == null : this.getOperOrg().equals(other.getOperOrg()))
-                && (this.getTextAuditRemark() == null ? other.getTextAuditRemark() == null : this.getTextAuditRemark().equals(other.getTextAuditRemark()))
-                && (this.getTextAuditStatus() == null ? other.getTextAuditStatus() == null : this.getTextAuditStatus().equals(other.getTextAuditStatus()))
-                && (this.getTextAuditOperId() == null ? other.getTextAuditOperId() == null : this.getTextAuditOperId().equals(other.getTextAuditOperId()))
-                && (this.getTextAuditOperName() == null ? other.getTextAuditOperName() == null : this.getTextAuditOperName().equals(other.getTextAuditOperName()))
-                && (this.getTextAuditDate() == null ? other.getTextAuditDate() == null : this.getTextAuditDate().equals(other.getTextAuditDate()))
-                && (this.getTextAuditTime() == null ? other.getTextAuditTime() == null : this.getTextAuditTime().equals(other.getTextAuditTime()))
-                && (this.getTemplateAuditRemark() == null ? other.getTemplateAuditRemark() == null : this.getTemplateAuditRemark().equals(other.getTemplateAuditRemark()))
-                && (this.getTemplateAuditStatus() == null ? other.getTemplateAuditStatus() == null : this.getTemplateAuditStatus().equals(other.getTemplateAuditStatus()))
-                && (this.getTemplateAuditOperId() == null ? other.getTemplateAuditOperId() == null : this.getTemplateAuditOperId().equals(other.getTemplateAuditOperId()))
-                && (this.getTemplateAuditOperName() == null ? other.getTemplateAuditOperName() == null : this.getTemplateAuditOperName().equals(other.getTemplateAuditOperName()))
-                && (this.getTemplateAuditDate() == null ? other.getTemplateAuditDate() == null : this.getTemplateAuditDate().equals(other.getTemplateAuditDate()))
-                && (this.getTemplateAuditTime() == null ? other.getTemplateAuditTime() == null : this.getTemplateAuditTime().equals(other.getTemplateAuditTime()))
-                && (this.getBusinStatus() == null ? other.getBusinStatus() == null : this.getBusinStatus().equals(other.getBusinStatus()))
-                && (this.getDocStatus() == null ? other.getDocStatus() == null : this.getDocStatus().equals(other.getDocStatus()))
-                && (this.getRegOperId() == null ? other.getRegOperId() == null : this.getRegOperId().equals(other.getRegOperId()))
-                && (this.getRegOperName() == null ? other.getRegOperName() == null : this.getRegOperName().equals(other.getRegOperName()))
-                && (this.getRegDate() == null ? other.getRegDate() == null : this.getRegDate().equals(other.getRegDate()))
-                && (this.getRegTime() == null ? other.getRegTime() == null : this.getRegTime().equals(other.getRegTime()))
-                && (this.getModiOperId() == null ? other.getModiOperId() == null : this.getModiOperId().equals(other.getModiOperId()))
-                && (this.getModiOperName() == null ? other.getModiOperName() == null : this.getModiOperName().equals(other.getModiOperName()))
-                && (this.getModiDate() == null ? other.getModiDate() == null : this.getModiDate().equals(other.getModiDate()))
-                && (this.getModiTime() == null ? other.getModiTime() == null : this.getModiTime().equals(other.getModiTime()));
+                && (this.getCustName() == null ? other.getCustName() == null
+                        : this.getCustName().equals(other.getCustName()))
+                && (this.getOperOrg() == null ? other.getOperOrg() == null
+                        : this.getOperOrg().equals(other.getOperOrg()))
+                && (this.getTextAuditRemark() == null ? other.getTextAuditRemark() == null
+                        : this.getTextAuditRemark().equals(other.getTextAuditRemark()))
+                && (this.getTextAuditStatus() == null ? other.getTextAuditStatus() == null
+                        : this.getTextAuditStatus().equals(other.getTextAuditStatus()))
+                && (this.getTextAuditOperId() == null ? other.getTextAuditOperId() == null
+                        : this.getTextAuditOperId().equals(other.getTextAuditOperId()))
+                && (this.getTextAuditOperName() == null ? other.getTextAuditOperName() == null
+                        : this.getTextAuditOperName().equals(other.getTextAuditOperName()))
+                && (this.getTextAuditDate() == null ? other.getTextAuditDate() == null
+                        : this.getTextAuditDate().equals(other.getTextAuditDate()))
+                && (this.getTextAuditTime() == null ? other.getTextAuditTime() == null
+                        : this.getTextAuditTime().equals(other.getTextAuditTime()))
+                && (this.getTemplateAuditRemark() == null ? other.getTemplateAuditRemark() == null
+                        : this.getTemplateAuditRemark().equals(other.getTemplateAuditRemark()))
+                && (this.getTemplateAuditStatus() == null ? other.getTemplateAuditStatus() == null
+                        : this.getTemplateAuditStatus().equals(other.getTemplateAuditStatus()))
+                && (this.getTemplateAuditOperId() == null ? other.getTemplateAuditOperId() == null
+                        : this.getTemplateAuditOperId().equals(other.getTemplateAuditOperId()))
+                && (this.getTemplateAuditOperName() == null ? other.getTemplateAuditOperName() == null
+                        : this.getTemplateAuditOperName().equals(other.getTemplateAuditOperName()))
+                && (this.getTemplateAuditDate() == null ? other.getTemplateAuditDate() == null
+                        : this.getTemplateAuditDate().equals(other.getTemplateAuditDate()))
+                && (this.getTemplateAuditTime() == null ? other.getTemplateAuditTime() == null
+                        : this.getTemplateAuditTime().equals(other.getTemplateAuditTime()))
+                && (this.getBusinStatus() == null ? other.getBusinStatus() == null
+                        : this.getBusinStatus().equals(other.getBusinStatus()))
+                && (this.getDocStatus() == null ? other.getDocStatus() == null
+                        : this.getDocStatus().equals(other.getDocStatus()))
+                && (this.getRegOperId() == null ? other.getRegOperId() == null
+                        : this.getRegOperId().equals(other.getRegOperId()))
+                && (this.getRegOperName() == null ? other.getRegOperName() == null
+                        : this.getRegOperName().equals(other.getRegOperName()))
+                && (this.getRegDate() == null ? other.getRegDate() == null
+                        : this.getRegDate().equals(other.getRegDate()))
+                && (this.getRegTime() == null ? other.getRegTime() == null
+                        : this.getRegTime().equals(other.getRegTime()))
+                && (this.getModiOperId() == null ? other.getModiOperId() == null
+                        : this.getModiOperId().equals(other.getModiOperId()))
+                && (this.getModiOperName() == null ? other.getModiOperName() == null
+                        : this.getModiOperName().equals(other.getModiOperName()))
+                && (this.getModiDate() == null ? other.getModiDate() == null
+                        : this.getModiDate().equals(other.getModiDate()))
+                && (this.getModiTime() == null ? other.getModiTime() == null
+                        : this.getModiTime().equals(other.getModiTime()));
     }
 
     @Override

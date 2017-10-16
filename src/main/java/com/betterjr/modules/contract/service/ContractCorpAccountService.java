@@ -13,6 +13,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,7 +75,7 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
             logger.info("custMechBaseService :" + mechBase.getOperOrg());
             logger.info("UserUtils.getOperOrg() :" + UserUtils.getOperOrg());
 
-            BTAssert.isTrue(BetterStringUtils.equals(mechBase.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
+            BTAssert.isTrue(StringUtils.equals(mechBase.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
 
             final CustOperatorInfo operator = UserUtils.getOperatorInfo();
             anCorpAccount.init(operator);
@@ -117,8 +118,8 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
         final ContractSignerAccount signerAccount = contractSignerAccountService.findSignerAccount(anSignerAccountId);
         BTAssert.notNull(corpAccount, "没有找到电子合同服务个人注册信息！");
 
-        BTAssert.isTrue(BetterStringUtils.equals(corpAccount.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
-        BTAssert.isTrue(BetterStringUtils.equals(signerAccount.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(StringUtils.equals(corpAccount.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(StringUtils.equals(signerAccount.getOperOrg(), UserUtils.getOperOrg()), "操作失败！");
 
         BTAssert.isTrue(corpAccount.getServiceCustNo().equals(signerAccount.getServiceCustNo()), "合同服务商不一致！");
 
@@ -141,7 +142,8 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
      * @param anCustNo
      * @return
      */
-    public Page<ContractCorpAccount> queryCorpAccountInfo(final Long anCustNo, final int anFlag, final int anPageNum, final int anPageSize) {
+    public Page<ContractCorpAccount> queryCorpAccountInfo(final Long anCustNo, final int anFlag, final int anPageNum,
+            final int anPageSize) {
         BTAssert.notNull(anCustNo, "公司编号不允许为空！");
 
         final Map<String, Object> conditionMap = QueryTermBuilder.newInstance().put("custNo", anCustNo).build();
@@ -157,13 +159,12 @@ public class ContractCorpAccountService extends BaseService<ContractCorpAccountM
      * @return
      */
     public String findSignAccountId(final Long anCustNo, final Long anServiceCustNo) {
-        final Map<String, Object> queryTerm = QueryTermBuilder.newInstance().put("custNo", anCustNo).put("serviceCustNo", anServiceCustNo)
-                .put("businStatus", "1").build();
+        final Map<String, Object> queryTerm = QueryTermBuilder.newInstance().put("custNo", anCustNo)
+                .put("serviceCustNo", anServiceCustNo).put("businStatus", "1").build();
         final List<ContractCorpAccount> tmpList = this.selectByProperty(queryTerm);
         if (Collections3.isEmpty(tmpList)) {
             return "";
-        }
-        else {
+        } else {
             return Collections3.getFirst(tmpList).getAccount();
         }
     }

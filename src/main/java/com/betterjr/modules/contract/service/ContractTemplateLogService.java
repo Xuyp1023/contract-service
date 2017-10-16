@@ -43,7 +43,8 @@ public class ContractTemplateLogService extends BaseService<ContractTemplateLogM
      * @param anTemplateLog
      * @return
      */
-    protected ContractTemplateLog saveAddTemplateLog(final Long anTemplateId, final Long anCustNo, final String anCustName, final String anOperType, final String anOperContent) {
+    protected ContractTemplateLog saveAddTemplateLog(final Long anTemplateId, final Long anCustNo,
+            final String anCustName, final String anOperType, final String anOperContent) {
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
         final ContractTemplateLog templateLog = new ContractTemplateLog();
 

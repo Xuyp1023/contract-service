@@ -15,6 +15,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,7 +72,8 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
      *
      * @return
      */
-    public Page<ContractStamper> queryOwnStamper(final Long anCustNo, final int anFlag, final int anPageNum, final int anPageSize) {
+    public Page<ContractStamper> queryOwnStamper(final Long anCustNo, final int anFlag, final int anPageNum,
+            final int anPageSize) {
         final String operOrg = UserUtils.getOperatorInfo().getOperOrg();
 
         final Map<String, Object> conditionMap = new HashMap<>();
@@ -109,7 +111,8 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
 
         BTAssert.notNull(contractStamper, "没有找到印章信息！");
 
-        if (UserUtils.platformUser() || BetterStringUtils.equals(contractStamper.getOperOrg(), UserUtils.getOperOrg())) {
+        if (UserUtils.platformUser()
+                || StringUtils.equals(contractStamper.getOperOrg(), UserUtils.getOperOrg())) {
             if (contractStamper.getOriginStamper() != null) {
                 final CustFileItem originStamper = custFileService.findOneByBatchNo(contractStamper.getOriginStamper());
                 if (originStamper != null) {
@@ -134,8 +137,7 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
     private String findAccountId(final Long anCustNo, final Boolean anPerson) {
         if (anPerson) {
             return signerAccountService.findSignAccountId(anCustNo, null);
-        }
-        else {
+        } else {
             return corpAccountService.findSignAccountId(anCustNo, null);
         }
     }
@@ -162,7 +164,7 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
         anContractStamper.setOriginStamper(0L);
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
-        BTAssert.isTrue(BetterStringUtils.equals(operator.getOperOrg(), custInfo.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(StringUtils.equals(operator.getOperOrg(), custInfo.getOperOrg()), "操作失败！");
 
         anContractStamper.setBusinStatus("01"); // 已经由电子合同签署方提供电子合同章
         anContractStamper.init(operator);
@@ -177,7 +179,7 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
 
     public ContractStamper saveAddOwnStamper2(final ContractStamper anContractStamper, final String anOrginFileId) {
         BTAssert.notNull(anContractStamper, "印章数据不允许为空！");
-        BTAssert.isTrue(BetterStringUtils.isNotBlank(anOrginFileId), "原始印章文件不允许为空！");
+        BTAssert.isTrue(StringUtils.isNotBlank(anOrginFileId), "原始印章文件不允许为空！");
 
         // final CustMechBase custMechBase = custMechBaseService.findBaseInfo(anContractStamper.getCustNo());
 
@@ -195,7 +197,7 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
         anContractStamper.setOriginStamper(batchNo);
 
         final CustOperatorInfo operator = UserUtils.getOperatorInfo();
-        BTAssert.isTrue(BetterStringUtils.equals(operator.getOperOrg(), custInfo.getOperOrg()), "操作失败！");
+        BTAssert.isTrue(StringUtils.equals(operator.getOperOrg(), custInfo.getOperOrg()), "操作失败！");
 
         anContractStamper.setBusinStatus("00"); // 已上传待制作状态
         anContractStamper.init(operator);
@@ -212,7 +214,8 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
      * @param anContractStamper
      * @return
      */
-    public ContractStamper saveAddStamper(final ContractStamper anContractStamper, final String anOrginFileId, final String anFileId) {
+    public ContractStamper saveAddStamper(final ContractStamper anContractStamper, final String anOrginFileId,
+            final String anFileId) {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败!");
         BTAssert.notNull(anContractStamper, "印章数据不允许为空！");
         BTAssert.notNull(anFileId, "印章文件不允许为空！");
@@ -233,7 +236,8 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
         anContractStamper.setOriginStamper(custFileService.updateCustFileItemInfo(anOrginFileId, null));
 
         // dataStoreService
-        final BufferedInputStream inputStream = new BufferedInputStream(dataStoreService.loadFromStore(Long.valueOf(anFileId)));
+        final BufferedInputStream inputStream = new BufferedInputStream(
+                dataStoreService.loadFromStore(Long.valueOf(anFileId)));
 
         final int mb2 = 2 * 1024 * 1024;
         final byte[] picBytes = new byte[mb2];
@@ -275,7 +279,8 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
 
         BTAssert.notNull(contractStamper, "未找到该印章");
 
-        final BufferedInputStream inputStream = new BufferedInputStream(dataStoreService.loadFromStore(Long.valueOf(anFileId)));
+        final BufferedInputStream inputStream = new BufferedInputStream(
+                dataStoreService.loadFromStore(Long.valueOf(anFileId)));
         final int mb2 = 2 * 1024 * 1024;
         final byte[] picBytes = new byte[mb2];
 
@@ -319,16 +324,16 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
      *
      * @return
      */
-    public Page<ContractStamper> queryAllStamper(final Map<String, Object> anParam, final int anFlag, final int anPageNum, final int anPageSize) {
+    public Page<ContractStamper> queryAllStamper(final Map<String, Object> anParam, final int anFlag,
+            final int anPageNum, final int anPageSize) {
         BTAssert.isTrue(UserUtils.platformUser(), "操作失败!");
 
-        if (BetterStringUtils.isBlank((String) anParam.get("LIKEcustName"))) {
+        if (StringUtils.isBlank((String) anParam.get("LIKEcustName"))) {
             anParam.remove("LIKEcustName");
-        }
-        else {
+        } else {
             anParam.put("LIKEcustName", "%" + (String) anParam.get("LIKEcustName") + "%");
         }
-        if (BetterStringUtils.isBlank((String) anParam.get("businStatus"))) {
+        if (StringUtils.isBlank((String) anParam.get("businStatus"))) {
             anParam.remove("businStatus");
         }
 
@@ -345,13 +350,12 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
      * @return
      */
     public String findMakerStamper(final Long anCustNo, final int anCustType) {
-        final Map<String, Object> queryTerm = QueryTermBuilder.newInstance().put("custNo", anCustNo).put("custType", anCustType)
-                .put("businStatus", "01").build();
+        final Map<String, Object> queryTerm = QueryTermBuilder.newInstance().put("custNo", anCustNo)
+                .put("custType", anCustType).put("businStatus", "01").build();
         final List<ContractStamper> tmpList = this.selectByProperty(queryTerm);
         if (Collections3.isEmpty(tmpList)) {
             return "";
-        }
-        else {
+        } else {
             return Collections3.getFirst(tmpList).getStamperData();
         }
     }

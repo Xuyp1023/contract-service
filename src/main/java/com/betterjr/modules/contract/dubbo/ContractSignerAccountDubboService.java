@@ -34,7 +34,8 @@ public class ContractSignerAccountDubboService implements IContractSignerAccount
     public String webSaveRegistSignerAccount(final Map<String, Object> anParam) {
         final ContractSignerAccount contractSignerAccount = RuleServiceDubboFilterInvoker.getInputObj();
 
-        return AjaxObject.newOk("注册签署人成功！", contractSignerAccountService.saveRegistSignerAccount(contractSignerAccount)).toJson();
+        return AjaxObject.newOk("注册签署人成功！", contractSignerAccountService.saveRegistSignerAccount(contractSignerAccount))
+                .toJson();
     }
 
     /* (non-Javadoc)
@@ -57,8 +58,12 @@ public class ContractSignerAccountDubboService implements IContractSignerAccount
      * @see com.betterjr.modules.contract.IContractSignerAccountService#webQuerySignerAccountInfo(java.lang.Long)
      */
     @Override
-    public String webQuerySignerAccountInfo(final Long anCustNo, final int anFlag, final int anPageNum, final int anPageSize) {
-        return AjaxObject.newOkWithPage("检查签署人成功！", contractSignerAccountService.querySignerAccountInfo(anCustNo, anFlag, anPageNum, anPageSize)).toJson();
+    public String webQuerySignerAccountInfo(final Long anCustNo, final int anFlag, final int anPageNum,
+            final int anPageSize) {
+        return AjaxObject
+                .newOkWithPage("检查签署人成功！",
+                        contractSignerAccountService.querySignerAccountInfo(anCustNo, anFlag, anPageNum, anPageSize))
+                .toJson();
     }
 
 }
