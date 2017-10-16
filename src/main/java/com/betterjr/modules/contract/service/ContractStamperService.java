@@ -72,7 +72,7 @@ public class ContractStamperService extends BaseService<ContractStamperMapper, C
      * @return
      */
     public Page<ContractStamper> queryOwnStamper(final Long anCustNo, final int anFlag, final int anPageNum, final int anPageSize) {
-        final String operOrg = UserUtils.getOperOrg();
+        final String operOrg = UserUtils.getOperatorInfo().getOperOrg();
 
         final Map<String, Object> conditionMap = new HashMap<>();
         conditionMap.put("operOrg", operOrg);
