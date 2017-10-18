@@ -26,7 +26,6 @@ import com.betterjr.common.exception.BytterException;
 import com.betterjr.common.service.BaseService;
 import com.betterjr.common.utils.BTAssert;
 import com.betterjr.common.utils.BetterDateUtils;
-import com.betterjr.common.utils.BetterStringUtils;
 import com.betterjr.common.utils.Collections3;
 import com.betterjr.common.utils.UserUtils;
 import com.betterjr.mapper.pagehelper.Page;
@@ -370,8 +369,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         final ContractTemplate contractTemplate = findContractTemplate(anTemplateId);
         BTAssert.notNull(contractTemplate, "没有找到合同模板！");
 
-        BTAssert.isTrue(
-                StringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()),
+        BTAssert.isTrue(StringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()),
                 "操作失败！");
 
         BTAssert.isTrue(
@@ -384,6 +382,9 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
             contractTemplate
                     .setOriginApplyNo(SequenceFactory.generate("PLAT_COMMON", "#{Date:yyyyMMdd}#{Seq:12}", "D"));
         }
+        final String existtextAuditStatus = contractTemplate.getTextAuditStatus();
+        Long existTemplateId = contractTemplate.getOriginTemplateId();
+        Long existSimpleId = contractTemplate.getOriginSimpleId();
         contractTemplate.setOriginTemplate(custFileService.updateCustFileItemInfo(anOriginTemplateId, null));
         contractTemplate.setOriginSimple(custFileService.updateCustFileItemInfo(anOrginSimpleId, null));
         contractTemplate.setOriginDate(BetterDateUtils.getNumDate());
@@ -404,7 +405,7 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         BTAssert.isTrue(result == 1, "上传标准合同模板失败！");
         // 根据文本审核状态，插入相应的日志
-        if ("00".equals(contractTemplate.getTextAuditStatus())) {
+        if (existtextAuditStatus == null || existtextAuditStatus.equals("")) {
             contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
                     contractTemplate.getCustName(), "00",
                     "上传标准合同文本" + "“" + custFileService.findOne(Long.valueOf(anOriginTemplateId)).getFileName() + "”");
@@ -413,9 +414,57 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
                     "上传标准合同样例" + "“" + custFileService.findOne(Long.valueOf(anOrginSimpleId)).getFileName() + "”");
             contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
                     contractTemplate.getCustName(), "00", "提交申请");
-        } else {
-            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
-                    contractTemplate.getCustName(), "00", "重新上传申请");
+        }
+        // 文本审核状态02,审核不通过，根据不同操作插入不同日志内容
+        if ("02".equals(existtextAuditStatus)) {
+            // 无重新上传的文件
+            if (anOriginTemplateId.equals(String.valueOf(existTemplateId))
+                    && anOrginSimpleId.equals(String.valueOf(existSimpleId))) {
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00", "提交申请");
+            }
+            // 删除标准合同文本，重新上传
+            if (!anOriginTemplateId.equals(String.valueOf(existTemplateId))
+                    && anOrginSimpleId.equals(String.valueOf(existSimpleId))) {
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00",
+                        "删除标准合同文本" + "“" + custFileService.findOne(existTemplateId).getFileName() + "”");
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00", "上传标准合同文本" + "“"
+                                + custFileService.findOne(Long.valueOf(anOriginTemplateId)).getFileName() + "”");
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00", "提交申请");
+            }
+            // 删除标准合同样例，重新上传
+            if (anOriginTemplateId.equals(String.valueOf(existTemplateId))
+                    && !anOrginSimpleId.equals(String.valueOf(existSimpleId))) {
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00",
+                        "删除标准合同样例" + "“" + custFileService.findOne(existSimpleId).getFileName() + "”");
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00",
+                        "上传标准合同样例" + "“" + custFileService.findOne(Long.valueOf(anOrginSimpleId)).getFileName() + "”");
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00", "提交申请");
+            }
+            // 删除标准合同文本，删除标准合同样例，重新上传
+            if (!anOriginTemplateId.equals(String.valueOf(existTemplateId))
+                    && !anOrginSimpleId.equals(String.valueOf(existSimpleId))) {
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00",
+                        "删除标准合同文本" + "“" + custFileService.findOne(existTemplateId).getFileName() + "”");
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00", "上传标准合同文本" + "“"
+                                + custFileService.findOne(Long.valueOf(anOriginTemplateId)).getFileName() + "”");
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00",
+                        "删除标准合同样例" + "“" + custFileService.findOne(existSimpleId).getFileName() + "”");
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00",
+                        "上传标准合同样例" + "“" + custFileService.findOne(Long.valueOf(anOrginSimpleId)).getFileName() + "”");
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "00", "提交申请");
+            }
         }
         return contractTemplate;
     }
@@ -578,12 +627,12 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         final ContractTemplate contractTemplate = findContractTemplate(anTemplateId);
 
-        BTAssert.isTrue(
-                StringUtils.equals("02", contractTemplate.getBusinStatus())
-                        || (StringUtils.equals("01", contractTemplate.getBusinStatus())
-                                && StringUtils.equals("01", contractTemplate.getTextAuditStatus())),
+        BTAssert.isTrue(StringUtils.equals("02", contractTemplate.getBusinStatus())
+                || (StringUtils.equals("01", contractTemplate.getBusinStatus())
+                        && StringUtils.equals("01", contractTemplate.getTextAuditStatus())),
                 "标准合同模板状态不正确！");
-
+        final String templateAuditStatus = contractTemplate.getTemplateAuditStatus();
+        Long existTemplateId = contractTemplate.getTemplateId();
         // 检查印章位置 contractTemplateStampPlaceService
         final List<ContractTemplateStampPlace> stampPlaces = contractTemplateStampPlaceService
                 .queryStampPlace(anTemplateId);
@@ -606,17 +655,32 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
         final int result = this.updateByPrimaryKeySelective(contractTemplate);
 
         BTAssert.isTrue(result == 1, "上传模板失败！");
-
-        if ("00".equals(contractTemplate.getTemplateAuditStatus())) {
+        // 根据审核状态，插入日志
+        if (templateAuditStatus == null || templateAuditStatus.equals("")) {
             contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
                     contractTemplate.getCustName(), "04",
                     "上传电子合同模板" + "“" + custFileService.findOne(Long.valueOf(anTemplateFileId)).getFileName() + "”");
             contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
                     contractTemplate.getCustName(), "04", "提交申请");
-        } else {
-            contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
-                    contractTemplate.getCustName(), "04", "重新发起申请");
-
+        }
+        // 02表示审核不通过
+        if ("02".equals(templateAuditStatus)) {
+            // 有重新上传电子合同模
+            if (!anTemplateFileId.equals(String.valueOf(existTemplateId))) {
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "04",
+                        "删除电子合同模版" + "“" + custFileService.findOne(existTemplateId).getFileName() + "”");
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "04",
+                        "上传电子合同模版" + "“" + custFileService.findOne(Long.valueOf(anTemplateFileId)).getFileName() + "”");
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "04", "提交申请");
+            }
+            // 无重新上传电子合同模
+            if (anTemplateFileId.equals(String.valueOf(existTemplateId))) {
+                contractTemplateLogService.saveAddTemplateLog(anTemplateId, contractTemplate.getCustNo(),
+                        contractTemplate.getCustName(), "04", "提交申请");
+            }
         }
         return contractTemplate;
     }
@@ -635,10 +699,9 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         BTAssert.notNull(contractTemplate, "标准合同模板未找到！");
 
-        BTAssert.isTrue(
-                StringUtils.equals("02", contractTemplate.getBusinStatus())
-                        || (StringUtils.equals("01", contractTemplate.getBusinStatus())
-                                && StringUtils.equals("01", contractTemplate.getTextAuditStatus())),
+        BTAssert.isTrue(StringUtils.equals("02", contractTemplate.getBusinStatus())
+                || (StringUtils.equals("01", contractTemplate.getBusinStatus())
+                        && StringUtils.equals("01", contractTemplate.getTextAuditStatus())),
                 "标准合同模板状态不正确！");
 
         BTAssert.isTrue(contractTemplate.getOriginSignerCount().equals(Long.valueOf(anStampPlaceList.size())),
@@ -719,8 +782,9 @@ public class ContractTemplateService extends BaseService<ContractTemplateMapper,
 
         BTAssert.notNull(contractTemplate, "没有找到电子合同模板！");
 
-        BTAssert.isTrue(UserUtils.platformUser()
-                || StringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()),
+        BTAssert.isTrue(
+                UserUtils.platformUser()
+                        || StringUtils.equals(contractTemplate.getOperOrg(), UserUtils.getOperatorInfo().getOperOrg()),
                 "操作失败！");
 
         return contractTemplateLogService.queryTemplateLog(anTemplateId);
